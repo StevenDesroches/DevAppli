@@ -20,4 +20,9 @@ class UsersController extends BaseController
     {
         return new ViewModel();
     }
+
+    public function loginPostAction()
+    {
+        
+    }
 }
