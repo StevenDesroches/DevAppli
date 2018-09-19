@@ -3,6 +3,23 @@ body {
     padding-bottom: 40px;
 }
 
+li > a {
+    color: skyblue;
+    text-shadow: none;
+    font-weight: bold;
+}
+
+.navbar-brand {
+    color: skyblue;
+    text-shadow: none;
+    font-weight: bold;
+}
+
+footer {
+    color: skyblue;
+    font-weight: bold;
+}
+
 .zf-green {
     color: #68b604;
 }
