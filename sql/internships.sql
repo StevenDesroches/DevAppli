@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mer 12 Septembre 2018 à 19:44
+-- Généré le :  Mer 19 Septembre 2018 à 21:30
 -- Version du serveur :  5.6.37
 -- Version de PHP :  5.6.31
 
@@ -37,8 +37,7 @@ CREATE TABLE IF NOT EXISTS `coordinators` (
   `postal_code` varchar(255) CHARACTER SET utf32 COLLATE utf32_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `phone` int(10) NOT NULL,
-  `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL
+  `user_id` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -48,15 +47,14 @@ CREATE TABLE IF NOT EXISTS `coordinators` (
 --
 
 CREATE TABLE IF NOT EXISTS `employers` (
-  `id` int(11) NOT NULL,
+  `id` int(8) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `adress` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `city` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `province` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `postal_code` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL
+  `id_user` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -82,10 +80,8 @@ CREATE TABLE IF NOT EXISTS `internship_offers` (
 CREATE TABLE IF NOT EXISTS `students` (
   `admission_number` int(8) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL
+  `active` tinyint(4) NOT NULL,
+  `user_id` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -95,12 +91,31 @@ CREATE TABLE IF NOT EXISTS `students` (
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL,
+  `id` int(8) NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL
+  `user_type` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_types`
+--
+
+CREATE TABLE IF NOT EXISTS `user_types` (
+  `id` int(11) NOT NULL,
+  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `user_types`
+--
+
+INSERT INTO `user_types` (`id`, `type`) VALUES
+(0, 'coordinator'),
+(1, 'student'),
+(2, 'employer');
 
 --
 -- Index pour les tables exportées
@@ -110,13 +125,15 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Index pour la table `coordinators`
 --
 ALTER TABLE `coordinators`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Index pour la table `employers`
 --
 ALTER TABLE `employers`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Index pour la table `internship_offers`
@@ -129,12 +146,20 @@ ALTER TABLE `internship_offers`
 -- Index pour la table `students`
 --
 ALTER TABLE `students`
-  ADD PRIMARY KEY (`admission_number`);
+  ADD PRIMARY KEY (`admission_number`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Index pour la table `users`
 --
 ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_type` (`user_type`);
+
+--
+-- Index pour la table `user_types`
+--
+ALTER TABLE `user_types`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -150,7 +175,7 @@ ALTER TABLE `coordinators`
 -- AUTO_INCREMENT pour la table `employers`
 --
 ALTER TABLE `employers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `internship_offers`
 --
@@ -160,7 +185,41 @@ ALTER TABLE `internship_offers`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `coordinators`
+--
+ALTER TABLE `coordinators`
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Contraintes pour la table `employers`
+--
+ALTER TABLE `employers`
+  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+
+--
+-- Contraintes pour la table `internship_offers`
+--
+ALTER TABLE `internship_offers`
+  ADD CONSTRAINT `fk_id_employer` FOREIGN KEY (`id_employer`) REFERENCES `employers` (`id`);
+
+--
+-- Contraintes pour la table `students`
+--
+ALTER TABLE `students`
+  ADD CONSTRAINT `fk_id_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Contraintes pour la table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `fk_user_types` FOREIGN KEY (`user_type`) REFERENCES `user_types` (`id`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
