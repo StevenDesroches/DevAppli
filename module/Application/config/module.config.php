@@ -24,12 +24,12 @@ return [
                     ],
                 ],
             ],
-            'application' => [
+            'users' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/application[/:action]',
+                    'route'    => '/users[/:action]',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
+                        'controller' => Controller\UsersController::class,
                         'action'     => 'index',
                     ],
                 ],
@@ -39,6 +39,7 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
+            Controller\UsersController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
