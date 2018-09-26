@@ -6,7 +6,7 @@ use Zend\Mvc\Controller\AbstractController;
 use Zend\Mvc\MvcEvent;
 use Zend\View\Model\ViewModel;
 use Zend\Authentication\AuthenticationService;
-use Zend\Db\Adapter\Adapter as DbAdapter;
+use Zend\Db\Adapter\Adapter;
 
 class BaseController extends AbstractController
 {
@@ -46,7 +46,7 @@ class BaseController extends AbstractController
             $method = 'notFoundAction';
         }
 
-        if($action != 'login')
+        if($action != 'login' && $action != 'loginPost')
         {
             $auth = new AuthenticationService();
             if(!$auth->hasIdentity())

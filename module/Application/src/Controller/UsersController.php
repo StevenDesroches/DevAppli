@@ -9,9 +9,15 @@ namespace Application\Controller;
 
 use Zend\View\Model\ViewModel;
 use Zend\Authentication\Adapter\DbTable\CredentialTreatmentAdapter as AuthAdapter;
+use Zend\Authentication\AuthenticationService;
 
 class UsersController extends BaseController
 {
+    public function __construct($db)
+    {
+        parent::__construct($db);
+    }
+
     public function indexAction()
     {
         return new ViewModel();
@@ -24,10 +30,13 @@ class UsersController extends BaseController
 
     public function loginPostAction()
     {
-        $authAdapter = new AuthAdapter($db, 'users', 'email', 'password');
+        $authAdapter = new AuthAdapter($this->db, 'users', 'email', 'password');
         $authAdapter->setIdentity($this->params()->fromPost('email'));
-        $authAdapter->setCredential($this->params()->fromPost('password'));
-        $result = $authAdapter->authenticate();
-        return new ViewModel();
+        $authAdapter->setCredential(md5($this->params()->fromPost('password')));
+        
+        $auth = new AuthenticationService();
+
+        $result = $auth->authenticate($authAdapter); 
+        $this->redirect()->toRoute("home", ['action' => 'index']);
     }
 }

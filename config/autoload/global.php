@@ -16,8 +16,7 @@ return [
         'driver' => 'mysqli',
         'database' => 'internships',
         'username' => 'root',
-        'password' => 'mysql',
+        'password' => '',
         'hostname' => 'localhost',
     ],
-    'service_manager'
 ];
