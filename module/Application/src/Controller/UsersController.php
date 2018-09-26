@@ -8,6 +8,7 @@
 namespace Application\Controller;
 
 use Zend\View\Model\ViewModel;
+use Zend\Authentication\Adapter\DbTable\CredentialTreatmentAdapter as AuthAdapter;
 
 class UsersController extends BaseController
 {
@@ -23,6 +24,10 @@ class UsersController extends BaseController
 
     public function loginPostAction()
     {
-        
+        $authAdapter = new AuthAdapter($db, 'users', 'email', 'password');
+        $authAdapter->setIdentity($this->params()->fromPost('email'));
+        $authAdapter->setCredential($this->params()->fromPost('password'));
+        $result = $authAdapter->authenticate();
+        return new ViewModel();
     }
 }

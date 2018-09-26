@@ -17,5 +17,7 @@ return [
         'database' => 'internships',
         'username' => 'root',
         'password' => 'mysql',
+        'hostname' => 'localhost',
     ],
+    'service_manager'
 ];

@@ -38,8 +38,8 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => InvokableFactory::class,
-            Controller\UsersController::class => InvokableFactory::class,
+            Controller\IndexController::class => Factory\ControllerFactory::class,
+            Controller\UsersController::class => Factory\ControllerFactory::class,
         ],
     ],
     'view_manager' => [

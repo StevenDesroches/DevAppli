@@ -6,10 +6,17 @@ use Zend\Mvc\Controller\AbstractController;
 use Zend\Mvc\MvcEvent;
 use Zend\View\Model\ViewModel;
 use Zend\Authentication\AuthenticationService;
+use Zend\Db\Adapter\Adapter as DbAdapter;
 
 class BaseController extends AbstractController
 {
     protected $eventIdentifier = __CLASS__;
+    protected $db;
+
+    public function __construct($db)
+    {
+        $this->db = $db;
+    }
 
     public function notFoundAction()
     {
