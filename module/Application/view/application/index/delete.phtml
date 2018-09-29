@@ -1,0 +1,23 @@
+<?php
+
+
+$title = 'Supprimer un etudiant';
+$url   = $this->url('student', ['action' => 'delete', 'admission_number' => $id]);
+
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+
+<p>
+    Voulez-vous vraiment supprimer cet etudiant?
+    <?= $this->escapeHtml($student->id) ?>
+    <?= $this->escapeHtml($student->name) ?>
+</p>
+
+<form action="<?= $url ?>" method="post">
+<div class="form-group">
+    <input type="submit" name="admission_number" value="<?= (int) $student->id ?>" />
+    <input type="submit" class="btn btn-danger" name="del" value="Yes" />
+    <input type="submit" class="btn btn-success" name="del" value="No" />
+</div>
+</form>

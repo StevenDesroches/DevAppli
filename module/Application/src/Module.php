@@ -36,6 +36,26 @@ class Module implements ConfigProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Model\User());
                     return new TableGateway('user', $dbAdapter, null, $resultSetPrototype);
                 },
+                Model\StudentTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Student());
+                    $table = new StudentTable();
+                    return new TableGateway('user', $dbAdapter, null, $resultSetPrototype, $table);
+                },
+            ],
+        ];
+    }
+
+    public function getControllerConfig()
+    {
+        return [
+            'factories' => [
+                Controller\StudentsController::class => function($container) {
+                    return new Controller\StudentsController(
+                        $container->get(Model\StudentTable::class)
+                    );
+                },
             ],
         ];
     }

@@ -34,12 +34,46 @@ return [
                     ],
                 ],
             ],
+            'employers' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/employers[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\EmployersController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'students' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/students[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\StudentsController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'Internships' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/internships[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\InternshipsController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => Factory\ControllerFactory::class,
             Controller\UsersController::class => Factory\ControllerFactory::class,
+            Controller\EmployersController::class => Factory\ControllerFactory::class,
+            Controller\StudentsController::class => InvokableFactory::class,
+            Controller\InternshipsController::class => Factory\ControllerFactory::class,
+
         ],
     ],
     'view_manager' => [

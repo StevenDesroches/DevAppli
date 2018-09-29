@@ -13,6 +13,7 @@ class IndexController extends BaseController
 
     public function indexAction()
     {
-        return new ViewModel();
+        return new ViewModel(['students' => $this->table->fetchAll(),
+        ]);
     }
 }
