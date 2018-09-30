@@ -11,9 +11,8 @@ class StudentsController extends BaseController
  
     private $table;
 
-    public function __construct($db, StudentTable $table)
+    public function __construct(StudentTable $table)
     {
-        parent::__construct($db);
         $this->table = $table;
     }
 

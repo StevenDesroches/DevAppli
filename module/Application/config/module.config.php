@@ -9,7 +9,6 @@ namespace Application;
 
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
-use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     'router' => [
@@ -64,16 +63,6 @@ return [
                     ],
                 ],
             ],
-        ],
-    ],
-    'controllers' => [
-        'factories' => [
-            Controller\IndexController::class => Factory\ControllerFactory::class,
-            Controller\UsersController::class => Factory\ControllerFactory::class,
-            Controller\EmployersController::class => Factory\ControllerFactory::class,
-            Controller\StudentsController::class => InvokableFactory::class,
-            Controller\InternshipsController::class => Factory\ControllerFactory::class,
-
         ],
     ],
     'view_manager' => [

@@ -34,14 +34,17 @@ class Module implements ConfigProviderInterface
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\User());
-                    return new TableGateway('user', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('users', $dbAdapter, null, $resultSetPrototype);
+                },
+                Model\StudentTable::class => function($container) {
+                    $tableGateway = $container->get(Model\StudentTableGateway::class);
+                    return new Model\StudentTable($tableGateway);
                 },
                 Model\StudentTableGateway::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Student());
-                    $table = new StudentTable();
-                    return new TableGateway('user', $dbAdapter, null, $resultSetPrototype, $table);
+                    return new TableGateway('students', $dbAdapter, null, $resultSetPrototype);
                 },
             ],
         ];
@@ -56,6 +59,9 @@ class Module implements ConfigProviderInterface
                         $container->get(Model\StudentTable::class)
                     );
                 },
+                Controller\IndexController::class => Factory\ControllerFactory::class,
+                Controller\UsersController::class => Factory\ControllerFactory::class,
+                Controller\EmployersController::class => Factory\ControllerFactory::class,
             ],
         ];
     }

@@ -12,7 +12,7 @@ use Zend\InputFilter\InputFilterInterface;
 use Zend\Validator\StringLength;
 
 
-class Student extends InputFilterAwareInterface
+class Student implements InputFilterAwareInterface
 {
 
     public $admission_number;
