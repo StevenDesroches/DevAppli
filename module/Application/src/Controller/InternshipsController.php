@@ -1,8 +1,8 @@
 <?php
 
-namespace Applicaton\Controller;
+namespace Application\Controller;
 
-class IntershipsController extends BaseController 
+class InternshipsController extends BaseController 
 {
     public function __construct($db)
     {

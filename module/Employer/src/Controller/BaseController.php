@@ -45,16 +45,7 @@ class BaseController extends AbstractController
         if (! method_exists($this, $method)) {
             $method = 'notFoundAction';
         }
-
-        if($action != 'login' && $action != 'loginPost')
-        {
-            $auth = new AuthenticationService();
-            if(!$auth->hasIdentity())
-            {
-                $this->redirect()->toRoute("users", ['action' => 'login']);
-            }
-        }   
-
+        
         $actionResponse = $this->$method();
 
         $e->setResult($actionResponse);

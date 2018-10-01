@@ -1,0 +1,27 @@
+<?php
+
+$title = 'Étudiants';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+
+
+<table class="table">
+<tr>
+    <th>Numéro d'admission</th>
+    <th>Nom de l'étudiant</th>
+    <th>Est actif</th>
+    <th>&nbsp;</th>
+</tr>
+<?php foreach ($students as $student) : ?>
+    <tr>
+        <td><?= $this->escapeHtml($student->admission_number) ?></td>
+        <td><?= $this->escapeHtml($student->name) ?></td>
+        <td><?= $this->escapeHtml($student->active) ?></td>
+        <td>
+            <a href="<?= $this->url('student', ['action' => 'edit', 'id' => $student->id]) ?>">Modifier</a>
+            <a href="<?= $this->url('student', ['action' => 'delete', 'id' => $student->id]) ?>">Supprimer</a>
+        </td>
+    </tr>
+<?php endforeach; ?>
+</table>

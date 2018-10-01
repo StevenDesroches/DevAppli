@@ -59,9 +59,26 @@ class Module implements ConfigProviderInterface
                         $container->get(Model\StudentTable::class)
                     );
                 },
-                Controller\IndexController::class => Factory\ControllerFactory::class,
-                Controller\UsersController::class => Factory\ControllerFactory::class,
-                Controller\EmployersController::class => Factory\ControllerFactory::class,
+                Controller\IndexController::class => function($container) {
+                    return new Controller\IndexController(
+                        $container->get(\Zend\Db\Adapter\Adapter::class)
+                    );
+                },
+                Controller\UsersController::class => function($container) {
+                    return new Controller\UsersController(
+                        $container->get(\Zend\Db\Adapter\Adapter::class)
+                    );
+                },
+                Controller\EmployersController::class => function($container) {
+                    return new Controller\EmployersController(
+                        $container->get(\Zend\Db\Adapter\Adapter::class)
+                    );
+                },
+                Controller\InternshipsController::class => function($container) {
+                    return new Controller\InternshipsController(
+                        $container->get(\Zend\Db\Adapter\Adapter::class)
+                    );
+                },
             ],
         ];
     }

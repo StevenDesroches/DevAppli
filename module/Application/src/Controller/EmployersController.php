@@ -2,7 +2,9 @@
 
 namespace Application\Controller;
 
-class EmployersControler extends BaseController
+use Zend\View\Model\ViewModel;
+
+class EmployersController extends BaseController
 {
  
     public function __construct($db)

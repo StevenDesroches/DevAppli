@@ -53,7 +53,7 @@ return [
                     ],
                 ],
             ],
-            'Internships' => [
+            'internships' => [
                 'type'    => Segment::class,
                 'options' => [
                     'route'    => '/internships[/:action]',
