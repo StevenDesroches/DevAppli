@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Controller;
+namespace Student\Controller;
 
 use Zend\View\Model\ViewModel;
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Sep 29, 2018 at 04:30 AM
+-- Generation Time: Oct 02, 2018 at 05:22 PM
 -- Server version: 5.7.23
 -- PHP Version: 7.1.20
 
@@ -80,6 +80,14 @@ CREATE TABLE `students` (
   `user_id` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `students`
+--
+
+INSERT INTO `students` (`admission_number`, `name`, `active`, `user_id`) VALUES
+(201529098, 'test nomfamille', 1, 2),
+(201529765, 'nomfamille testt', 0, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -92,6 +100,13 @@ CREATE TABLE `users` (
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_type` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`, `user_type`) VALUES
+(2, 'test@test.com', '098f6bcd4621d373cade4e832627b4f6', 0);
 
 -- --------------------------------------------------------
 
@@ -184,7 +199,7 @@ ALTER TABLE `internship_offers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

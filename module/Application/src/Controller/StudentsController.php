@@ -16,12 +16,6 @@ class StudentsController extends BaseController
         $this->table = $table;
     }
 
-    // public function __construct(StudentTable $table)
-    // {
- 
-    //     $this->table = $table;
-    // }
-
     public function indexAction()
     {
         return new ViewModel(['students' => $this->table->fetchAll(),

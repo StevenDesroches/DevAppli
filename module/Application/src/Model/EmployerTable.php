@@ -1,11 +1,11 @@
 <?php
 
-namespace Employer\Model;
+namespace Application\Model;
 
 use RuntimeException;
 use Zend\Db\TableGateway\TableGatewayInterface;
 
-class UserTable
+class EmployerTable
 {
     private $tableGateway;
 
@@ -19,7 +19,7 @@ class UserTable
         return $this->tableGateway->select();
     }
 
-    public function getUser($id)
+    public function getEmployer($id)
     {
         $id = (int) $id;
         $rowset = $this->tableGateway->select(['id' => $id]);
@@ -34,23 +34,29 @@ class UserTable
         return $row;
     }
 
-    public function saveUser(User $user)
+    public function saveEmployer(Employer $employer)
     {
         $data = [
-            'email' => $user->email,
-            'password'  => $user->password,
+            'name' => $employer->name,
+            'email' => $employer->email,
+            'adress' => $employer->adress,
+            'city' => $employer->city,
+            'province' => $employer->province,
+            'postal_code' => $employer->postal_code,
+            'active' => $employer->active,
+            'id_employer' => $employer->id_employer,
         ];
 
-        $id = (int) $user->id;
+        $id = (int) $employer->id;
 
         if ($id === 0) {
             $this->tableGateway->insert($data);
             return;
         }
 
-        if (! $this->getUser($id)) {
+        if (! $this->getEmployer($id)) {
             throw new RuntimeException(sprintf(
-                'Cannot update user with identifier %d; does not exist',
+                'Cannot update employer with identifier %d; does not exist',
                 $id
             ));
         }
@@ -58,7 +64,7 @@ class UserTable
         $this->tableGateway->update($data, ['id' => $id]);
     }
 
-    public function deleteUser($id)
+    public function deleteEmployer($id)
     {
         $this->tableGateway->delete(['id' => (int) $id]);
     }

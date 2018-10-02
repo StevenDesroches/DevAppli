@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Controller;
+namespace Employer\Controller;
 
 use Zend\Mvc\Controller\AbstractController;
 use Zend\Mvc\MvcEvent;

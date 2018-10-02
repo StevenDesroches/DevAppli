@@ -1,5 +1,5 @@
 <?php
-namespace Student\Model;
+namespace Application\Model;
 
 class Internships
 {

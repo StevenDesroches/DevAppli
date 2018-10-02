@@ -35,17 +35,19 @@ class StudentTable
 
         public function editStudent($student)
         {
-            // $data = [
-            //     'artist' => $album->artist,
-            //     'title'  => $album->title,
-            // ];
+             $data = [
+                 'name'  => $album->name,
+                'active'  => $album->active,
+                'user_id'  => $album->user_id,
+             ];
     
-            // $id = (int) $album->id;
-            $this->tableGateway->update($data, ['id' => $id]);
+             $id = (int) $album->admission_number;
+
+            $this->tableGateway->update($data, ['admission_number' => $id]);
         }
 
         public function deleteStudent($id)
         {
-            $this->tableGateway->delete(['id' => (int) $id]);
+            $this->tableGateway->delete(['admission_number' => (int) $id]);
         }
     }
