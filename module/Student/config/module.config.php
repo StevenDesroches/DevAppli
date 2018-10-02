@@ -34,12 +34,23 @@ return [
                     ],
                 ],
             ],
+            'internship' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/internship[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\InternshipController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => Factory\ControllerFactory::class,
             Controller\UsersController::class => Factory\ControllerFactory::class,
+            Controller\InternshipController::class => Factory\ControllerFactory::class,
         ],
     ],
     'view_manager' => [

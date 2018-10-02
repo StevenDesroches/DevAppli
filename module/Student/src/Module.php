@@ -34,7 +34,27 @@ class Module implements ConfigProviderInterface
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\User());
-                    return new TableGateway('user', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('users', $dbAdapter, null, $resultSetPrototype);
+                },
+                Model\InternshipsTable::class => function($container) {
+                    $tableGateway = $container->get(Model\InternshipsTableGateway::class);
+                    return new Model\InternshipsTable($tableGateway);
+                },
+                Model\InternshipsTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Internships());
+                    return new TableGateway('internship_offers', $dbAdapter, null, $resultSetPrototype);
+                },
+                Model\EmployerTable::class => function($container) {
+                    $tableGateway = $container->get(Model\EmployerTableGateway::class);
+                    return new Model\EmployerTable($tableGateway);
+                },
+                Model\EmployerTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Employer());
+                    return new TableGateway('employers', $dbAdapter, null, $resultSetPrototype);
                 },
             ],
         ];
