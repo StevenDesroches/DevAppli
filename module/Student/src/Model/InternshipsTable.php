@@ -19,6 +19,15 @@ class InternshipsTable
         return $this->tableGateway->select();
     }
 
+    public function fetchAllWithEmployer()
+    {
+        $select = $this->tableGateway->getSql()->select();
+        $select->join('employers', 'employers.id = internship_offers.id_employer', ['employer' => 'name'], 'left'); 
+        $stmt = $this->tableGateway->getSql()->prepareStatementForSqlObject($select);
+        $results = $stmt->execute();
+        return $results;
+    }
+
     public function getInternship($id)
     {
         $id = (int) $id;

@@ -8,6 +8,7 @@ class Internships
     public $date_posted;
     public $description;
     public $active;
+    public $employer;
     public $id_employer;
 
     public function exchangeArray(array $data)

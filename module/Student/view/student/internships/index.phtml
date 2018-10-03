@@ -1,6 +1,6 @@
 <?php
 
-$title = 'Les offres';
+$title = 'Offres de stage';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
@@ -13,10 +13,10 @@ $this->headTitle($title);
     </tr>
     <?php foreach ($internships as $internship) : ?>
         <tr>
-            <td><?php echo $this->escapeHtml($internship->name);?></td>
-            <td><?php echo $this->escapeHtml($internship->description);?></td>
+            <td><?php echo $this->escapeHtml($internship['name']);?></td>
+            <td><?php echo $this->escapeHtml($internship['description']);?></td>
             <td>
-                <a href="<?php echo $this->url('internship',
+                <a href="<?php echo $this->url('internships',
                     array('action'=>'details', 'id' => $internship->id));?>">Détails</a>
             </td>
         </tr>

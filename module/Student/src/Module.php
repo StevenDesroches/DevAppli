@@ -59,4 +59,27 @@ class Module implements ConfigProviderInterface
             ],
         ];
     }
+
+    public function getControllerConfig()
+    {
+        return [
+            'factories' => [
+                Controller\IndexController::class => function($container) {
+                    return new Controller\IndexController(
+                        $container->get(\Zend\Db\Adapter\Adapter::class)
+                    );
+                },
+                Controller\UsersController::class => function($container) {
+                    return new Controller\UsersController(
+                        $container->get(\Zend\Db\Adapter\Adapter::class)
+                    );
+                },
+                Controller\InternshipsController::class => function($container) {
+                    return new Controller\InternshipsController(
+                        $container->get(Model\InternshipsTable::class)
+                    );
+                },
+            ],
+        ];
+    }
 }

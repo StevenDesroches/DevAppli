@@ -33,27 +33,21 @@ return [
                     ],
                 ],
             ],
-            'student_internship' => [
+            'student_internships' => [
                 'type'    => Segment::class,
                 'options' => [
                     'route'    => '/student/internships[/:action]',
                     'defaults' => [
-                        'controller' => Controller\InternshipController::class,
+                        'controller' => Controller\InternshipsController::class,
                         'action'     => 'index',
                     ],
                 ],
             ],
         ],
     ],
-    'controllers' => [
-        'factories' => [
-            Controller\IndexController::class => Factory\ControllerFactory::class,
-            Controller\UsersController::class => Factory\ControllerFactory::class,
-            Controller\InternshipController::class => Factory\ControllerFactory::class,
-        ],
-    ],
     'view_manager' => [
         'template_map' => [
+            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'student/index/index' => __DIR__ . '/../view/student/index/index.phtml',
         ],
         'template_path_stack' => [

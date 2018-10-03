@@ -46,14 +46,19 @@ class BaseController extends AbstractController
             $method = 'notFoundAction';
         }
 
-        if($action != 'login')
+        /* if($action != 'login')
         {
             $auth = new AuthenticationService();
             if(!$auth->hasIdentity())
             {
                 $this->redirect()->toRoute("users", ['action' => 'login']);
             }
-        }   
+        }  */  
+
+        if($routeMatch->getParam('uid', 'none') == 'none')
+        {
+            $this->redirect()->toRoute("employer_users", ['action' => 'badAuth']);
+        }
 
         $actionResponse = $this->$method();
 

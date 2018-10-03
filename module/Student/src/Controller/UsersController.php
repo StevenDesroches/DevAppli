@@ -8,8 +8,8 @@
 namespace Student\Controller;
 
 use Zend\View\Model\ViewModel;
-use Zend\Authentication\Adapter\DbTable\CredentialTreatmentAdapter as AuthAdapter;
 use Zend\Authentication\AuthenticationService;
+use Application\Adapter\CredentialAdapter;
 
 class UsersController extends BaseController
 {
@@ -25,18 +25,22 @@ class UsersController extends BaseController
 
     public function loginAction()
     {
-        return new ViewModel();
-    }
-
-    public function loginPostAction()
-    {
-        $authAdapter = new AuthAdapter($this->db, 'users', 'email', 'password');
-        $authAdapter->setIdentity($this->params()->fromPost('email'));
-        $authAdapter->setCredential(md5($this->params()->fromPost('password')));
+        if(!$this->getRequest()->isPost())
+        {
+            return new ViewModel();
+        }
+        else
+        {
+            $authAdapter = new CredentialAdapter($this->db, 'users', 'email', 'password');
+            $authAdapter->setIdentity($this->params()->fromPost('email'));
+            $authAdapter->setCredential(md5($this->params()->fromPost('password')));
+            $authAdapter->setUserType(1);
         
-        $auth = new AuthenticationService();
+            $auth = new AuthenticationService();
 
-        $result = $auth->authenticate($authAdapter); 
-        $this->redirect()->toRoute("home", ['action' => 'index']);
+            $result = $auth->authenticate($authAdapter); 
+            $this->redirect()->toRoute("student_home", ['action' => 'index']);
+        }
+        
     }
 }
