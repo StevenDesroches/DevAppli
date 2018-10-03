@@ -22,7 +22,7 @@ class InternshipsTable
     public function fetchAllWithEmployer()
     {
         $select = $this->tableGateway->getSql()->select();
-        $select->join('employers', 'employers.id = internship_offers.id_employer', ['name'], 'left'); 
+        $select->join('employers', 'employers.id = internship_offers.id_employer', ['employer' => 'name'], 'left'); 
         $stmt = $this->tableGateway->getSql()->prepareStatementForSqlObject($select);
         $results = $stmt->execute();
         return $results;

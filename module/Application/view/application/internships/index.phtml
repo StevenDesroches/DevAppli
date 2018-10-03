@@ -17,13 +17,13 @@ $this->headTitle($title);
 </tr>
 <?php foreach ($internships as $internship) : ?>
     <tr>
-        <td><?= $this->escapeHtml($internship->name) ?></td>
-        <td><?= $this->escapeHtml($internship->employer) ?></td>
-        <td><?= $this->escapeHtml($internship->date_posted) ?></td>
-        <td><?= $this->escapeHtml($internship->active) ?></td>
+        <td><?= $this->escapeHtml($internship['name']) ?></td>
+        <td><?= $this->escapeHtml($internship['employer']) ?></td>
+        <td><?= $this->escapeHtml($internship['date_posted']) ?></td>
+        <td><?= $this->escapeHtml($internship['active']) ?></td>
         <td>
-            <a href="<?= $this->url('internships', ['action' => 'edit', 'id' => $internship->id]) ?>">Modifier</a>
-            <a href="<?= $this->url('internships', ['action' => 'delete', 'id' => $internship->id]) ?>">Supprimer</a>
+            <a href="<?= $this->url('internships', ['action' => 'edit', 'id' => $internship['id']]) ?>">Modifier</a>
+            <a href="<?= $this->url('internships', ['action' => 'delete', 'id' => $internship['id']]) ?>">Supprimer</a>
         </td>
     </tr>
 <?php endforeach; ?>

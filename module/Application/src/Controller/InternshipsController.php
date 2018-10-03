@@ -32,6 +32,26 @@ class InternshipsController extends BaseController
     }
     public function deleteAction()
     {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (!$id) {
+            return $this->redirect()->toRoute('internships');
+        }
 
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $del = $request->getPost('del', 'No');
+
+            if ($del == 'Yes') {
+                $id = (int) $request->getPost('id');
+                $this->table->deleteInternship($id);
+            }
+
+            return $this->redirect()->toRoute('internships');
+        }
+
+        return [
+            'id'    => $id,
+            'internship' => $this->table->getInternship($id),
+        ];
     }
 }
