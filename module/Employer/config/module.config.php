@@ -16,7 +16,7 @@ return [
             'employer_home' => [
                 'type' => Segment::class,
                 'options' => [
-                    'route'    => '/employer',
+                    'route'    => '/employer[/:uid]',
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
@@ -26,7 +26,7 @@ return [
             'employer_users' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/employer/users[/:action]',
+                    'route'    => '/employer[/:uid]/users[/:action]',
                     'defaults' => [
                         'controller' => Controller\UsersController::class,
                         'action'     => 'index',

@@ -39,6 +39,7 @@ class BaseController extends AbstractController
             throw new Exception\DomainException('Missing route matches; unsure how to retrieve action');
         }
 
+        $this->layout()->setTemplate('layout/layout');
         $action = $routeMatch->getParam('action', 'not-found');
         $method = static::getMethodFromAction($action);
         

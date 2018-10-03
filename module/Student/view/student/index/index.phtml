@@ -1,1 +1,20 @@
-<?php phpinfo(); ?>
+<?php
+
+$title = 'Accueil';
+$this->headTitle($title);
+?>
+
+<h1 class="page-header"><?= $title?></h1>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Stages</div>
+            <div class="panel-body">
+                <p>Consulter la liste des stages</p>
+            </div>
+            <div class="panel-footer">
+                <a class="btn btn-primary" href="<?= $this->url('student_internships') ?>">Consulter</a>
+            </div>
+        </div>
+    </div>        
+</div>

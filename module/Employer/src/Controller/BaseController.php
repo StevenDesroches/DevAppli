@@ -54,8 +54,10 @@ class BaseController extends AbstractController
                 $this->redirect()->toRoute("users", ['action' => 'login']);
             }
         }  */  
+        $uid = $routeMatch->getParam('uid', 'none');
+        //$statement = $adater->createStatement
 
-        if($routeMatch->getParam('uid', 'none') == 'none')
+        if($uid == 'none')
         {
             $this->redirect()->toRoute("employer_users", ['action' => 'badAuth']);
         }
