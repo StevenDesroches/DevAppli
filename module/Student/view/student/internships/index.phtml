@@ -16,8 +16,8 @@ $this->headTitle($title);
             <td><?php echo $this->escapeHtml($internship['name']);?></td>
             <td><?php echo $this->escapeHtml($internship['description']);?></td>
             <td>
-                <a href="<?php echo $this->url('internships',
-                    array('action'=>'details', 'id' => $internship->id));?>">Détails</a>
+                <a href="<?php echo $this->url('student_internships',
+                    array('action'=>'details', 'id' => $internship['id']));?>">Détails</a>
             </td>
         </tr>
     <?php endforeach; ?>
