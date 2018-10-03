@@ -45,12 +45,12 @@ class StudentTable
     public function editStudent($student)
     {
             $data = [
-                'name'  => $album->name,
-            'active'  => $album->active,
-            'user_id'  => $album->user_id,
+                'name'  => $student->name,
+            'active'  => $student->active,
+            'user_id'  => $student->user_id,
             ];
 
-            $id = (int) $album->admission_number;
+            $id = (int) $student->admission_number;
 
         $this->tableGateway->update($data, ['admission_number' => $id]);
     }

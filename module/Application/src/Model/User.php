@@ -1,7 +1,7 @@
 <?php
 namespace Application\Model;
 
-class Album
+class User
 {
     public $id;
     public $email;

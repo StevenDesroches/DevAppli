@@ -3,15 +3,19 @@
 namespace Student\Controller;
 
 use Student\Model\InternshipsTable;
+use Student\Model\EmployerTable;
 use Zend\View\Model\ViewModel;
 
 class InternshipsController extends BaseController
 {
     private $table;
 
-    public function __construct(InternshipsTable $table)
+    private $tableEmployer;
+
+    public function __construct(InternshipsTable $table, EmployerTable $tableEmployer)
     {
         $this->table = $table;
+        $this->tableEmployer = $tableEmployer;
     }
 
 
@@ -29,8 +33,11 @@ class InternshipsController extends BaseController
         }
         $internship = $this->table->getInternship($id);
 
+        $employer = $this->tableEmployer->getEmployer( ($internship->id_employer) );
+
         return new ViewModel(array(
             'internship' => $internship,
+            'employer' => $employer,
         ));
     }
 }
