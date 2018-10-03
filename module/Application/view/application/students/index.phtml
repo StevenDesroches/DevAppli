@@ -3,20 +3,23 @@
 $title = 'Étudiants';
 $this->headTitle($title);
 ?>
-<h1><?= $this->escapeHtml($title) ?></h1>
 
+<h1 class="page-header"><?= $title?></h1>
 
+<a href="<?= $this->url('students', ['action' => 'add']) ?>"><i class="glyphicon glyphicon-plus"></i> Ajouter</a>
 <table class="table">
 <tr>
     <th>Numéro d'admission</th>
-    <th>Nom de l'étudiant</th>
+    <th>Nom</th>
+    <th>Courriel</th>
     <th>Est actif</th>
-    <th>&nbsp;</th>
+    <th>Actions</th>
 </tr>
 <?php foreach ($students as $student) : ?>
     <tr>
         <td><?= $this->escapeHtml($student->admission_number) ?></td>
         <td><?= $this->escapeHtml($student->name) ?></td>
+        <td><?= $this->escapeHtml($student->email) ?></td>
         <td><?= $this->escapeHtml($student->active) ?></td>
         <td>
             <a href="<?= $this->url('student', ['action' => 'edit', 'id' => $student->id]) ?>">Modifier</a>

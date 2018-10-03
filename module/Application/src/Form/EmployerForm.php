@@ -4,18 +4,18 @@ namespace Application\Form;
 
 use Zend\Form\Form;
 
-class StudentForm extends Form
+class EmployerForm extends Form
 {
 
     public function __construct($name = null)
     {
-        parent::__construct('student');
+        parent::__construct('employer');
 
         $this->add([
-            'name' => 'admission_number',
-            'type' => 'number',
+            'name' => 'name',
+            'type' => 'text',
             'options' => [
-                'title' => 'numero admission',
+                'title' => 'nom employeur',
             ]
         ]);
         $this->add([
@@ -23,6 +23,13 @@ class StudentForm extends Form
             'type' => 'text',
             'options' => [
                 'title' => 'nom etudiant',
+            ]
+        ]);
+        $this->add([
+            'name' => 'email',
+            'type' => 'text',
+            'options' => [
+                'title' => 'courriel',
             ]
         ]);
         $this->add([
@@ -39,10 +46,6 @@ class StudentForm extends Form
                 'value' => 'Go',
                 'id'    => 'submitbutton',
             ],
-        ]);
-        $this->add([
-            'name' => 'user_id',
-            'type' => 'hidden',
         ]);
         
     }

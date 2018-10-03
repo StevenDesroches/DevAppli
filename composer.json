@@ -20,11 +20,15 @@
         "zendframework/zend-session": "^2.8",
         "zendframework/zend-db": "^2.9",
         "zendframework/zend-modulemanager": "^2.8",
-        "zendframework/zend-inputfilter": "^2.8"
+        "zendframework/zend-inputfilter": "^2.8",
+        "zendframework/zend-form": "^2.12",
+        "zendframework/zend-mvc-i18n": "^1.1"
     },
     "autoload": {
         "psr-4": {
-            "Application\\": "module/Application/src/"
+            "Application\\": "module/Application/src/",
+            "Employer\\": "module/Employer/src",
+            "Student\\": "module/Student/src"
         }
     },
     "autoload-dev": {

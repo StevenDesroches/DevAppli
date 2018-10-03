@@ -19,6 +19,15 @@ class StudentTable
         return $this->tableGateway->select();
     }
 
+    public function fetchAllWithEmail()
+    {
+        $select = $this->tableGateway->getSql()->select();
+        $select->join('users', 'users.id = students.user_id', ['email'], 'left'); 
+        $stmt = $this->tableGateway->getSql()->prepareStatementForSqlObject($select);
+        $results = $stmt->execute();
+        return $results;
+    }
+
     public function getStudent($id)
     {
         $id = (int) $id;
@@ -31,23 +40,23 @@ class StudentTable
             ));
         }
         return $row;
-        }
-
-        public function editStudent($student)
-        {
-             $data = [
-                 'name'  => $album->name,
-                'active'  => $album->active,
-                'user_id'  => $album->user_id,
-             ];
-    
-             $id = (int) $album->admission_number;
-
-            $this->tableGateway->update($data, ['admission_number' => $id]);
-        }
-
-        public function deleteStudent($id)
-        {
-            $this->tableGateway->delete(['admission_number' => (int) $id]);
-        }
     }
+
+    public function editStudent($student)
+    {
+            $data = [
+                'name'  => $album->name,
+            'active'  => $album->active,
+            'user_id'  => $album->user_id,
+            ];
+
+            $id = (int) $album->admission_number;
+
+        $this->tableGateway->update($data, ['admission_number' => $id]);
+    }
+
+    public function deleteStudent($id)
+    {
+        $this->tableGateway->delete(['admission_number' => (int) $id]);
+    }
+}

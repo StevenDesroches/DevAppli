@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Application\Model\StudentTable;
+use Application\Form\StudentForm;
 use Zend\View\Model\ViewModel;
 use Zend\Db\Adapter\Adapter;
 
@@ -18,11 +19,21 @@ class StudentsController extends BaseController
 
     public function indexAction()
     {
-        return new ViewModel(['students' => $this->table->fetchAll(),
-        ]);
+        return new ViewModel(['students' => $this->table->fetchAllWithEmail(),]);
 
     }
 
+    public function addAction()
+    {   
+        $request = $this->getRequest();
+        if(! $request->isPost())
+        {
+            $form = new StudentForm();
+            $form->get('submit')->setAttribute('value', 'Add');
+            $viewData = ['form' => $form];
+            return $viewData;
+        }
+    }
  
     public function editAction()
     {

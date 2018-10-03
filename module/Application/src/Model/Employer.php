@@ -12,6 +12,7 @@ class Employer
     public $postal_code;
     public $active;
     public $id_user;
+    public $uuid;
 
     public function exchangeArray(array $data)
     {

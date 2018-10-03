@@ -46,7 +46,7 @@ class BaseController extends AbstractController
             $method = 'notFoundAction';
         }
 
-        if($action != 'login' && $action != 'loginPost')
+        if($action != 'login')
         {
             $auth = new AuthenticationService();
             if(!$auth->hasIdentity())
