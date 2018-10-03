@@ -36,7 +36,7 @@ return [
             'student_internships' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/student/internships[/:action[/:id]',
+                    'route'    => '/student/internships[/:action[/:id]]',
                     'defaults' => [
                         'controller' => Controller\InternshipsController::class,
                         'action'     => 'index',
