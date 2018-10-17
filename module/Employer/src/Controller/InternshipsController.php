@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\Controller;
+namespace Employer\Controller;
 
-use Application\Model\InternshipsTable;
-use Application\Model\EmployersTable;
-use Application\Form\InternshipsForm;
+use Employer\Model\InternshipsTable;
+use Employer\Model\EmployersTable;
+use Employer\Form\InternshipsForm;
 use Zend\View\Model\ViewModel;
 use Zend\Db\Adapter\Adapter;
 
@@ -16,6 +16,7 @@ class InternshipsController extends BaseController
     public function __construct(InternshipsTable $table, EmployersTable $employers)
     {
         $this->table = $table;
+        $this->employers = $employers;
     }
 
 
@@ -27,7 +28,7 @@ class InternshipsController extends BaseController
     public function addAction()
     {
         $request = $this->getRequest();
-        $employer = $employers->getFromUid($this->params()->fromRoute('uid', 0));
+        $employer = $this->employers->getFromUid($this->params()->fromRoute('uid', 0));
         if ($request->isPost()) {
 
         } else {

@@ -33,7 +33,16 @@ return [
                     ],
                 ],
             ],
-        ],
+            'employer_internships' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/employer[/:uid]/internships[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\InternshipsController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],        ],
     ],
     'view_manager' => [
         'template_map' => [
