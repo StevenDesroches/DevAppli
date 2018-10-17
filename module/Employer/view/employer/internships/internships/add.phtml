@@ -1,0 +1,57 @@
+<?php
+$title = "Ajouter une offre de stage pour votre entreprise";
+$url   = $this->url('internships', ['action' => 'add']);
+$this->headTitle($title);
+?>
+
+<h1><?= $this->escapeHtml($title) ?></h1>
+
+<?php
+
+$title = "Ajouter les informations de stage pour votre entreprise";
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+
+$name = $form->get('name');
+$name->setAttribute('class', 'form-control');
+$name->setAttribute('placeholder', 'Nom');
+
+$description = $form->get('description');
+$description->setAttribute('class', 'form-control');
+$description->setAttribute('placeholder', 'Description');
+
+$id_employer = $form->get('id_employer');
+$id_employer->setValue($employer->id);
+
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('internships', [
+    'action' => 'add'
+]));
+
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+
+<div class="form-group">
+    <?= $this->formLabel($name, "Nom") ?>
+    <?= $this->formElement($name) ?>
+    <?= $this->formElementErrors()->render($name, ['class' => 'help-block']) ?>
+</div>
+<div class="form-group">
+    <?= $this->formLabel($description, "Description") ?>
+    <?= $this->formElement($description) ?>
+    <?= $this->formElementErrors()->render($description, ['class' => 'help-block']) ?>
+</div>
+
+<?= $this->formElement($id_employer);?>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->form()->closeTag();
+
+?>

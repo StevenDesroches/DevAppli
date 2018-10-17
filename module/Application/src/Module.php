@@ -56,6 +56,16 @@ class Module implements ConfigProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Internships());
                     return new TableGateway('internship_offers', $dbAdapter, null, $resultSetPrototype);
                 },
+                Model\EmployerTable::class => function($container) {
+                    $tableGateway = $container->get(Model\EmployerTableGateway::class);
+                    return new Model\EmployerTable($tableGateway);
+                },
+                Model\EmployerTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Employer());
+                    return new TableGateway('employers', $dbAdapter, null, $resultSetPrototype);
+                },
             ],
         ];
     }
@@ -81,7 +91,7 @@ class Module implements ConfigProviderInterface
                 },
                 Controller\EmployersController::class => function($container) {
                     return new Controller\EmployersController(
-                        $container->get(\Zend\Db\Adapter\Adapter::class)
+                        $container->get(Model\EmployerTable::class)
                     );
                 },
                 Controller\InternshipsController::class => function($container) {

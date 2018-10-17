@@ -1,0 +1,36 @@
+<?php
+
+$title = 'Employers';
+$this->headTitle($title);
+?>
+
+<h1 class="page-header"><?= $title?></h1>
+
+<a href="<?= $this->url('employers', ['action' => 'add']) ?>"><i class="glyphicon glyphicon-plus"></i> Ajouter</a>
+<table class="table">
+    <tr>
+        <th>Nom</th>
+        <th>Adresse</th>
+        <th>Ville</th>
+        <th>Province</th>
+        <th>Code postal</th>
+        <th>Courriel</th>
+        <th>Est actif</th>
+        <th>Actions</th>
+    </tr>
+    <?php foreach ($employers as $employer) : ?>
+        <tr>
+            <td><?= $this->escapeHtml($employer->name) ?></td>
+            <td><?= $this->escapeHtml($employer->adress) ?></td>
+            <td><?= $this->escapeHtml($employer->city) ?></td>
+            <td><?= $this->escapeHtml($employer->province) ?></td>
+            <td><?= $this->escapeHtml($employer->postal_code) ?></td>
+            <td><?= $this->escapeHtml($employer->email) ?></td>
+            <td><?= $this->escapeHtml($employer->active) ?></td>
+            <td>
+                <a href="<?= $this->url('employers', ['action' => 'edit', 'id' => $employer->id]) ?>">Modifier</a>
+                <a href="<?= $this->url('employers', ['action' => 'delete', 'id' => $employer->id]) ?>">Supprimer</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
