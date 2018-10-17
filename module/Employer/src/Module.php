@@ -36,6 +36,26 @@ class Module implements ConfigProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Model\User());
                     return new TableGateway('user', $dbAdapter, null, $resultSetPrototype);
                 },
+                Model\InternshipsTable::class => function($container) {
+                    $tableGateway = $container->get(Model\InternshipsTableGateway::class);
+                    return new Model\InternshipsTable($tableGateway);
+                },
+                Model\InternshipsTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Internships());
+                    return new TableGateway('internship_offers', $dbAdapter, null, $resultSetPrototype);
+                },
+                Model\EmployersTable::class => function($container) {
+                    $tableGateway = $container->get(Model\EmployersTableGateway::class);
+                    return new Model\EmployersTable($tableGateway);
+                },
+                Model\EmployersTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Employer());
+                    return new TableGateway('employers', $dbAdapter, null, $resultSetPrototype);
+                },
             ],
         ];
     }
@@ -56,7 +76,7 @@ class Module implements ConfigProviderInterface
                 },
                 Controller\InternshipsController::class => function($container) {
                     return new Controller\InternshipsController(
-                        $container->get(\Zend\Db\Adapter\Adapter::class)
+                        $container->get(Model\InternshipsTable::class)
                     );
                 },
             ],

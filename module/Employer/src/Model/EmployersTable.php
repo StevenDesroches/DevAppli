@@ -5,7 +5,7 @@ namespace Application\Model;
 use RuntimeException;
 use Zend\Db\TableGateway\TableGatewayInterface;
 
-class EmployerTable
+class EmployersTable
 {
     private $tableGateway;
 
