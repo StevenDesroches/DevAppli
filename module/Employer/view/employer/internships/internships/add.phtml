@@ -22,6 +22,9 @@ $description = $form->get('description');
 $description->setAttribute('class', 'form-control');
 $description->setAttribute('placeholder', 'Description');
 
+$id_employer = $form->get('id_employer');
+$id_employer->setValue($employer->id);
+
 $submit = $form->get('submit');
 $submit->setAttribute('class', 'btn btn-primary');
 
@@ -44,6 +47,8 @@ echo $this->form()->openTag($form);
     <?= $this->formElement($description) ?>
     <?= $this->formElementErrors()->render($description, ['class' => 'help-block']) ?>
 </div>
+
+<?= $this->formElement($id_employer);?>
 
 <?php
 echo $this->formSubmit($submit);
