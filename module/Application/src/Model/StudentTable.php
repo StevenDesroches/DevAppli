@@ -42,6 +42,32 @@ class StudentTable
         return $row;
     }
 
+    public function saveStudent(Student $student)
+    {
+        $data = [
+            'admission_number' => $student->admission_number,
+            'name' => $student->name,
+            'active' => $student->active,
+            'user_id' => $student->user_id,
+        ];
+
+        $id = (int) $student->id;
+
+        if ($id === 0) {
+            $this->tableGateway->insert($data);
+            return;
+        }
+
+        if (! $this->getStudent($id)) {
+            throw new RuntimeException(sprintf(
+                'Cannot update student with identifier %d; does not exist',
+                $id
+            ));
+        }
+
+        $this->tableGateway->update($data, ['id' => $id]);
+    }
+
     public function editStudent($student)
     {
             $data = [

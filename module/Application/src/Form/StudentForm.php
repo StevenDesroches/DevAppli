@@ -33,6 +33,13 @@ class StudentForm extends Form
             ]
         ]);
         $this->add([
+            'name' => 'user_id',
+            'type' => 'number',
+            'options' => [
+                'title' => 'user id',
+            ]
+        ]);
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => [
@@ -40,10 +47,6 @@ class StudentForm extends Form
                 'id'    => 'submitbutton',
             ],
         ]);
-        $this->add([
-            'name' => 'user_id',
-            'type' => 'hidden',
-        ]);
-        
+
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Application\Controller;
 
+use Application\Model\Student;
 use Application\Model\StudentTable;
 use Application\Form\StudentForm;
 use Zend\View\Model\ViewModel;
@@ -24,15 +25,30 @@ class StudentsController extends BaseController
     }
 
     public function addAction()
-    {   
+    {
+        $form = new StudentForm();
+        $form->get('submit')->setValue('Add');
+
         $request = $this->getRequest();
         if(! $request->isPost())
         {
-            $form = new StudentForm();
-            $form->get('submit')->setAttribute('value', 'Add');
+            //$form = new EmployerForm();
+            //$form->get('submit')->setAttribute('value', 'Add');
             $viewData = ['form' => $form];
             return $viewData;
         }
+
+        $student = new Student();
+        //$form->setInputFilter($employer->getInputFilter());
+        $form->setData($request->getPost());
+
+        if (! $form->isValid()) {
+            return ['form' => $form];
+        }
+
+        $student->exchangeArray($form->getData());
+        $this->table->saveStudent($student);
+        return $this->redirect()->toRoute('students');
     }
  
     public function editAction()
@@ -41,13 +57,13 @@ class StudentsController extends BaseController
         $id = (int) $this->params()->fromRoute('admission_number', 0);
 
         if (0 === $id) {
-            return $this->redirect()->toRoute('student', ['action' => 'index']);
+            return $this->redirect()->toRoute('students', ['action' => 'index']);
         }
 
         try {
             $student = $this->table->getStudent($id);
-        } catch (\Exception $e) {
-            return $this->redirect()->toRoute('student', ['action' => 'index']);
+        } catch (Exception $e) {
+            return $this->redirect()->toRoute('students', ['action' => 'index']);
         }
 
         $form = new StudentForm();
@@ -71,7 +87,7 @@ class StudentsController extends BaseController
         $this->table->editStudent($student);
 
        
-        return $this->redirect()->toRoute('student', ['action' => 'index']);
+        return $this->redirect()->toRoute('students', ['action' => 'index']);
     }
 
 
@@ -80,7 +96,7 @@ class StudentsController extends BaseController
 
         $id = (int) $this->params()->fromRoute('admission_number', 0);
         if (!$id) {
-            return $this->redirect()->toRoute('student');
+            return $this->redirect()->toRoute('students');
         }
 
         $request = $this->getRequest();
@@ -92,7 +108,7 @@ class StudentsController extends BaseController
                 $this->table->deleteStudent($id);
             }
 
-            return $this->redirect()->toRoute('student');
+            return $this->redirect()->toRoute('students');
         }
 
         return [

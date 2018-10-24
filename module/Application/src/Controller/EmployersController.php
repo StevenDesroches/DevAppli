@@ -51,11 +51,32 @@ class EmployersController extends BaseController
 
     public function editAction()
     {
-
+// a delete ou non?
     }
     public function deleteAction()
     {
 
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (!$id) {
+            return $this->redirect()->toRoute('employers');
+        }
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $del = $request->getPost('del', 'No');
+
+            if ($del == 'Yes') {
+                $id = (int) $request->getPost('id');
+                $this->table->deleteEmployer($id);
+            }
+
+            return $this->redirect()->toRoute('employers');
+        }
+
+        return [
+            'id'    => $id,
+            'employer' => $this->table->getEmployer($id),
+        ];
+    }
     }
     
-}
