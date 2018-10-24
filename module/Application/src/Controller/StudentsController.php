@@ -46,11 +46,7 @@ class StudentsController extends BaseController
 
         try {
             $student = $this->table->getStudent($id);
-<<<<<<< HEAD
-        } catch (\Exception $e) {
-=======
         } catch (Exception $e) {
->>>>>>> 8beab29e31e19a58b788c972890e583ebdc54d44
             return $this->redirect()->toRoute('students', ['action' => 'index']);
         }
 
