@@ -3,20 +3,17 @@
 namespace Employer\Controller;
 
 use Employer\Model\InternshipsTable;
-use Employer\Model\EmployersTable;
-use Employer\Form\InternshipsForm;
 use Zend\View\Model\ViewModel;
 use Zend\Db\Adapter\Adapter;
+use Employer\Form\InternshipForm;
 
 class InternshipsController extends BaseController 
 {
     private $table;
-    private $employers;
 
-    public function __construct(InternshipsTable $table, EmployersTable $employers)
+    public function __construct(InternshipsTable $table)
     {
         $this->table = $table;
-        $this->employers = $employers;
     }
 
 
@@ -27,23 +24,69 @@ class InternshipsController extends BaseController
 
     public function addAction()
     {
-        $request = $this->getRequest();
-        $employer = $this->employers->getFromUid($this->params()->fromRoute('uid', 0));
-        if ($request->isPost()) {
+        $form = new InternshipForm();
+        $form->get('submit')->setValue('Add');
 
-        } else {
-            $form = new InternshipForm();
-            $employer = 
-            $form->get('submit')->setAttribute('value', 'Add');
-            $viewData = ['form' => $form, 'employer' => $employer];
+        $request = $this->getRequest();
+        if(! $request->isPost())
+        {
+
+            $viewData = ['form' => $form];
             return $viewData;
         }
+
+        $internship = new Internship();
+        $form->setData($request->getPost());
+
+        if (! $form->isValid()) {
+            return ['form' => $form];
+        }
+
+        $internship->exchangeArray($form->getData());
+        $internship->date_posted=date();
+        //$internship->id_employer=
+        $this->table->saveEmployer($internship);
+        return $this->redirect()->toRoute('internships');
     }
 
     public function editAction()
     {
+        $id = (int) $this->params()->fromRoute('id', 0);
 
+        if (0 === $id) {
+            return $this->redirect()->toRoute('internships', ['action' => 'index']);
+        }
+
+        try {
+            $internship = $this->table->getInternship($id);
+        } catch (\Exception $e) {
+            return $this->redirect()->toRoute('internships', ['action' => 'index']);
+        }
+
+        $form = new InternshipsForm();
+        $form->bind($internship);
+        $form->get('submit')->setAttribute('value', 'Edit');
+
+        $request = $this->getRequest();
+        $viewData = ['id' => $id, 'form' => $form];
+
+        if (! $request->isPost()) {
+            return $viewData;
+        }
+
+        $form->setInputFilter($internship->getInputFilter());
+        $form->setData($request->getPost());
+
+        if (! $form->isValid()) {
+            return $viewData;
+        }
+
+        $this->table->editStudent($internship);
+
+       
+        return $this->redirect()->toRoute('internships', ['action' => 'index']);
     }
+
     public function deleteAction()
     {
         $id = (int) $this->params()->fromRoute('id', 0);

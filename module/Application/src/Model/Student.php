@@ -19,7 +19,6 @@ class Student implements InputFilterAwareInterface
     public $name;
     public $active;
     public $user_id;
-    public $email;
 
     private $inputFilter;
 

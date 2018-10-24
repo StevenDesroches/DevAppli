@@ -40,6 +40,9 @@ $postal->setAttribute('placeholder', 'code postal');
 $active = $form->get('active');
 $active->setAttribute('class', 'form-check-input');
 
+$uuid = $form->get('uuid');
+$uuid->setAttribute('class', 'form-check-input');
+
 $submit = $form->get('submit');
 $submit->setAttribute('class', 'btn btn-primary');
 
@@ -52,7 +55,6 @@ $form->prepare();
 echo $this->form()->openTag($form);
 ?>
     <div class="form-group">
-        <?= $this->formLabel($id, "Le id") ?>
         <?= $this->formElement($id) ?>
         <?= $this->formElementErrors()->render($id, ['class' => 'help-block']) ?>
     </div>
@@ -88,7 +90,7 @@ echo $this->form()->openTag($form);
     </div>
 
     <div class="form-group">
-        <?= $this->formLabel($postal, "CODE POSTAAL") ?>
+        <?= $this->formLabel($postal, "Code postal") ?>
         <?= $this->formElement($postal) ?>
         <?= $this->formElementErrors()->render($postal, ['class' => 'help-block']) ?>
     </div>
@@ -103,6 +105,11 @@ echo $this->form()->openTag($form);
         <?= $this->formLabel($active, "Actif") ?>
         <?= $this->formElement($active) ?>
         <?= $this->formElementErrors()->render($active, ['class' => 'help-block']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= $this->formElement($uuid) ?>
+        <?= $this->formElementErrors()->render($uuid, ['class' => 'help-block']) ?>
     </div>
 
 <?php

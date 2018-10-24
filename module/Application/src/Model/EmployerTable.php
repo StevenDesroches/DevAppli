@@ -45,7 +45,7 @@ class EmployerTable
             'postal_code' => $employer->postal_code,
             'active' => $employer->active,
             'id_user' => $employer->id_user,
-            //'uuid' => $employer->uuid,
+            'uuid' => $employer->uuid,
         ];
 
         $id = (int) $employer->id;
