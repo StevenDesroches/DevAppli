@@ -10,6 +10,7 @@ namespace Student\Controller;
 use Zend\View\Model\ViewModel;
 use Zend\Authentication\AuthenticationService;
 use Application\Adapter\CredentialAdapter;
+use Zend\Authentication\Storage\Session;
 
 class UsersController extends BaseController
 {
@@ -37,6 +38,7 @@ class UsersController extends BaseController
             $authAdapter->setUserType(1);
         
             $auth = new AuthenticationService();
+            $auth->setStorage(new Session('Student'));
 
             $result = $auth->authenticate($authAdapter); 
             $this->redirect()->toRoute("student_home", ['action' => 'index']);
