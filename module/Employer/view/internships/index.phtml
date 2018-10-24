@@ -1,0 +1,30 @@
+<?php
+
+$title = 'Stages';
+$this->headTitle($title);
+?>
+
+<h1 class="page-header"><?= $title?></h1>
+
+<a href="<?= $this->url('internships', ['action' => 'add']) ?>"><i class="glyphicon glyphicon-plus"></i> Ajouter</a>
+<table class="table">
+<tr>
+    <th>Titre du stage</th>
+    <th>Employeur</th>
+    <th>Date</th>
+    <th>Est actif</th>
+    <th>Actions</th>
+</tr>
+<?php foreach ($internships as $internship) : ?>
+    <tr>
+        <td><?= $this->escapeHtml($internship['name']) ?></td>
+        <td><?= $this->escapeHtml($internship['employer']) ?></td>
+        <td><?= $this->escapeHtml($internship['date_posted']) ?></td>
+        <td><?= $this->escapeHtml($internship['active']) ?></td>
+        <td>
+            <a href="<?= $this->url('employer_internships', ['action' => 'edit', 'id' => $internship['id']]) ?>">Modifier</a>
+            <a href="<?= $this->url('internships', ['action' => 'delete', 'id' => $internship['id']]) ?>">Supprimer</a>
+        </td>
+    </tr>
+<?php endforeach; ?>
+</table>

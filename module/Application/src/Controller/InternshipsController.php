@@ -5,6 +5,7 @@ namespace Application\Controller;
 use Application\Model\InternshipsTable;
 use Zend\View\Model\ViewModel;
 use Zend\Db\Adapter\Adapter;
+use Application\Form\InternshipForm;
 
 class InternshipsController extends BaseController 
 {
@@ -23,7 +24,7 @@ class InternshipsController extends BaseController
 
     public function addAction()
     {
-
+        
     }
 
     public function editAction()

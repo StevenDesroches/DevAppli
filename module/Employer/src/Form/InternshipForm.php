@@ -3,6 +3,7 @@
 namespace Application\Form;
 
 use Zend\Form\Form;
+use Zend\Form\Element;
 
 class InternshipForm extends Form
 {
@@ -12,17 +13,38 @@ class InternshipForm extends Form
         parent::__construct('internship');
 
         $this->add([
+            'name' => 'id',
+            'type' => 'hidden',
+            'options' => [
+                'title' => 'le id',
+            ]
+        ]);
+        $this->add([
             'name' => 'name',
             'type' => 'text',
             'options' => [
-                'title' => 'nom du stage',
+                'title' => 'nom stage',
+            ]
+        ]);
+        $this->add([
+            'name' => 'date_posted',
+            'type' => 'hidden', 'datetime',
+            'options' => [
+                'title' => 'Date du postage',
             ]
         ]);
         $this->add([
             'name' => 'description',
             'type' => 'text',
             'options' => [
-                'title' => 'description du stage',
+                'title' => 'description',
+            ]
+        ]);
+        $this->add([
+            'name' => 'id_employer',
+            'type' => 'number',
+            'options' => [
+                'title' => 'employer id',
             ]
         ]);
         $this->add([
@@ -32,10 +54,6 @@ class InternshipForm extends Form
                 'value' => 'Go',
                 'id'    => 'submitbutton',
             ],
-        ]);
-        $this->add([
-            'name' => 'id_employer',
-            'type' => 'hidden',
         ]);
         
     }
