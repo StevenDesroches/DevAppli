@@ -2,6 +2,7 @@
 
 namespace Application\Controller;
 
+use Application\Model\Student;
 use Application\Model\StudentTable;
 use Application\Form\StudentForm;
 use Zend\View\Model\ViewModel;
@@ -24,15 +25,30 @@ class StudentsController extends BaseController
     }
 
     public function addAction()
-    {   
+    {
+        $form = new StudentForm();
+        $form->get('submit')->setValue('Add');
+
         $request = $this->getRequest();
         if(! $request->isPost())
         {
-            $form = new StudentForm();
-            $form->get('submit')->setAttribute('value', 'Add');
+            //$form = new EmployerForm();
+            //$form->get('submit')->setAttribute('value', 'Add');
             $viewData = ['form' => $form];
             return $viewData;
         }
+
+        $student = new Student();
+        //$form->setInputFilter($employer->getInputFilter());
+        $form->setData($request->getPost());
+
+        if (! $form->isValid()) {
+            return ['form' => $form];
+        }
+
+        $student->exchangeArray($form->getData());
+        $this->table->saveStudent($student);
+        return $this->redirect()->toRoute('students');
     }
  
     public function editAction()
