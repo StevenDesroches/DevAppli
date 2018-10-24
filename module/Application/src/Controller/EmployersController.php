@@ -51,7 +51,41 @@ class EmployersController extends BaseController
 
     public function editAction()
     {
-// a delete ou non?
+
+        $id = (int) $this->params()->fromRoute('id', 0);
+
+        if (0 === $id) {
+            return $this->redirect()->toRoute('employers', ['action' => 'index']);
+        }
+
+        try {
+            $employer = $this->table->getEmployer($id);
+        } catch (Exception $e) {
+            return $this->redirect()->toRoute('employers', ['action' => 'index']);
+        }
+
+        $form = new EmployerForm();
+        $form->bind($employer);
+        $form->get('submit')->setAttribute('value', 'Edit');
+
+        $request = $this->getRequest();
+        $viewData = ['id' => $id, 'form' => $form];
+
+        if (! $request->isPost()) {
+            return $viewData;
+        }
+
+        $form->setInputFilter($employer->getInputFilter());
+        $form->setData($request->getPost());
+
+        if (! $form->isValid()) {
+            return $viewData;
+        }
+
+        $this->table->editEmployer($employer);
+
+       
+        return $this->redirect()->toRoute('employers', ['action' => 'index']);
     }
     public function deleteAction()
     {

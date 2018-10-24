@@ -6,7 +6,7 @@ $this->headTitle($title);
 ?>
 <h1><?= $this->escapeHtml($title) ?></h1>
 <?php
-$numAdmission = $form->get('numero_admission');
+$numAdmission = $form->get('admission_number');
 $numAdmission->setAttribute('class', 'form-control');
 $numAdmission->setAttribute('placeholder', 'numero admission');
 
@@ -21,9 +21,9 @@ $active->setAttribute('class', 'form-control');
 $submit = $form->get('submit');
 $submit->setAttribute('class', 'btn btn-primary');
 
-$form->setAttribute('action', $this->url('student', [
+$form->setAttribute('action', $this->url('students', [
     'action' => 'edit',
-    'id'     => $numAdmission,
+    'id'     => $admission_number,
 ]));
 
 $form->prepare();
@@ -31,18 +31,18 @@ $form->prepare();
 echo $this->form()->openTag($form);
 ?>
 <div class="form-group">
-    <?= $this->formLabel($numAdmission) ?>
+    <?= $this->formLabel($numAdmission, 'numero d admission') ?>
     <?= $this->formElement($numAdmission) ?>
     <?= $this->formElementErrors()->render($numAdmission, ['class' => 'help-block']) ?>
 </div>
 
 <div class="form-group">
-    <?= $this->formLabel($name) ?>
+    <?= $this->formLabel($name, 'nom') ?>
     <?= $this->formElement($name) ?>
     <?= $this->formElementErrors()->render($name, ['class' => 'help-block']) ?>
 </div>
 <div class="form-group">
-    <?= $this->formLabel($active) ?>
+    <?= $this->formLabel($active, 'actif') ?>
     <?= $this->formElement($active) ?>
     <?= $this->formElementErrors()->render($active, ['class' => 'help-block']) ?>
 </div>

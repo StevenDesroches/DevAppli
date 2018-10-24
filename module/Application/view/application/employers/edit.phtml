@@ -1,0 +1,117 @@
+<?php
+
+$title = "Modifier un employeur";
+$this->headTitle($title);
+?>
+    <h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+$id = $form->get('id');
+$id->setAttribute('class', 'form-control');
+$id->setAttribute('placeholder', 'le id');
+
+$iduser = $form->get('id_user');
+$iduser->setAttribute('class', 'form-control');
+$iduser->setAttribute('placeholder', 'le id de user');
+
+$courriel = $form->get('email');
+$courriel->setAttribute('class', 'form-control');
+$courriel->setAttribute('placeholder', 'courriel');
+
+$name = $form->get('name');
+$name->setAttribute('class', 'form-control');
+$name->setAttribute('placeholder', 'Nom');
+
+$adress = $form->get('adress');
+$adress->setAttribute('class', 'form-control');
+$adress->setAttribute('placeholder', 'Adresse');
+
+$city = $form->get('city');
+$city->setAttribute('class', 'form-control');
+$city->setAttribute('placeholder', 'ville');
+
+$province = $form->get('province');
+$province->setAttribute('class', 'form-control');
+$province->setAttribute('placeholder', 'province');
+
+$postal = $form->get('postal_code');
+$postal->setAttribute('class', 'form-control');
+$postal->setAttribute('placeholder', 'code postal');
+
+$active = $form->get('active');
+$active->setAttribute('class', 'form-check-input');
+
+$uuid = $form->get('uuid');
+$uuid->setAttribute('class', 'form-check-input');
+
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('employers', [
+    'action' => 'add'
+]));
+
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+    <div class="form-group">
+        <?= $this->formElement($id) ?>
+        <?= $this->formElementErrors()->render($id, ['class' => 'help-block']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= $this->formLabel($name, "Nom") ?>
+        <?= $this->formElement($name) ?>
+        <?= $this->formElementErrors()->render($name, ['class' => 'help-block']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= $this->formLabel($adress, "Adresse") ?>
+        <?= $this->formElement($adress) ?>
+        <?= $this->formElementErrors()->render($adress, ['class' => 'help-block']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= $this->formLabel($city, "Ville") ?>
+        <?= $this->formElement($city) ?>
+        <?= $this->formElementErrors()->render($city, ['class' => 'help-block']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= $this->formLabel($courriel, "Courriel") ?>
+        <?= $this->formElement($courriel) ?>
+        <?= $this->formElementErrors()->render($courriel, ['class' => 'help-block']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= $this->formLabel($province, "Province") ?>
+        <?= $this->formElement($province) ?>
+        <?= $this->formElementErrors()->render($province, ['class' => 'help-block']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= $this->formLabel($postal, "Code postal") ?>
+        <?= $this->formElement($postal) ?>
+        <?= $this->formElementErrors()->render($postal, ['class' => 'help-block']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= $this->formLabel($iduser, "Le id user") ?>
+        <?= $this->formElement($iduser) ?>
+        <?= $this->formElementErrors()->render($iduser, ['class' => 'help-block']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= $this->formLabel($active, "Actif") ?>
+        <?= $this->formElement($active) ?>
+        <?= $this->formElementErrors()->render($active, ['class' => 'help-block']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= $this->formElement($uuid) ?>
+        <?= $this->formElementErrors()->render($uuid, ['class' => 'help-block']) ?>
+    </div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->form()->closeTag();

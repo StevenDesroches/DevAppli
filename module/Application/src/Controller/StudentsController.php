@@ -54,7 +54,7 @@ class StudentsController extends BaseController
     public function editAction()
     {
 
-        $id = (int) $this->params()->fromRoute('admission_number', 0);
+        $id = (int) $this->params()->fromRoute('id', 0);
 
         if (0 === $id) {
             return $this->redirect()->toRoute('students', ['action' => 'index']);
@@ -94,7 +94,7 @@ class StudentsController extends BaseController
     public function deleteAction()
     {
 
-        $id = (int) $this->params()->fromRoute('admission_number', 0);
+        $id = (int) $this->params()->fromRoute('id', 0);
         if (!$id) {
             return $this->redirect()->toRoute('students');
         }

@@ -2,7 +2,7 @@
 
 
 $title = 'Supprimer un etudiant';
-$url   = $this->url('students', ['action' => 'delete', 'admission_number' => $id]);
+$url   = $this->url('students', ['action' => 'delete', 'id' => $admission_number]);
 
 $this->headTitle($title);
 ?>
@@ -10,13 +10,13 @@ $this->headTitle($title);
 
 <p>
     Voulez-vous vraiment supprimer cet etudiant?
-    <?= $this->escapeHtml($student->id) ?>
+    <?= $this->escapeHtml($student->admission_number) ?>
     <?= $this->escapeHtml($student->name) ?>
 </p>
 
 <form action="<?= $url ?>" method="post">
 <div class="form-group">
-    <input type="submit" name="admission_number" value="<?= (int) $student->id ?>" />
+    <input type="hidden" name="admission_number" value="<?= (int) $student->admission_number ?>" />
     <input type="submit" class="btn btn-danger" name="del" value="Yes" />
     <input type="submit" class="btn btn-success" name="del" value="No" />
 </div>
