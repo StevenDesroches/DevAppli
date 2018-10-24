@@ -26,4 +26,21 @@ class Employer
         $this->active = !empty($data['active']) ? $data['active'] : null;
         $this->id_user = !empty($data['id_user']) ? $data['id_user'] : null;
     }
+
+    public function getArrayCopy(){
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'adress' => $this->adress,
+            'city' => $this->city,
+            'province' => $this->province,
+            'postal_code' => $this->postal_code,
+            'active' => $this->active,
+            'id_user' => $this->id_user,
+            
+
+        ];
+    }
+
 }

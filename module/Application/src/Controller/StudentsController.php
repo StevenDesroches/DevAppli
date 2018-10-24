@@ -41,13 +41,13 @@ class StudentsController extends BaseController
         $id = (int) $this->params()->fromRoute('admission_number', 0);
 
         if (0 === $id) {
-            return $this->redirect()->toRoute('student', ['action' => 'index']);
+            return $this->redirect()->toRoute('students', ['action' => 'index']);
         }
 
         try {
             $student = $this->table->getStudent($id);
         } catch (\Exception $e) {
-            return $this->redirect()->toRoute('student', ['action' => 'index']);
+            return $this->redirect()->toRoute('students', ['action' => 'index']);
         }
 
         $form = new StudentForm();
@@ -71,7 +71,7 @@ class StudentsController extends BaseController
         $this->table->editStudent($student);
 
        
-        return $this->redirect()->toRoute('student', ['action' => 'index']);
+        return $this->redirect()->toRoute('students', ['action' => 'index']);
     }
 
 
@@ -80,7 +80,7 @@ class StudentsController extends BaseController
 
         $id = (int) $this->params()->fromRoute('admission_number', 0);
         if (!$id) {
-            return $this->redirect()->toRoute('student');
+            return $this->redirect()->toRoute('students');
         }
 
         $request = $this->getRequest();
@@ -92,7 +92,7 @@ class StudentsController extends BaseController
                 $this->table->deleteStudent($id);
             }
 
-            return $this->redirect()->toRoute('student');
+            return $this->redirect()->toRoute('students');
         }
 
         return [
