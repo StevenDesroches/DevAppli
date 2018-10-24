@@ -23,7 +23,7 @@ class Employer
         $this->city = !empty($data['city']) ? $data['city'] : null;
         $this->province = !empty($data['province']) ? $data['province'] : null;
         $this->postal_code = !empty($data['postal_code']) ? $data['postal_code'] : null;
-        $this->active = !empty($data['active']) ? $data['active'] : null;
+        $this->active = !empty($data['active']) ? $data['active'] : 0;
         $this->id_user = !empty($data['id_user']) ? $data['id_user'] : null;
         $this->uuid = !empty($data['uuid']) ? $data['uuid'] : null;
     }
