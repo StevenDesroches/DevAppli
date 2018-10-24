@@ -91,6 +91,7 @@ class EmployerForm extends Form
             'options' => [
                 'title' => 'actif',
             ]
+
         ]);
         $this->add([
             'name' => 'id_user',
