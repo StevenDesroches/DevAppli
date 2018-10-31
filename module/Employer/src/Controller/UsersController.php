@@ -9,7 +9,7 @@ namespace Employer\Controller;
 
 use Zend\View\Model\ViewModel;
 use Zend\Authentication\AuthenticationService;
-use Application\Adapter\CredentialAdapter;
+use Employer\Adapter\CredentialAdapter;
 
 class UsersController extends BaseController
 {
