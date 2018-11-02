@@ -1,11 +1,11 @@
 <?php
 
-namespace Application\Form;
+namespace Employer\Form;
 
 use Zend\Form\Form;
 use Zend\Form\Element;
 
-class InternshipForm extends Form
+class InternshipsForm extends Form
 {
 
     public function __construct($name = null)

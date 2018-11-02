@@ -5,7 +5,7 @@ namespace Employer\Controller;
 use Employer\Model\InternshipsTable;
 use Zend\View\Model\ViewModel;
 use Zend\Db\Adapter\Adapter;
-use Employer\Form\InternshipForm;
+use Employer\Form\InternshipsForm;
 
 class InternshipsController extends BaseController 
 {
@@ -24,7 +24,7 @@ class InternshipsController extends BaseController
 
     public function addAction()
     {
-        $form = new InternshipForm();
+        $form = new InternshipsForm();
         $form->get('submit')->setValue('Add');
 
         $request = $this->getRequest();
@@ -44,7 +44,6 @@ class InternshipsController extends BaseController
 
         $internship->exchangeArray($form->getData());
         $internship->date_posted=date();
-        //$internship->id_employer=
         $this->table->saveEmployer($internship);
         return $this->redirect()->toRoute('internships');
     }
@@ -59,6 +58,7 @@ class InternshipsController extends BaseController
 
         try {
             $internship = $this->table->getInternship($id);
+            var_dump($internship);
         } catch (\Exception $e) {
             return $this->redirect()->toRoute('internships', ['action' => 'index']);
         }

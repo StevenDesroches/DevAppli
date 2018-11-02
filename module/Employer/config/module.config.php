@@ -36,7 +36,7 @@ return [
             'employer_internships' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/employer[/:uid]/internships[/:action]',
+                    'route'    => '/employer[/:uid]/internships[/:action][/:id]',
                     'defaults' => [
                         'controller' => Controller\InternshipsController::class,
                         'action'     => 'index',
