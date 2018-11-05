@@ -3,20 +3,34 @@
 namespace Application\Model;
 
 use RuntimeException;
-use Zend\Db\TableGateway\TableGatewayInterface;
+use Zend\Db\TableGateway\AbstractTableGateway;
 
-class UserTable
+class UserTable extends AbstractTableGateway
 {
     private $tableGateway;
 
-    public function __construct(TableGatewayInterface $tableGateway)
+    public function __construct($table, $adapter)
     {
-        $this->tableGateway = $tableGateway;
+        $this->table = $table;
+
+        $this->adapter = $adapter;
+
+        $this->initialize();
     }
 
     public function fetchAll()
     {
         return $this->tableGateway->select();
+    }
+
+    public function getUserType($id){
+
+        $id = (int) $id;
+        $rowset = $this->tableGateway->select(['id' => $id]);
+        $userType = $rowset->user_type;
+        
+
+        return $userType; 
     }
 
     public function getUser($id)

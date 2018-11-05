@@ -86,6 +86,13 @@ class EmployerForm extends Form
             ]
         ]);
         $this->add([
+            'name' => 'password',
+            'type' => 'password',
+            'options' => [
+                'title' => 'mot de passe',
+            ]
+        ]);
+        $this->add([
             'name' => 'active',
             'type' => 'checkbox',
             'options' => [

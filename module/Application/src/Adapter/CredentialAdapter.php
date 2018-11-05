@@ -34,7 +34,7 @@ class CredentialAdapter extends CredentialTreatmentAdapter
         $dbSelect->from($this->tableName)
             ->columns(['*', $credentialExpression])
             ->where(new SqlOp($this->identityColumn, '=', $this->identity))
-            ->where(new SqlOp('user_type', '=', $this->user_type));
+           ;// ->where(new SqlOp('user_type', '=', $this->user_type));
         return $dbSelect;
     }
 }

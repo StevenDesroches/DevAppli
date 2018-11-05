@@ -39,6 +39,7 @@ class EmployerTable
         $data = [
             'name' => $employer->name,
             'email' => $employer->email,
+            'password' => $employer->password,
             'adress' => $employer->adress,
             'city' => $employer->city,
             'province' => $employer->province,
@@ -51,7 +52,22 @@ class EmployerTable
         $id = (int) $employer->id;
 
         if ($id === 0) {
+
             $this->tableGateway->insert($data);
+
+            
+            //en meme temps d'ajouter un employeur, on cree un user avec le email et passwd
+            $lastId = $this->tableGateway->lastInsertValue;
+            $adapter = $this->tableGateway->getAdapter(); 
+            $userTable = new UserTable('users', $adapter);
+            $userData = [
+                'id' => $lastId,
+                'email' => $employer->email,
+            'password' => md5($employer->password),
+            'user_type' => 2,
+            ];
+       
+            $userTable->insert($userData);
             return;
         }
 
