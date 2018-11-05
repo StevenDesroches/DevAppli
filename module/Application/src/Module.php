@@ -98,7 +98,7 @@ class Module implements ConfigProviderInterface
                     return new Controller\InternshipsController(
                         $container->get(Model\InternshipsTable::class)
                     );
-                },
+                },           
             ],
         ];
     }

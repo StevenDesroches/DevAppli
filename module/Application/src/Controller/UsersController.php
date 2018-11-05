@@ -12,7 +12,7 @@ use Zend\Authentication\AuthenticationService;
 use Application\Adapter\CredentialAdapter;
 
 class UsersController extends BaseController
-{
+{  
     public function __construct($db)
     {
         parent::__construct($db);
@@ -38,9 +38,19 @@ class UsersController extends BaseController
         
             $auth = new AuthenticationService();
 
-            $result = $auth->authenticate($authAdapter); 
-            $this->redirect()->toRoute("home", ['action' => 'index']);
+            $result = $auth->authenticate($authAdapter);           
+             $this->redirect()->toRoute("home", ['action' => 'index']);
         }
         
     }
-}
+
+    public function logoutAction()
+    {
+        $auth = new AuthenticationService(); 
+        if($auth->hasIdentity()) 
+        { 
+            $auth->clearIdentity();
+            return $this->redirect()->toRoute('users', ['action' => 'login']);
+        } 
+            }
+        }
