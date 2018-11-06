@@ -8,17 +8,27 @@
 namespace ApplicationTest\Controller;
 
 use Application\Controller\IndexController;
+use Application\Controller\UsersController;
+use Application\Model\Employer;
+use Application\Model\User;
+use Application\Model\UserTable;
+use PHPUnit\Util\PHP\AbstractPhpProcess;
+use Zend\Db\ResultSet\ResultSet;
 use Zend\Stdlib\ArrayUtils;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use Zend\Db\Adapter\Adapter;
 
 class IndexControllerTest extends AbstractHttpControllerTestCase
 {
+
     public function setUp()
     {
+
         // The module configuration should still be applicable for tests.
         // You can override configuration here with test case specific values,
         // such as sample view templates, path stacks, module_listener_options,
         // etc.
+
         $configOverrides = [];
 
         $this->setApplicationConfig(ArrayUtils::merge(
@@ -29,10 +39,15 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         parent::setUp();
     }
 
+    public function tearDown()
+    {
+        //$this->user->delete();
+    }
+
     public function testIndexActionCanBeAccessed()
     {
         $this->dispatch('/', 'GET');
-        $this->assertResponseStatusCode(302);
+        $this->assertResponseStatusCode(302); //Redirection
         $this->assertModuleName('application');
         $this->assertControllerName(IndexController::class); // as specified in router's controller name alias
         $this->assertControllerClass('IndexController');
@@ -55,5 +70,146 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
     {
         $this->dispatch('/', 'GET');
         $this->assertModulesLoaded(array("Application", "Employer", "Student"));
+    }
+
+    public function testUsersNotEmpty()
+    {
+        $adapter = new Adapter([
+            'driver' => 'mysqli',
+            'database' => 'internships',
+            'username' => 'root',
+            'password' => 'mysql',
+            'hostname' => 'localhost',
+        ]);
+
+        $sql = "SELECT * FROM users";
+        $statement = $adapter->createStatement($sql);
+        $result = $statement->execute();
+        $result->buffer();
+
+        if ( $result->count() > 0 ) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false, "La table users ne contient pas de valeurs");
+        }
+
+    }
+
+    public function testInternshipNotEmpty()
+    {
+        $adapter = new Adapter([
+            'driver' => 'mysqli',
+            'database' => 'internships',
+            'username' => 'root',
+            'password' => 'mysql',
+            'hostname' => 'localhost',
+        ]);
+
+        $sql = "SELECT * FROM internship_offers";
+        $statement = $adapter->createStatement($sql);
+        $result = $statement->execute();
+        $result->buffer();
+
+        if ( $result->count() > 0 ) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false, "La table internship_offers ne contient pas de valeurs");
+        }
+
+    }
+
+    public function testEmployersNotEmpty()
+    {
+        $adapter = new Adapter([
+            'driver' => 'mysqli',
+            'database' => 'internships',
+            'username' => 'root',
+            'password' => 'mysql',
+            'hostname' => 'localhost',
+        ]);
+
+        $sql = "SELECT * FROM employers";
+        $statement = $adapter->createStatement($sql);
+        $result = $statement->execute();
+        $result->buffer();
+
+        if ( $result->count() > 0 ) {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false, "La table employers ne contient pas de valeurs");
+        }
+
+    }
+
+    public function testCoordinatorsNotEmpty()
+    {
+
+        $adapter = new Adapter([
+            'driver' => 'mysqli',
+            'database' => 'internships',
+            'username' => 'root',
+            'password' => 'mysql',
+            'hostname' => 'localhost',
+        ]);
+
+        $sql = "SELECT * FROM coordinators";
+        $statement = $adapter->createStatement($sql);
+        $result = $statement->execute();
+        $result->buffer();
+
+        if ( $result->count() > 0 )  {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false, "La table coordinators ne contient pas de valeurs");
+        }
+
+    }
+
+    public function testStudentsNotEmpty()
+    {
+
+        $adapter = new Adapter([
+            'driver' => 'mysqli',
+            'database' => 'internships',
+            'username' => 'root',
+            'password' => 'mysql',
+            'hostname' => 'localhost',
+        ]);
+
+        $sql = "SELECT * FROM students";
+        $statement = $adapter->createStatement($sql);
+        $result = $statement->execute();
+        $result->buffer();
+
+        if ( $result->count() > 0 )  {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false, "La table students ne contient pas de valeurs");
+        }
+
+    }
+
+    public function testUserTypesNotEmpty()
+    {
+
+        $adapter = new Adapter([
+            'driver' => 'mysqli',
+            'database' => 'internships',
+            'username' => 'root',
+            'password' => 'mysql',
+            'hostname' => 'localhost',
+        ]);
+
+        $sql = "SELECT * FROM user_types";
+        $statement = $adapter->createStatement($sql);
+        $result = $statement->execute();
+        $result->buffer();
+
+        if ( $result->count() > 0 )  {
+            $this->assertTrue(true);
+        } else {
+            $this->assertTrue(false, "La table user_types ne contient pas de valeurs");
+        }
+
     }
 }
