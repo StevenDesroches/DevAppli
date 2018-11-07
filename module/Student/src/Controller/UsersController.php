@@ -89,7 +89,7 @@ class UsersController extends BaseController
         $student->exchangeArray($form->getData());
         $student->user_id = $user_id;
         $this->table->saveStudent($student);
-        return $this->redirect()->toRoute('students');
+        return $this->redirect()->toRoute('student_users', ['action' => 'login']);
     }
 
     public function logoutAction()
