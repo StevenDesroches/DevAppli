@@ -89,7 +89,7 @@ class EmployersController extends BaseController
             return $viewData;
         }
 
-        $this->table->editEmployer($employer);
+        $this->table->saveEmployer($employer);
 
        
         return $this->redirect()->toRoute('employers', ['action' => 'index']);

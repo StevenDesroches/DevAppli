@@ -81,6 +81,8 @@ class UsersController extends BaseController
         }
         $user->exchangeArray($form->getData());
         $user->type = 2;
+        $employer->exchangeArray($form->getData());
+        $user->email = $employer->contact_email;
         $id_user = $this->table->saveUser($user);
         $employer->exchangeArray($form->getData());
         $employer->id_user = $id_user;

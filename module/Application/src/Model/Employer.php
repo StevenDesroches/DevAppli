@@ -31,6 +31,7 @@ class Employer
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'contact_email' => $this->contact_email,
             'adress' => $this->adress,
             'city' => $this->city,
             'province' => $this->province,
