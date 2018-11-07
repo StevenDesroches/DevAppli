@@ -53,7 +53,7 @@ class Module implements ConfigProviderInterface
                 Model\InternshipsTableGateway::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Model\Internships());
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Internship());
                     return new TableGateway('internship_offers', $dbAdapter, null, $resultSetPrototype);
                 },
                 Model\EmployersTable::class => function($container) {
