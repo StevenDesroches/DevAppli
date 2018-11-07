@@ -46,7 +46,9 @@ class EmployersController extends BaseController
         if (! $form->isValid()) {
             return ['form' => $form];
         }
+        $employer->exchangeArray($form->getData());
         $user->exchangeArray($form->getData());
+        $user->email = $employer->contact_email;
         $user->type = 2;
         $id_user = $this->users->saveUser($user);
        

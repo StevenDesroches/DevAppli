@@ -43,6 +43,7 @@ class InternshipsTable
         return $row;
     }
 
+
     public function saveInternship(Internship $internship)
     {
         $data = [
