@@ -47,7 +47,7 @@ class InternshipsController extends BaseController
         $internship->exchangeArray($form->getData());
         $internship->date_posted=date("Y-m-d H:i:s");
         $this->table->saveInternship($internship);
-        return $this->redirect()->toRoute('internships');
+        return $this->redirect()->toRoute('employer_internships');
     }
 
     public function editAction()
@@ -86,7 +86,7 @@ class InternshipsController extends BaseController
         $this->table->editStudent($internship);
 
        
-        return $this->redirect()->toRoute('internships', ['action' => 'index']);
+        return $this->redirect()->toRoute('employer_internships', ['action' => 'index']);
     }
 
     public function deleteAction()
@@ -105,7 +105,7 @@ class InternshipsController extends BaseController
                 $this->table->deleteInternship($id);
             }
 
-            return $this->redirect()->toRoute('internships');
+            return $this->redirect()->toRoute('employer_internships');
         }
 
         return [
