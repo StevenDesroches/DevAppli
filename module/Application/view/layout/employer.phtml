@@ -37,13 +37,19 @@
                     </a>
                 </div>
                 <div class="collapse navbar-collapse">
+                <?php if($currentUser != null) : ?>
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="<?= $this->url('employer_home') ?>">Accueil</a></li>
                         <li class="active"><a href="<?= $this->url('employer_internships') ?>">Stages</a></li>                      
                     </ul>
-                    <?php if($this->currentUser != null) : ?>
+                    
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="<?=$this->url('employer_users', ['action' => 'logout']) ?>">Déconnexion</a></li>
+                    </ul>
+                    <?php elseif ($currentUser == null): ?>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="<?= $this->url('student_users', ['action' => 'login']) ?>">Étudiants</a></li>
+                        <li class="active"><a href="<?= $this->url('users', ['action' => 'login']) ?>">Coordonnateur</a></li>
                     </ul>
                     <?php endif;?>
                 </div>
