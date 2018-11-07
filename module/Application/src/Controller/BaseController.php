@@ -6,6 +6,7 @@ use Zend\Mvc\Controller\AbstractController;
 use Zend\Mvc\MvcEvent;
 use Zend\View\Model\ViewModel;
 use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\Storage\Session;
 
 class BaseController extends AbstractController
 {
@@ -50,6 +51,7 @@ class BaseController extends AbstractController
         if(!in_array($action, $this->allowedActions))
         {
             $auth = new AuthenticationService();
+            $auth->setStorage(new Session('Application'));
             if(!$auth->hasIdentity())
             {
                 $this->redirect()->toRoute("users", ['action' => 'login']);

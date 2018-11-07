@@ -11,6 +11,7 @@ use Zend\View\Model\ViewModel;
 use Zend\Authentication\AuthenticationService;
 use Application\Adapter\CredentialAdapter;
 use \Zend\Db\Adapter\Adapter as Database;
+use Zend\Authentication\Storage\Session;
 
 class UsersController extends BaseController
 {  
@@ -40,6 +41,7 @@ class UsersController extends BaseController
             $authAdapter->setUserType(0);
 
             $auth = new AuthenticationService();
+            $auth->setStorage(new Session('Application'));
 
             $result = $auth->authenticate($authAdapter);           
              $this->redirect()->toRoute("home", ['action' => 'index']);
@@ -50,6 +52,7 @@ class UsersController extends BaseController
     public function logoutAction()
     {
         $auth = new AuthenticationService(); 
+        $auth->setStorage(new Session('Application'));
         if($auth->hasIdentity()) 
         { 
             $auth->clearIdentity();

@@ -3,17 +3,20 @@
 namespace Employer\Controller;
 
 use Employer\Model\InternshipsTable;
+use Employer\Model\Internship;
+use Employer\Model\EmployersTable;
 use Zend\View\Model\ViewModel;
 use Employer\Form\InternshipsForm;
 
 class InternshipsController extends BaseController 
 {
     private $table;
-
-    public function __construct(InternshipsTable $table)
+    private $employersTable;
+    public function __construct(InternshipsTable $table, EmployersTable $employersTable)
     {  
         parent::__construct();
         $this->table = $table;
+        $this->employersTable = $employersTable;
     }
 
 
@@ -30,8 +33,7 @@ class InternshipsController extends BaseController
         $request = $this->getRequest();
         if(! $request->isPost())
         {
-
-            $viewData = ['form' => $form];
+            $viewData = ['form' => $form, 'employer' => $this->employersTable->getEmployerFromUser($this->currentUser)];
             return $viewData;
         }
 
@@ -39,12 +41,12 @@ class InternshipsController extends BaseController
         $form->setData($request->getPost());
 
         if (! $form->isValid()) {
-            return ['form' => $form];
+            return ['form' => $form, 'employer' => $this->employersTable->getEmployerFromUser($this->currentUser)];
         }
 
         $internship->exchangeArray($form->getData());
-        $internship->date_posted=date();
-        $this->table->saveEmployer($internship);
+        $internship->date_posted=date("Y-m-d H:i:s");
+        $this->table->saveInternship($internship);
         return $this->redirect()->toRoute('internships');
     }
 

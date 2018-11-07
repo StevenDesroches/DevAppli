@@ -44,6 +44,13 @@ class EmployerForm extends Form
             ]
         ]);
         $this->add([
+            'name' => 'id_user',
+            'type' => 'hidden',
+            'options' => [
+                'title' => 'le id_user',
+            ]
+        ]);
+        $this->add([
             'name' => 'name',
             'type' => 'text',
             'options' => [
@@ -86,13 +93,6 @@ class EmployerForm extends Form
             ]
         ]);
         $this->add([
-            'name' => 'email',
-            'type' => 'text',
-            'options' => [
-                'title' => 'courriel de compte',
-            ]
-        ]);
-        $this->add([
             'name' => 'password',
             'type' => 'password',
             'options' => [
@@ -105,7 +105,6 @@ class EmployerForm extends Form
             'options' => [
                 'title' => 'actif',
             ]
-
         ]);
         $this->add([
             'name' => 'uuid',

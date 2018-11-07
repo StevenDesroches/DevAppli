@@ -9,13 +9,9 @@ $id = $form->get('id');
 $id->setAttribute('class', 'form-control');
 $id->setAttribute('placeholder', 'le id');
 
-$iduser = $form->get('id_user');
-$iduser->setAttribute('class', 'form-control');
-$iduser->setAttribute('placeholder', 'le id de user');
-
-$courriel = $form->get('email');
+$courriel = $form->get('contact_email');
 $courriel->setAttribute('class', 'form-control');
-$courriel->setAttribute('placeholder', 'courriel');
+$courriel->setAttribute('placeholder', 'courriel de contact');
 
 $name = $form->get('name');
 $name->setAttribute('class', 'form-control');
@@ -78,7 +74,7 @@ echo $this->form()->openTag($form);
     </div>
 
     <div class="form-group">
-        <?= $this->formLabel($courriel, "Courriel") ?>
+        <?= $this->formLabel($courriel, "Courriel de contact") ?>
         <?= $this->formElement($courriel) ?>
         <?= $this->formElementErrors()->render($courriel, ['class' => 'help-block']) ?>
     </div>
@@ -93,12 +89,6 @@ echo $this->form()->openTag($form);
         <?= $this->formLabel($postal, "Code postal") ?>
         <?= $this->formElement($postal) ?>
         <?= $this->formElementErrors()->render($postal, ['class' => 'help-block']) ?>
-    </div>
-
-    <div class="form-group">
-        <?= $this->formLabel($iduser, "Le id user") ?>
-        <?= $this->formElement($iduser) ?>
-        <?= $this->formElementErrors()->render($iduser, ['class' => 'help-block']) ?>
     </div>
 
     <div class="form-group">

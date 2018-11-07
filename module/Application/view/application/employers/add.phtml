@@ -9,10 +9,6 @@ $id = $form->get('id');
 $id->setAttribute('class', 'form-control');
 $id->setAttribute('placeholder', 'le id');
 
-$courriel = $form->get('email');
-$courriel->setAttribute('class', 'form-control');
-$courriel->setAttribute('placeholder', 'compte@test.com');
-
 $courriel_contact = $form->get('contact_email');
 $courriel_contact->setAttribute('class', 'form-control');
 $courriel_contact->setAttribute('placeholder', 'contact@test.com');
@@ -50,7 +46,7 @@ $uuid->setAttribute('class', 'form-check-input');
 $submit = $form->get('submit');
 $submit->setAttribute('class', 'btn btn-primary');
 
-$form->setAttribute('action', $this->url('employer_users', [
+$form->setAttribute('action', $this->url('employers', [
     'action' => 'add'
 ]));
 
@@ -79,12 +75,6 @@ echo $this->form()->openTag($form);
         <?= $this->formLabel($city, "Ville") ?>
         <?= $this->formElement($city) ?>
         <?= $this->formElementErrors()->render($city, ['class' => 'help-block']) ?>
-    </div>
-
-    <div class="form-group">
-        <?= $this->formLabel($courriel, "Courriel de compte") ?>
-        <?= $this->formElement($courriel) ?>
-        <?= $this->formElementErrors()->render($courriel, ['class' => 'help-block']) ?>
     </div>
 
     <div class="form-group">
