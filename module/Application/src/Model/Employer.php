@@ -5,7 +5,7 @@ class Employer
 {
     public $id;
     public $name;
-    public $email;
+    public $contact_email;
     public $adress;
     public $city;
     public $province;
@@ -18,21 +18,19 @@ class Employer
     {
         $this->id     = !empty($data['id']) ? $data['id'] : null;
         $this->name = !empty($data['name']) ? $data['name'] : null;
-        $this->email = !empty($data['email']) ? $data['email'] : null;
+        $this->contact_email = !empty($data['contact_email']) ? $data['contact_email'] : null;
         $this->adress = !empty($data['adress']) ? $data['adress'] : null;
         $this->city = !empty($data['city']) ? $data['city'] : null;
         $this->province = !empty($data['province']) ? $data['province'] : null;
         $this->postal_code = !empty($data['postal_code']) ? $data['postal_code'] : null;
-        $this->active = !empty($data['active']) ? $data['active'] : 0;
+        $this->active = !empty($data['active']) ? $data['active'] : null;
         $this->id_user = !empty($data['id_user']) ? $data['id_user'] : null;
-        $this->uuid = !empty($data['uuid']) ? $data['uuid'] : null;
     }
 
     public function getArrayCopy(){
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'email' => $this->email,
             'adress' => $this->adress,
             'city' => $this->city,
             'province' => $this->province,
@@ -41,5 +39,4 @@ class Employer
             'id_user' => $this->id_user,
         ];
     }
-
 }

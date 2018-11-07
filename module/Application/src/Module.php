@@ -26,21 +26,21 @@ class Module implements ConfigProviderInterface
     {
         return [
             'factories' => [
-                Model\UserTable::class => function($container) {
-                    $tableGateway = $container->get(Model\UserTableGateway::class);
-                    return new Model\UserTable($tableGateway);
+                Model\UsersTable::class => function($container) {
+                    $tableGateway = $container->get(Model\UsersTableGateway::class);
+                    return new Model\UsersTable($tableGateway);
                 },
-                Model\UserTableGateway::class => function ($container) {
+                Model\UsersTableGateway::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\User());
                     return new TableGateway('users', $dbAdapter, null, $resultSetPrototype);
                 },
-                Model\StudentTable::class => function($container) {
-                    $tableGateway = $container->get(Model\StudentTableGateway::class);
-                    return new Model\StudentTable($tableGateway);
+                Model\StudentsTable::class => function($container) {
+                    $tableGateway = $container->get(Model\StudentsTableGateway::class);
+                    return new Model\StudentsTable($tableGateway);
                 },
-                Model\StudentTableGateway::class => function ($container) {
+                Model\StudentsTableGateway::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Student());
@@ -56,11 +56,11 @@ class Module implements ConfigProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Internships());
                     return new TableGateway('internship_offers', $dbAdapter, null, $resultSetPrototype);
                 },
-                Model\EmployerTable::class => function($container) {
-                    $tableGateway = $container->get(Model\EmployerTableGateway::class);
-                    return new Model\EmployerTable($tableGateway);
+                Model\EmployersTable::class => function($container) {
+                    $tableGateway = $container->get(Model\EmployersTableGateway::class);
+                    return new Model\EmployersTable($tableGateway);
                 },
-                Model\EmployerTableGateway::class => function ($container) {
+                Model\EmployersTableGateway::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Employer());
@@ -76,13 +76,12 @@ class Module implements ConfigProviderInterface
             'factories' => [
                 Controller\StudentsController::class => function($container) {
                     return new Controller\StudentsController(
-                        $container->get(Model\StudentTable::class)
+                        $container->get(Model\StudentsTable::class),
+                        $container->get(Model\UsersTable::class)
                     );
                 },
                 Controller\IndexController::class => function($container) {
-                    return new Controller\IndexController(
-                        $container->get(\Zend\Db\Adapter\Adapter::class)
-                    );
+                    return new Controller\IndexController();
                 },
                 Controller\UsersController::class => function($container) {
                     return new Controller\UsersController(
@@ -91,7 +90,8 @@ class Module implements ConfigProviderInterface
                 },
                 Controller\EmployersController::class => function($container) {
                     return new Controller\EmployersController(
-                        $container->get(Model\EmployerTable::class)
+                        $container->get(Model\EmployersTable::class),
+                        $container->get(Model\UsersTable::class)
                     );
                 },
                 Controller\InternshipsController::class => function($container) {

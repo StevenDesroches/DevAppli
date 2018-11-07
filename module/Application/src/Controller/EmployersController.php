@@ -3,7 +3,8 @@
 namespace Application\Controller;
 
 use Application\Model\Employer;
-use Application\Model\EmployerTable;
+use Application\Model\EmployersTable;
+use Application\Model\UsersTable;
 use Application\Form\EmployerForm;
 use Zend\View\Model\ViewModel;
 
@@ -11,10 +12,13 @@ class EmployersController extends BaseController
 {
 
     private $table;
+    private $users;
 
-    public function __construct(EmployerTable $table)
+    public function __construct(EmployersTable $table, UsersTable $users)
     {
-         $this->table = $table;
+        parent::__construct();
+        $this->table = $table;
+        $this->users = $users;
     }
 
     public function indexAction()
@@ -30,23 +34,24 @@ class EmployersController extends BaseController
         $request = $this->getRequest();
         if(! $request->isPost())
         {
-            //$form = new EmployerForm();
-            //$form->get('submit')->setAttribute('value', 'Add');
             $viewData = ['form' => $form];
             return $viewData;
         }
 
         $employer = new Employer();
-        //$form->setInputFilter($employer->getInputFilter());
+        $user = new User();
         $form->setData($request->getPost());
 
         if (! $form->isValid()) {
             return ['form' => $form];
         }
-
+        $user->exchangeArray($form->getData());
+        $user->type = 2;
+        $id_user = $this->users->saveUser($user);
         $employer->exchangeArray($form->getData());
+        $employer->id_user = $id_user;
         $this->table->saveEmployer($employer);
-        return $this->redirect()->toRoute('employers');
+        return $this->redirect()->toRoute('employer_home');
     }
 
     public function editAction()

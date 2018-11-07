@@ -1,11 +1,11 @@
 <?php
 
-namespace Application\Model;
+namespace Student\Model;
 
 use RuntimeException;
 use Zend\Db\TableGateway\TableGatewayInterface;
 
-class StudentTable
+class StudentsTable
 {
     private $tableGateway;
 
@@ -19,26 +19,11 @@ class StudentTable
         return $this->tableGateway->select();
     }
 
-    public function fetchAllWithEmail()
-    {
-        $select = $this->tableGateway->getSql()->select();
-        $select->join('users', 'users.id = students.user_id', ['email'], 'left'); 
-        $stmt = $this->tableGateway->getSql()->prepareStatementForSqlObject($select);
-        $results = $stmt->execute();
-        return $results;
-    }
-
     public function getStudent($id)
     {
         $id = (int) $id;
         $rowset= $this->tableGateway->select(['admission_number' => $id]);
         $row = $rowset->current();
-        if (! $row){
-            throw new RuntimeException(sprintf(
-                'Could not find row with identifier %d',
-                $id
-            ));
-        }
         return $row;
     }
 
@@ -53,19 +38,10 @@ class StudentTable
 
         $id = (int) $student->admission_number;
 
-        if ($id === 0) {
+        if (! $this->getStudent($id)) {
             $this->tableGateway->insert($data);
             return;
         }
-
-        if (! $this->getStudent($id)) {
-            throw new RuntimeException(sprintf(
-                'Cannot update student with identifier %d; does not exist',
-                $id
-            ));
-        }
-
-        $this->tableGateway->update($data, ['id' => $id]);
     }
 
     public function editStudent($student)
@@ -77,6 +53,13 @@ class StudentTable
             ];
 
             $id = (int) $student->admission_number;
+
+            if (! $this->getStudent($id)) {
+                throw new RuntimeException(sprintf(
+                    'Cannot update student with identifier %d; does not exist',
+                    $id
+                ));
+            }
 
         $this->tableGateway->update($data, ['admission_number' => $id]);
     }

@@ -14,6 +14,7 @@ class InternshipsController extends BaseController
 
     public function __construct(InternshipsTable $table, EmployerTable $tableEmployer)
     {
+        parent::__construct();
         $this->table = $table;
         $this->tableEmployer = $tableEmployer;
     }

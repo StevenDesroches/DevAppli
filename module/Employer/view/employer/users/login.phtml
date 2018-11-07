@@ -7,7 +7,7 @@
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">Se Connecter</h5>
-            <form class="form-signin" action="<?= $this->url('users', ['action' => 'login']);?>" method="post">
+            <form class="form-signin" action="<?= $this->url('employer_users', ['action' => 'login']);?>" method="post">
               <div class="form-label-group">
                 <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                 <label for="email">Courriel</label>
@@ -20,11 +20,13 @@
 
 
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Connexion</button>
-  
+              
             </form>
             <h5 class="card-title text-center"><a href="<?= $this->url('employer_users', ['action' => 'lostPassword']);?>">Mot de passe oublié?</a></h5>
             <h5 class="card-title text-center"><a href="<?= $this->url('users', ['action' => 'login']);?>">Cliquez ici pour coordonateur</a></h5>
             <h5 class="card-title text-center"><a href="<?= $this->url('student_users', ['action' => 'login']);?>">Cliquez ici pour étudiant</a></h5>
+            <hr />
+            <a href="<?= $this->url('employer_users', ['action' => 'add']);?>" class="btn btn-lg btn-primary btn-block text-uppercase">S'inscrire</a>
           </div>
         </div>
       </div>

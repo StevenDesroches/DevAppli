@@ -10,12 +10,15 @@ namespace Application\Controller;
 use Zend\View\Model\ViewModel;
 use Zend\Authentication\AuthenticationService;
 use Application\Adapter\CredentialAdapter;
+use \Zend\Db\Adapter\Adapter as Database;
 
 class UsersController extends BaseController
 {  
-    public function __construct($db)
+    private $db;
+    public function __construct(Database $db)
     {
-        parent::__construct($db);
+        parent::__construct();
+        $this->db = $db;
     }
 
     public function indexAction()

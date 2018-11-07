@@ -3,34 +3,20 @@
 namespace Application\Model;
 
 use RuntimeException;
-use Zend\Db\TableGateway\AbstractTableGateway;
+use Zend\Db\TableGateway\TableGatewayInterface;
 
-class UserTable extends AbstractTableGateway
+class UsersTable
 {
     private $tableGateway;
 
-    public function __construct($table, $adapter)
+    public function __construct(TableGatewayInterface $tableGateway)
     {
-        $this->table = $table;
-
-        $this->adapter = $adapter;
-
-        $this->initialize();
+        $this->tableGateway = $tableGateway;
     }
 
     public function fetchAll()
     {
         return $this->tableGateway->select();
-    }
-
-    public function getUserType($id){
-
-        $id = (int) $id;
-        $rowset = $this->tableGateway->select(['id' => $id]);
-        $userType = $rowset->user_type;
-        
-
-        return $userType; 
     }
 
     public function getUser($id)
@@ -53,13 +39,13 @@ class UserTable extends AbstractTableGateway
         $data = [
             'email' => $user->email,
             'password'  => $user->password,
+            'user_type' => $user->type
         ];
 
         $id = (int) $user->id;
 
         if ($id === 0) {
-            $this->tableGateway->insert($data);
-            return;
+            return $this->tableGateway->insert($data);;
         }
 
         if (! $this->getUser($id)) {

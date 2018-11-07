@@ -6,9 +6,9 @@ use Zend\View\Model\ViewModel;
 
 class IndexController extends BaseController
 {
-    public function __construct($db)
+    public function __construct()
     {
-        parent::__construct($db);
+        parent::__construct();
     }
 
     public function indexAction()

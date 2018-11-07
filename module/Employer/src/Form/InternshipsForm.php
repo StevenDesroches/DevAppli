@@ -42,7 +42,7 @@ class InternshipsForm extends Form
         ]);
         $this->add([
             'name' => 'id_employer',
-            'type' => 'number',
+            'type' => 'hidden',
             'options' => [
                 'title' => 'employer id',
             ]

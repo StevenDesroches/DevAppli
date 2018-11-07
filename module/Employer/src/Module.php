@@ -65,9 +65,7 @@ class Module implements ConfigProviderInterface
         return [
             'factories' => [
                 Controller\IndexController::class => function($container) {
-                    return new Controller\IndexController(
-                        $container->get(\Zend\Db\Adapter\Adapter::class)
-                    );
+                    return new Controller\IndexController();
                 },
                 Controller\UsersController::class => function($container) {
                     return new Controller\UsersController(

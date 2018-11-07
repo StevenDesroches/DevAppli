@@ -4,7 +4,6 @@ namespace Employer\Controller;
 
 use Employer\Model\InternshipsTable;
 use Zend\View\Model\ViewModel;
-use Zend\Db\Adapter\Adapter;
 use Employer\Form\InternshipsForm;
 
 class InternshipsController extends BaseController 

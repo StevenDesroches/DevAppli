@@ -26,17 +26,17 @@ class StudentForm extends Form
             ]
         ]);
         $this->add([
+            'name' => 'password',
+            'type' => 'password',
+            'options' => [
+                'title' => 'mot de passe',
+            ]
+        ]);
+        $this->add([
             'name' => 'active',
             'type' => 'checkbox',
             'options' => [
                 'title' => 'actif',
-            ]
-        ]);
-        $this->add([
-            'name' => 'user_id',
-            'type' => 'number',
-            'options' => [
-                'title' => 'user id',
             ]
         ]);
         $this->add([

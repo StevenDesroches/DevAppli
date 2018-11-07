@@ -1,6 +1,6 @@
 <?php
 
-namespace Employer\Form;
+namespace Student\Form;
 
 use Zend\Form\Form;
 
@@ -26,6 +26,13 @@ class StudentForm extends Form
             ]
         ]);
         $this->add([
+            'name' => 'password',
+            'type' => 'password',
+            'options' => [
+                'title' => 'mot de passe',
+            ]
+        ]);
+        $this->add([
             'name' => 'active',
             'type' => 'checkbox',
             'options' => [
@@ -40,10 +47,6 @@ class StudentForm extends Form
                 'id'    => 'submitbutton',
             ],
         ]);
-        $this->add([
-            'name' => 'user_id',
-            'type' => 'hidden',
-        ]);
-        
+
     }
 }

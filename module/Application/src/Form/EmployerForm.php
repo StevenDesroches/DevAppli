@@ -79,10 +79,17 @@ class EmployerForm extends Form
             ]
         ]);
         $this->add([
+            'name' => 'contact_email',
+            'type' => 'text',
+            'options' => [
+                'title' => 'courriel de contact',
+            ]
+        ]);
+        $this->add([
             'name' => 'email',
             'type' => 'text',
             'options' => [
-                'title' => 'courriel',
+                'title' => 'courriel de compte',
             ]
         ]);
         $this->add([
@@ -99,13 +106,6 @@ class EmployerForm extends Form
                 'title' => 'actif',
             ]
 
-        ]);
-        $this->add([
-            'name' => 'id_user',
-            'type' => 'number',
-            'options' => [
-                'title' => 'user id',
-            ]
         ]);
         $this->add([
             'name' => 'uuid',

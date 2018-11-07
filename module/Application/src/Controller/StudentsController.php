@@ -3,7 +3,9 @@
 namespace Application\Controller;
 
 use Application\Model\Student;
-use Application\Model\StudentTable;
+use Application\Model\StudentsTable;
+use Application\Model\User;
+use Application\Model\UsersTable;
 use Application\Form\StudentForm;
 use Zend\View\Model\ViewModel;
 use Zend\Db\Adapter\Adapter;
@@ -12,15 +14,18 @@ class StudentsController extends BaseController
 {
  
     private $table;
+    private $users;
 
-    public function __construct(StudentTable $table)
+    public function __construct(StudentsTable $table, UsersTable $users)
     {
+        parent::__construct();
+        $this->users = $users;
         $this->table = $table;
     }
 
     public function indexAction()
     {
-        return new ViewModel(['students' => $this->table->fetchAllWithEmail(),]);
+        return new ViewModel(['students' => $this->table->fetchAll()]);
 
     }
 
@@ -39,6 +44,7 @@ class StudentsController extends BaseController
         }
 
         $student = new Student();
+        $user = new User();
         //$form->setInputFilter($employer->getInputFilter());
         $form->setData($request->getPost());
 
@@ -46,7 +52,11 @@ class StudentsController extends BaseController
             return ['form' => $form];
         }
 
+        $user->exchangeArray([ 'email' => $form->getData()['admission_number'], 'password' => $form->getData()['password']]);
+        $user->type = 1;
+        $user_id = $this->users->saveUser($user);
         $student->exchangeArray($form->getData());
+        $student->user_id = $user_id;
         $this->table->saveStudent($student);
         return $this->redirect()->toRoute('students');
     }

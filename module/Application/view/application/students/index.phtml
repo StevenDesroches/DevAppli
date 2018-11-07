@@ -11,19 +11,17 @@ $this->headTitle($title);
 <tr>
     <th>Numéro d'admission</th>
     <th>Nom</th>
-    <th>Courriel</th>
     <th>Est actif</th>
     <th>Actions</th>
 </tr>
 <?php foreach ($students as $student) : ?>
     <tr>
-        <td><?= $this->escapeHtml($student['admission_number']) ?></td>
-        <td><?= $this->escapeHtml($student['name']) ?></td>
-        <td><?= $this->escapeHtml($student['email']) ?></td>
-        <td><?= $this->escapeHtml($student['active']) ?></td>
+        <td><?= $this->escapeHtml($student->admission_number) ?></td>
+        <td><?= $this->escapeHtml($student->name) ?></td>
+        <td><?= $this->escapeHtml($student->active) ?></td>
         <td>
-            <a href="<?= $this->url('students', ['action' => 'edit', 'id' => $student['admission_number']]) ?>">Modifier</a>
-            <a href="<?= $this->url('students', ['action' => 'delete', 'id' => $student['admission_number']]) ?>">Supprimer</a>
+            <a href="<?= $this->url('students', ['action' => 'edit', 'id' => $student->admission_number]) ?>">Modifier</a>
+            <a href="<?= $this->url('students', ['action' => 'delete', 'id' => $student->admission_number]) ?>">Supprimer</a>
         </td>
     </tr>
 <?php endforeach; ?>
