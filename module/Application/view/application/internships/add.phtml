@@ -21,15 +21,12 @@ $description = $form->get('description');
 $description->setAttribute('class', 'form-control');
 $description->setAttribute('placeholder', 'description');
 
-$employer = $form->get('employer');
-
-
 $active = $form->get('active');
 $active->setAttribute('class', 'form-check-input');
 
 $id_employer = $form->get('id_employer');
 $id_employer->setAttribute('class', 'form-control');
-$id_employer->setAttribute('placeholder', 'employer id');
+$id_employer->setAttribute('placeholder', 'employeur');
 
 $submit = $form->get('submit');
 $submit->setAttribute('class', 'btn btn-primary');
@@ -49,9 +46,15 @@ echo $this->form()->openTag($form);
     </div>
 
     <div class="form-group">
-        <?= $this->formLabel($description, "description") ?>
+        <?= $this->formLabel($description, "Description") ?>
         <?= $this->formElement($description) ?>
         <?= $this->formElementErrors()->render($description, ['class' => 'help-block']) ?>
+    </div>
+
+    <div class="form-group">
+    <?= $this->formLabel($id_employer, "Employeur") ?>
+    <?= $this->formElement($id_employer) ?>
+    <?= $this->formElementErrors()->render($id_employer, ['class' => 'help-block']) ?>
     </div>
 
     <div class="form-group">

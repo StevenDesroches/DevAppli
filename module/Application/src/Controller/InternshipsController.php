@@ -35,7 +35,7 @@ class InternshipsController extends BaseController
         if(! $request->isPost())
         {
             $elements = [];
-            foreach($this->employersTable->fetchAll() as $employersTable){
+            foreach($this->employersTable->fetchAll() as $employer){
                 $elements[$employer->id] = $employer->name;
             }
             $form->add([
@@ -77,6 +77,17 @@ class InternshipsController extends BaseController
         }
 
         $form = new InternshipsForm();
+        $elements = [];
+            foreach($this->employersTable->fetchAll() as $employer){
+                $elements[$employer->id] = $employer->name;
+            }
+            $form->add([
+                'type' => 'Zend\Form\Element\Select',
+                'name' => 'id_employer',
+                'options' => [
+                    'value_options' => $elements
+                ]
+            ]);
 
         $form->bind($internship);
         $form->get('submit')->setAttribute('value', 'Edit');
@@ -91,11 +102,12 @@ class InternshipsController extends BaseController
         $form->setInputFilter($internship->getInputFilter());
         $form->setData($request->getPost());
 
-       /* if (! $form->isValid()) {
+        if (! $form->isValid()) {
+            var_dump($internship);
             return $viewData;
-        }*/
+        }
 
-        $this->table->editInternship($internship);
+        $this->table->saveInternship($internship);
 
        
         return $this->redirect()->toRoute('internships', ['action' => 'index']);
