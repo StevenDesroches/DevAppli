@@ -11,9 +11,9 @@ $name = $form->get('name');
 $name->setAttribute('class', 'form-control');
 $name->setAttribute('placeholder', 'nom stage');
 
-$name = $form->get('description');
-$name->setAttribute('class', 'form-control');
-$name->setAttribute('placeholder', 'description');
+$description = $form->get('description');
+$description->setAttribute('class', 'form-control');
+$description->setAttribute('placeholder', 'description');
 
 $submit = $form->get('submit');
 $submit->setAttribute('class', 'btn btn-primary');
@@ -28,18 +28,17 @@ $form->prepare();
 echo $this->form()->openTag($form);
 ?>
 <div class="form-group">
-    <?= $this->formLabel($name) ?>
+    <?= $this->formLabel($name, 'Nom') ?>
     <?= $this->formElement($name) ?>
     <?= $this->formElementErrors()->render($name, ['class' => 'help-block']) ?>
 </div>
 
 <div class="form-group">
-    <?= $this->formLabel($description) ?>
+    <?= $this->formLabel($description, 'Description') ?>
     <?= $this->formElement($description) ?>
     <?= $this->formElementErrors()->render($description, ['class' => 'help-block']) ?>
 </div>
 
 <?php
 echo $this->formSubmit($submit);
-echo $this->formHidden($form->get('user_id'));
 echo $this->form()->closeTag();

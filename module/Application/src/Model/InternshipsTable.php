@@ -43,6 +43,24 @@ class InternshipsTable
         return $row;
     }
 
+    public function editInternship($internship){
+        $data = [
+            'name'  => $internship->name,
+        'description'  => $internship->description,
+        ];
+
+        $id = (int) $internship->id;
+
+        if (! $this->getInternship($id)) {
+            throw new RuntimeException(sprintf(
+                'Cannot update internship with identifier %d; does not exist',
+                $id
+            ));
+        }
+
+    $this->tableGateway->update($data, ['id' => $id]);
+    }
+
     public function saveInternship(Internship $internship)
     {
         $data = [

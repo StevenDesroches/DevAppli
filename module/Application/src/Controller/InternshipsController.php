@@ -64,6 +64,7 @@ class InternshipsController extends BaseController
         }
 
         $form = new InternshipsForm();
+
         $form->bind($internship);
         $form->get('submit')->setAttribute('value', 'Edit');
 
@@ -77,11 +78,11 @@ class InternshipsController extends BaseController
         $form->setInputFilter($internship->getInputFilter());
         $form->setData($request->getPost());
 
-        if (! $form->isValid()) {
+       /* if (! $form->isValid()) {
             return $viewData;
-        }
+        }*/
 
-        $this->table->editStudent($internship);
+        $this->table->editInternship($internship);
 
        
         return $this->redirect()->toRoute('internships', ['action' => 'index']);
