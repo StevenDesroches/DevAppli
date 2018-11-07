@@ -5,7 +5,7 @@ class Employer
 {
     public $id;
     public $name;
-    public $email;
+    public $contact_email;
     public $adress;
     public $city;
     public $province;
@@ -17,7 +17,7 @@ class Employer
     {
         $this->id     = !empty($data['id']) ? $data['id'] : null;
         $this->name = !empty($data['name']) ? $data['name'] : null;
-        $this->email = !empty($data['email']) ? $data['email'] : null;
+        $this->contact_email = !empty($data['contact_email']) ? $data['contact_email'] : null;
         $this->adress = !empty($data['adress']) ? $data['adress'] : null;
         $this->city = !empty($data['city']) ? $data['city'] : null;
         $this->province = !empty($data['province']) ? $data['province'] : null;
