@@ -4,6 +4,7 @@ namespace Application\Controller;
 
 use Application\Model\Employer;
 use Application\Model\EmployersTable;
+use Application\Model\User;
 use Application\Model\UsersTable;
 use Application\Form\EmployerForm;
 use Zend\View\Model\ViewModel;
@@ -45,10 +46,13 @@ class EmployersController extends BaseController
         if (! $form->isValid()) {
             return ['form' => $form];
         }
+        $user->email = $employer->contact_email;
         $user->exchangeArray($form->getData());
-        $user->type = 2;
-        $id_user = $this->users->saveUser($user);
         $employer->exchangeArray($form->getData());
+        $user->type = 2;
+        $user->email = $employer->contact_email;
+        $id_user = $this->users->saveUser($user);
+        //$employer->exchangeArray($form->getData());
         $employer->id_user = $id_user;
         $this->table->saveEmployer($employer);
         return $this->redirect()->toRoute('employer_home');
@@ -87,7 +91,7 @@ class EmployersController extends BaseController
             return $viewData;
         }
 
-        $this->table->editEmployer($employer);
+        $this->table->saveEmployer($employer);
 
        
         return $this->redirect()->toRoute('employers', ['action' => 'index']);

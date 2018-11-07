@@ -13,7 +13,7 @@ $iduser = $form->get('id_user');
 $iduser->setAttribute('class', 'form-control');
 $iduser->setAttribute('placeholder', 'le id de user');
 
-$courriel = $form->get('email');
+$courriel = $form->get('contact_email');
 $courriel->setAttribute('class', 'form-control');
 $courriel->setAttribute('placeholder', 'courriel');
 
@@ -93,12 +93,6 @@ echo $this->form()->openTag($form);
         <?= $this->formLabel($postal, "Code postal") ?>
         <?= $this->formElement($postal) ?>
         <?= $this->formElementErrors()->render($postal, ['class' => 'help-block']) ?>
-    </div>
-
-    <div class="form-group">
-        <?= $this->formLabel($iduser, "Le id user") ?>
-        <?= $this->formElement($iduser) ?>
-        <?= $this->formElementErrors()->render($iduser, ['class' => 'help-block']) ?>
     </div>
 
     <div class="form-group">
