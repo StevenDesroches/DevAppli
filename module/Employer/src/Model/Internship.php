@@ -1,7 +1,7 @@
 <?php
 namespace Employer\Model;
 
-class Internships
+class Internship
 {
     public $id;
     public $name;

@@ -48,6 +48,13 @@ class InternshipsForm extends Form
             ]
         ]);
         $this->add([
+            'name' => 'active',
+            'type' => 'checkbox',
+            'options' => [
+                'title' => 'actif',
+            ]
+        ]);
+        $this->add([
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => [

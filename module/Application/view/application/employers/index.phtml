@@ -25,7 +25,7 @@ $this->headTitle($title);
             <td><?= $this->escapeHtml($employer->city) ?></td>
             <td><?= $this->escapeHtml($employer->province) ?></td>
             <td><?= $this->escapeHtml($employer->postal_code) ?></td>
-            <td><?= $this->escapeHtml($employer->email) ?></td>
+            <td><?= $this->escapeHtml($employer->contact_email) ?></td>
             <td><?= $this->escapeHtml($employer->active) ?></td>
             <td>
                 <a href="<?= $this->url('employers', ['action' => 'edit', 'id' => $employer->id]) ?>">Modifier</a>

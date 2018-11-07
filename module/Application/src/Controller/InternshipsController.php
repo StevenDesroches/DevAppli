@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Application\Model\InternshipsTable;
+use Application\Model\EmployersTable;
 use Zend\View\Model\ViewModel;
 use Application\Form\InternshipsForm;
 use Application\Model\Internship;
@@ -10,17 +11,19 @@ use Application\Model\Internship;
 class InternshipsController extends BaseController 
 {
     private $table;
+    private $employersTable;
 
-    public function __construct(InternshipsTable $table)
+    public function __construct(InternshipsTable $table, EmployersTable $employersTable)
     {  
         parent::__construct();
         $this->table = $table;
+        $this->employersTable = $employersTable;
     }
 
 
     public function indexAction()
     {
-        return new ViewModel(['internships' => $this->table->fetchAllWithEmployer(),]);
+        return new ViewModel(['internships' => $this->table->fetchAllWithEmployer()]);
     }
 
     public function addAction()
@@ -31,7 +34,17 @@ class InternshipsController extends BaseController
         $request = $this->getRequest();
         if(! $request->isPost())
         {
-
+            $elements = [];
+            foreach($this->employersTable->fetchAll() as $employersTable){
+                $elements[$employer->id] = $employer->name;
+            }
+            $form->add([
+                'type' => 'Zend\Form\Element\Select',
+                'name' => 'id_employer',
+                'options' => [
+                    'value_options' => $elements
+                ]
+            ]);
             $viewData = ['form' => $form];
             return $viewData;
         }

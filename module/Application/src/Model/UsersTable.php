@@ -45,7 +45,9 @@ class UsersTable
         $id = (int) $user->id;
 
         if ($id === 0) {
-            return $this->tableGateway->insert($data);;
+            $this->tableGateway->insert($data);
+            $rowset = $this->tableGateway->select(['email' => $user->email]);
+            return $rowset->current()->id;
         }
 
         if (! $this->getUser($id)) {

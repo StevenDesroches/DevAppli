@@ -34,6 +34,21 @@ class EmployersTable
         return $row;
     }
 
+    public function getEmployerFromUser($user){
+        $select = $this->tableGateway->getSql()->select();
+        $select->join('users', 'users.id = employers.id_user', [], 'left');
+        $select->where(['users.email' => $user]);
+        $row = $this->tableGateway->selectWith($select);
+        if (! $row) {
+            throw new RuntimeException(sprintf(
+                'Could not find row with identifier %s',
+                $user
+            ));
+        }
+
+        return $row->current();
+    }
+
     public function saveEmployer(Employer $employer)
     {
         $data = [
