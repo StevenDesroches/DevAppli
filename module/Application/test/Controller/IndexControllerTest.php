@@ -21,6 +21,8 @@ use Zend\Db\Adapter\Adapter;
 class IndexControllerTest extends AbstractHttpControllerTestCase
 {
 
+    private $adapter;
+
     public function setUp()
     {
 
@@ -28,6 +30,15 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         // You can override configuration here with test case specific values,
         // such as sample view templates, path stacks, module_listener_options,
         // etc.
+
+        $this->adapter = new Adapter([
+            'driver' => 'mysqli',
+            'database' => 'internships',
+            'username' => 'root',
+            'password' => 'mysql',
+            'hostname' => 'localhost',
+        ]);
+
 
         $configOverrides = [];
 
@@ -74,16 +85,9 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
     public function testUsersNotEmpty()
     {
-        $adapter = new Adapter([
-            'driver' => 'mysqli',
-            'database' => 'internships',
-            'username' => 'root',
-            'password' => 'mysql',
-            'hostname' => 'localhost',
-        ]);
 
         $sql = "SELECT * FROM users";
-        $statement = $adapter->createStatement($sql);
+        $statement = $this->adapter->createStatement($sql);
         $result = $statement->execute();
         $result->buffer();
 
@@ -97,16 +101,9 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
     public function testInternshipNotEmpty()
     {
-        $adapter = new Adapter([
-            'driver' => 'mysqli',
-            'database' => 'internships',
-            'username' => 'root',
-            'password' => 'mysql',
-            'hostname' => 'localhost',
-        ]);
 
         $sql = "SELECT * FROM internship_offers";
-        $statement = $adapter->createStatement($sql);
+        $statement = $this->adapter->createStatement($sql);
         $result = $statement->execute();
         $result->buffer();
 
@@ -120,16 +117,9 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
 
     public function testEmployersNotEmpty()
     {
-        $adapter = new Adapter([
-            'driver' => 'mysqli',
-            'database' => 'internships',
-            'username' => 'root',
-            'password' => 'mysql',
-            'hostname' => 'localhost',
-        ]);
 
         $sql = "SELECT * FROM employers";
-        $statement = $adapter->createStatement($sql);
+        $statement = $this->adapter->createStatement($sql);
         $result = $statement->execute();
         $result->buffer();
 
@@ -138,22 +128,13 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         } else {
             $this->assertTrue(false, "La table employers ne contient pas de valeurs");
         }
-
     }
 
     public function testCoordinatorsNotEmpty()
     {
 
-        $adapter = new Adapter([
-            'driver' => 'mysqli',
-            'database' => 'internships',
-            'username' => 'root',
-            'password' => 'mysql',
-            'hostname' => 'localhost',
-        ]);
-
         $sql = "SELECT * FROM coordinators";
-        $statement = $adapter->createStatement($sql);
+        $statement = $this->adapter->createStatement($sql);
         $result = $statement->execute();
         $result->buffer();
 
@@ -162,22 +143,13 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         } else {
             $this->assertTrue(false, "La table coordinators ne contient pas de valeurs");
         }
-
     }
 
     public function testStudentsNotEmpty()
     {
 
-        $adapter = new Adapter([
-            'driver' => 'mysqli',
-            'database' => 'internships',
-            'username' => 'root',
-            'password' => 'mysql',
-            'hostname' => 'localhost',
-        ]);
-
         $sql = "SELECT * FROM students";
-        $statement = $adapter->createStatement($sql);
+        $statement = $this->adapter->createStatement($sql);
         $result = $statement->execute();
         $result->buffer();
 
@@ -186,22 +158,13 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         } else {
             $this->assertTrue(false, "La table students ne contient pas de valeurs");
         }
-
     }
 
     public function testUserTypesNotEmpty()
     {
 
-        $adapter = new Adapter([
-            'driver' => 'mysqli',
-            'database' => 'internships',
-            'username' => 'root',
-            'password' => 'mysql',
-            'hostname' => 'localhost',
-        ]);
-
         $sql = "SELECT * FROM user_types";
-        $statement = $adapter->createStatement($sql);
+        $statement = $this->adapter->createStatement($sql);
         $result = $statement->execute();
         $result->buffer();
 
@@ -210,6 +173,5 @@ class IndexControllerTest extends AbstractHttpControllerTestCase
         } else {
             $this->assertTrue(false, "La table user_types ne contient pas de valeurs");
         }
-
     }
 }
