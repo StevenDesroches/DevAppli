@@ -6,7 +6,6 @@ class Employer
     public $id;
     public $name;
     public $email;
-    public $password;
     public $adress;
     public $city;
     public $province;
@@ -20,7 +19,6 @@ class Employer
         $this->id     = !empty($data['id']) ? $data['id'] : null;
         $this->name = !empty($data['name']) ? $data['name'] : null;
         $this->email = !empty($data['email']) ? $data['email'] : null;
-        $this->password = !empty($data['password']) ? $data['password'] : null;
         $this->adress = !empty($data['adress']) ? $data['adress'] : null;
         $this->city = !empty($data['city']) ? $data['city'] : null;
         $this->province = !empty($data['province']) ? $data['province'] : null;
@@ -35,15 +33,12 @@ class Employer
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'password' => $this->password,
             'adress' => $this->adress,
             'city' => $this->city,
             'province' => $this->province,
             'postal_code' => $this->postal_code,
             'active' => $this->active,
             'id_user' => $this->id_user,
-            
-
         ];
     }
 

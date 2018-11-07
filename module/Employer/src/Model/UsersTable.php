@@ -5,7 +5,7 @@ namespace Employer\Model;
 use RuntimeException;
 use Zend\Db\TableGateway\TableGatewayInterface;
 
-class UserTable
+class UsersTable
 {
     private $tableGateway;
 
@@ -39,13 +39,13 @@ class UserTable
         $data = [
             'email' => $user->email,
             'password'  => $user->password,
+            'user_type' => $user->type
         ];
 
         $id = (int) $user->id;
 
         if ($id === 0) {
-            $this->tableGateway->insert($data);
-            return;
+            return $this->tableGateway->insert($data);;
         }
 
         if (! $this->getUser($id)) {

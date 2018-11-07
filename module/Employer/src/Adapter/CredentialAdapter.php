@@ -37,18 +37,4 @@ class CredentialAdapter extends CredentialTreatmentAdapter
             ->where(new SqlOp('user_type', '=', $this->user_type));
         return $dbSelect;
     }
-
-    protected function authenticateValidateResult($resultIdentity)
-    {
-        if ($resultIdentity['zend_auth_credential_match'] != '1') {
-            $this->authenticateResultInfo['code']       = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
-            $this->authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
-            return $this->authenticateCreateAuthResult();
-        }
-        unset($resultIdentity['zend_auth_credential_match']);
-        $this->resultRow = $resultIdentity;
-        $this->authenticateResultInfo['code']       = AuthenticationResult::SUCCESS;
-        $this->authenticateResultInfo['messages'][] = 'Authentication successful.';
-        return $this->authenticateCreateAuthResult();
-    }
 }

@@ -26,15 +26,15 @@ class Module implements ConfigProviderInterface
     {
         return [
             'factories' => [
-                Model\UserTable::class => function($container) {
-                    $tableGateway = $container->get(Model\UserTableGateway::class);
-                    return new Model\UserTable($tableGateway);
+                Model\UsersTable::class => function($container) {
+                    $tableGateway = $container->get(Model\UsersTableGateway::class);
+                    return new Model\UsersTable($tableGateway);
                 },
-                Model\UserTableGateway::class => function ($container) {
+                Model\UsersTableGateway::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\User());
-                    return new TableGateway('user', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('users', $dbAdapter, null, $resultSetPrototype);
                 },
                 Model\InternshipsTable::class => function($container) {
                     $tableGateway = $container->get(Model\InternshipsTableGateway::class);
@@ -71,6 +71,8 @@ class Module implements ConfigProviderInterface
                 },
                 Controller\UsersController::class => function($container) {
                     return new Controller\UsersController(
+                        $container->get(Model\UsersTable::class),
+                        $container->get(Model\EmployersTable::class),
                         $container->get(\Zend\Db\Adapter\Adapter::class)
                     );
                 },

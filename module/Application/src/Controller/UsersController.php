@@ -10,9 +10,6 @@ namespace Application\Controller;
 use Zend\View\Model\ViewModel;
 use Zend\Authentication\AuthenticationService;
 use Application\Adapter\CredentialAdapter;
-use Application\Model\Employer;
-use Application\Model\EmployerTable;
-use Application\Form\EmployerForm;
 
 class UsersController extends BaseController
 {  
@@ -37,10 +34,8 @@ class UsersController extends BaseController
             $authAdapter = new CredentialAdapter($this->db, 'users', 'email', 'password');
             $authAdapter->setIdentity($this->params()->fromPost('email'));
             $authAdapter->setCredential(md5($this->params()->fromPost('password')));
+            $authAdapter->setUserType(0);
 
-            //$authAdapter->setUserType(0);
-            
-        
             $auth = new AuthenticationService();
 
             $result = $auth->authenticate($authAdapter);           
@@ -58,31 +53,4 @@ class UsersController extends BaseController
             return $this->redirect()->toRoute('users', ['action' => 'login']);
         } 
     }
-
-       public function addEmployerAction()
-       {
-        $form = new EmployerForm();
-        $form->get('submit')->setValue('Add');
-
-        $request = $this->getRequest();
-        if(! $request->isPost())
-        {
-            //$form = new EmployerForm();
-            //$form->get('submit')->setAttribute('value', 'Add');
-            $viewData = ['form' => $form];
-            return $viewData;
-        }
-
-        $employer = new Employer();
-        //$form->setInputFilter($employer->getInputFilter());
-        $form->setData($request->getPost());
-
-        if (! $form->isValid()) {
-            return ['form' => $form];
-        }
-
-        $employer->exchangeArray($form->getData());
-        $this->table->saveEmployer($employer);
-        return $this->redirect()->toRoute('users', ['action' => 'login']);
-        }
-    }
+}

@@ -7,15 +7,17 @@ use Zend\Mvc\MvcEvent;
 use Zend\View\Model\ViewModel;
 use Zend\Authentication\AuthenticationService;
 use Zend\Db\Adapter\Adapter;
+use Zend\Authentication\Storage\Session;
 
 class BaseController extends AbstractController
 {
     protected $eventIdentifier = __CLASS__;
-    protected $db;
+    protected $allowedActions;
+    protected $currentUser;
 
-    public function __construct($db)
+    public function __construct()
     {
-        $this->db = $db;
+        $this->allowedActions = ['login'];
     }
 
     public function notFoundAction()
@@ -39,6 +41,8 @@ class BaseController extends AbstractController
             throw new Exception\DomainException('Missing route matches; unsure how to retrieve action');
         }
 
+        $this->layout()->setTemplate('layout/employer');
+
         $action = $routeMatch->getParam('action', 'not-found');
         $method = static::getMethodFromAction($action);
         
@@ -46,25 +50,24 @@ class BaseController extends AbstractController
             $method = 'notFoundAction';
         }
 
-        /* if($action != 'login')
-        {
+        if(!in_array($action, $this->allowedActions)) {
             $auth = new AuthenticationService();
+            $auth->setStorage(new Session('Employer'));
             if(!$auth->hasIdentity())
             {
-                $this->redirect()->toRoute("users", ['action' => 'login']);
+                $this->redirect()->toRoute("employer_users", ['action' => 'login']);
             }
-        }  */  
-        $uid = $routeMatch->getParam('uid', 'none');
-        //$statement = $adater->createStatement
-
-        if($uid == 'none')
-        {
-            $this->redirect()->toRoute("employer_users", ['action' => 'badAuth']);
-        }
+            else
+            {
+                $this->currentUser = $auth->getIdentity();
+            }
+        }  
+        //$uid = $routeMatch->getParam('uid', 'none');
 
         $actionResponse = $this->$method();
 
         $e->setResult($actionResponse);
+        $this->layout()->setVariable('currentUser', $this->currentUser);
 
         return $actionResponse;
     }

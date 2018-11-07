@@ -16,7 +16,7 @@ return [
             'employer_home' => [
                 'type' => Segment::class,
                 'options' => [
-                    'route'    => '/employer[/:uid]',
+                    'route'    => '/employer',
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
@@ -26,7 +26,7 @@ return [
             'employer_users' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/employer[/:uid]/users[/:action]',
+                    'route'    => '/employer/users[/:action[/:id]]',
                     'defaults' => [
                         'controller' => Controller\UsersController::class,
                         'action'     => 'index',
@@ -36,7 +36,7 @@ return [
             'employer_internships' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/employer[/:uid]/internships[/:action][/:id]',
+                    'route'    => '/employer/internships[/:action[/:id]]',
                     'defaults' => [
                         'controller' => Controller\InternshipsController::class,
                         'action'     => 'index',

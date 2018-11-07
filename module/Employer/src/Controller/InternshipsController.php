@@ -12,7 +12,8 @@ class InternshipsController extends BaseController
     private $table;
 
     public function __construct(InternshipsTable $table)
-    {
+    {  
+        parent::__construct();
         $this->table = $table;
     }
 

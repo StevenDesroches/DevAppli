@@ -26,7 +26,7 @@ return [
             'student_users' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/student/users[/:action]',
+                    'route'    => '/student/users[/:action[/:id]]',
                     'defaults' => [
                         'controller' => Controller\UsersController::class,
                         'action'     => 'index',

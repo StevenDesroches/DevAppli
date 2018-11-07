@@ -43,8 +43,7 @@ CREATE TABLE `coordinators` (
 CREATE TABLE `employers` (
   `id` int(8) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `contact_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `adress` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `city` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `province` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -90,7 +89,7 @@ CREATE TABLE `students` (
 
 CREATE TABLE `users` (
   `id` int(8) NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) UNIQUE COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_type` int(8) NOT NULL COMMENT '''0'' for admin, ''1'' for student, ''2'' for employer'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

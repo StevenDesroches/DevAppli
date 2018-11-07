@@ -42,9 +42,12 @@
                         <li class="active"><a href="<?= $this->url('students') ?>">Étudiants</a></li>
                         <li class="active"><a href="<?= $this->url('employers') ?>">Milieux de stage</a></li>
                         <li class="active"><a href="<?= $this->url('internships') ?>">Stages</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
+                    </ul>
+                    <?php if($currentUser != null) : ?>
+                    <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="<?=$this->url('users', ['action' => 'logout']) ?>">Déconnexion</a></li>
+                    </ul>
+                    <?php endif;?>
                     
                 </div>
             </div>

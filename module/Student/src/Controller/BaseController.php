@@ -13,10 +13,13 @@ class BaseController extends AbstractController
 {
     protected $eventIdentifier = __CLASS__;
     protected $db;
+    protected $allowedActions;
+    protected $currentUser;
 
     public function __construct($db)
     {
         $this->db = $db;
+        $this->allowedActions = ['login'];
     }
 
     public function notFoundAction()
@@ -48,7 +51,7 @@ class BaseController extends AbstractController
             $method = 'notFoundAction';
         }
 
-        if($action != 'login')
+        if(!in_array($action, $this->allowedActions))
         {
             $auth = new AuthenticationService();
             $auth->setStorage(new Session('Student'));
@@ -56,9 +59,14 @@ class BaseController extends AbstractController
             {
                 $this->redirect()->toRoute("student_users", ['action' => 'login']);
             }
+            else
+            {
+                $this->currentUser = $auth->getIdentity();
+            }
         }   
 
         $actionResponse = $this->$method();
+        $this->layout()->setVariable('currentUser', $this->currentUser);
 
         $e->setResult($actionResponse);
 

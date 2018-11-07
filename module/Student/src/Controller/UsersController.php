@@ -45,4 +45,15 @@ class UsersController extends BaseController
         }
         
     }
+
+    public function logoutAction()
+    {
+        $auth = new AuthenticationService();
+            $auth->setStorage(new Session('Student'));
+        if($auth->hasIdentity()) 
+        { 
+            $auth->clearIdentity();
+            return $this->redirect()->toRoute('student_users', ['action' => 'login']);
+        } 
+    }
 }

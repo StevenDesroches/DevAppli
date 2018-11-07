@@ -38,21 +38,20 @@ class EmployersTable
     {
         $data = [
             'name' => $employer->name,
-            'email' => $employer->email,
             'adress' => $employer->adress,
+            'contact_email' => $employer->contact_email,
             'city' => $employer->city,
             'province' => $employer->province,
             'postal_code' => $employer->postal_code,
             'active' => $employer->active,
-            'id_employer' => $employer->id_employer,
+            'id_user' => $employer->id_user,
             'uuid' => $employer->uuid,
         ];
 
         $id = (int) $employer->id;
 
         if ($id === 0) {
-            $this->tableGateway->insert($data);
-            return;
+            return $this->tableGateway->insert($data);
         }
 
         if (! $this->getEmployer($id)) {

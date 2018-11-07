@@ -9,13 +9,13 @@ $id = $form->get('id');
 $id->setAttribute('class', 'form-control');
 $id->setAttribute('placeholder', 'le id');
 
-$iduser = $form->get('id_user');
-$iduser->setAttribute('class', 'form-control');
-$iduser->setAttribute('placeholder', 'le id de user');
-
 $courriel = $form->get('email');
 $courriel->setAttribute('class', 'form-control');
-$courriel->setAttribute('placeholder', 'courriel');
+$courriel->setAttribute('placeholder', 'compte@test.com');
+
+$courriel_contact = $form->get('contact_email');
+$courriel_contact->setAttribute('class', 'form-control');
+$courriel_contact->setAttribute('placeholder', 'contact@test.com');
 
 $password = $form->get('password');
 $password->setAttribute('class', 'form-control');
@@ -50,7 +50,7 @@ $uuid->setAttribute('class', 'form-check-input');
 $submit = $form->get('submit');
 $submit->setAttribute('class', 'btn btn-primary');
 
-$form->setAttribute('action', $this->url('employers', [
+$form->setAttribute('action', $this->url('employer_users', [
     'action' => 'add'
 ]));
 
@@ -82,9 +82,15 @@ echo $this->form()->openTag($form);
     </div>
 
     <div class="form-group">
-        <?= $this->formLabel($courriel, "Courriel") ?>
+        <?= $this->formLabel($courriel, "Courriel de compte") ?>
         <?= $this->formElement($courriel) ?>
         <?= $this->formElementErrors()->render($courriel, ['class' => 'help-block']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= $this->formLabel($courriel_contact, "Courriel de contact") ?>
+        <?= $this->formElement($courriel_contact) ?>
+        <?= $this->formElementErrors()->render($courriel_contact, ['class' => 'help-block']) ?>
     </div>
 
      <div class="form-group">
@@ -103,12 +109,6 @@ echo $this->form()->openTag($form);
         <?= $this->formLabel($postal, "Code postal") ?>
         <?= $this->formElement($postal) ?>
         <?= $this->formElementErrors()->render($postal, ['class' => 'help-block']) ?>
-    </div>
-
-    <div class="form-group">
-        <?= $this->formLabel($iduser, "Le id user") ?>
-        <?= $this->formElement($iduser) ?>
-        <?= $this->formElementErrors()->render($iduser, ['class' => 'help-block']) ?>
     </div>
 
     <div class="form-group">
