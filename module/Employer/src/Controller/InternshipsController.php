@@ -55,14 +55,14 @@ class InternshipsController extends BaseController
         $id = (int) $this->params()->fromRoute('id', 0);
 
         if (0 === $id) {
-            return $this->redirect()->toRoute('internships', ['action' => 'index']);
+            return $this->redirect()->toRoute('employer_internships', ['action' => 'index']);
         }
 
         try {
             $internship = $this->table->getInternship($id);
             var_dump($internship);
         } catch (\Exception $e) {
-            return $this->redirect()->toRoute('internships', ['action' => 'index']);
+            return $this->redirect()->toRoute('employer_internships', ['action' => 'index']);
         }
 
         $form = new InternshipsForm();
@@ -93,7 +93,7 @@ class InternshipsController extends BaseController
     {
         $id = (int) $this->params()->fromRoute('id', 0);
         if (!$id) {
-            return $this->redirect()->toRoute('internships');
+            return $this->redirect()->toRoute('employer_internships');
         }
 
         $request = $this->getRequest();

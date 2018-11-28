@@ -15,4 +15,5 @@ class IndexController extends BaseController
     {
         return new ViewModel();
     }
+
 }

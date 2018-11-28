@@ -33,6 +33,16 @@ return [
                     ],
                 ],
             ],
+            'student_students' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/student/students[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\StudentsController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'student_internships' => [
                 'type'    => Segment::class,
                 'options' => [

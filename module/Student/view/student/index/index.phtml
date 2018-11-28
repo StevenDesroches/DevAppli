@@ -4,10 +4,10 @@ $title = 'Accueil';
 $this->headTitle($title);
 ?>
 
-<h1 class="page-header text-center"><?= $title?></h1>
+<h1 class="page-header "><?= $title?></h1>
 <div class="row">
-    <div class="col-sm-4 col-md-offset-4 text-center">
-        <div class="panel panel-default">
+    <div class="col-sm-4 ">
+    <div class="panel panel-default">
             <div class="panel-heading">Stages</div>
             <div class="panel-body">
                 <p>Consulter la liste des stages</p>
@@ -16,5 +16,18 @@ $this->headTitle($title);
                 <a class="btn btn-primary" href="<?= $this->url('student_internships') ?>">Consulter</a>
             </div>
         </div>
-    </div>        
+        
+    </div>  <div class="col-sm-4 col-md-offset-1 ">
+    <div class="panel panel-default">
+            <div class="panel-heading">Mon profil</div>
+            <div class="panel-body">
+                <p>Modifier mon profil étudiant</p>
+            </div>
+            <div class="panel-footer">
+                <a class="btn btn-primary" href="<?= $this->url('student_students')?>">Modifier</a>
+            </div>
+        </div>
+        
+    </div>   
+        
 </div>
