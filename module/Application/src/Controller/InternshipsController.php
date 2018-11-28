@@ -100,10 +100,13 @@ class InternshipsController extends BaseController
         }
 
         $form->setInputFilter($internship->getInputFilter());
-        $form->setData($request->getPost());
-
+        $reqPost = $request->getPost();
+        $reqPost['active'] = $internship->active; 
+        $form->setData($reqPost);
+        var_dump($internship);
         if (! $form->isValid()) {
-            var_dump($internship);
+            
+            var_dump($form->getMessages());
             return $viewData;
         }
 

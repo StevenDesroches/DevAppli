@@ -51,15 +51,25 @@ class Internship
         $inputFilter = new InputFilter();
 
         $inputFilter->add([
-            'name' => 'Nom',
+            'name' => 'name',
             'required' => true,
             'filters' => [
-                ['name' => ToInt::class],
+                ['name' => StripTags::class],
+            ],
+            'validators' => [
+                [
+                    'name' => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min' => 1,
+                        'max' => 100,
+                    ],
+                ],
             ],
         ]);
 
         $inputFilter->add([
-            'name' => 'Description',
+            'name' => 'description',
             'required' => true,
             'filters' => [
                 ['name' => StripTags::class],
