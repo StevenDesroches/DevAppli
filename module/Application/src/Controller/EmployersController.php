@@ -8,6 +8,7 @@ use Application\Model\User;
 use Application\Model\UsersTable;
 use Application\Form\EmployerForm;
 use Zend\View\Model\ViewModel;
+use Zend\Mail;
 
 class EmployersController extends BaseController
 {
@@ -20,6 +21,7 @@ class EmployersController extends BaseController
         parent::__construct();
         $this->table = $table;
         $this->users = $users;
+        array_push($this->allowedActions, 'sendMailUpdate');
     }
 
     public function indexAction()
@@ -54,6 +56,7 @@ class EmployersController extends BaseController
        
         $employer->exchangeArray($form->getData());
         $employer->id_user = $id_user;
+        $employer->date_created = date('Y-m-d');
         $this->table->saveEmployer($employer);
         return $this->redirect()->toRoute('employers', ['action' => 'index']);
     }
@@ -96,6 +99,7 @@ class EmployersController extends BaseController
        
         return $this->redirect()->toRoute('employers', ['action' => 'index']);
     }
+    
     public function deleteAction()
     {
 
@@ -121,5 +125,22 @@ class EmployersController extends BaseController
             'employer' => $this->table->getEmployer($id),
         ];
     }
+
+    public function sendMailUpdateAction(){
+        
+        $employers = $this->table->fetchAll();
+
+        foreach($employers as $employer){
+
+            if(!empty($employer['uuid'])){
+
+                $mail = new Message();
+                $mail->setBody('Bonjour,<br/> Vous avez dépassé le délai de 15 jours'
+                 . ' pour mettre à jour vos informations de contact veillez appuyer sur ce lien: '
+                 . '<a href="' . $this->url()->fromRoute() . '"></a>'
+                );
+            }
+        }
     }
+}
     

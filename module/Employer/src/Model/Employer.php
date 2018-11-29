@@ -25,6 +25,7 @@ class Employer
         $this->postal_code = !empty($data['postal_code']) ? $data['postal_code'] : null;
         $this->active = !empty($data['active']) ? $data['active'] : null;
         $this->id_user = !empty($data['id_user']) ? $data['id_user'] : null;
+        $this->uuid = !empty($data['uuid']) ? $data['uuid'] : null;
     }
 
     public function getArrayCopy(){
@@ -37,6 +38,7 @@ class Employer
             'postal_code' => $this->postal_code,
             'active' => $this->active,
             'id_user' => $this->id_user,
+            'uuid' => $this->uuid,
         ];
     }
 }

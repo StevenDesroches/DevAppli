@@ -44,6 +44,7 @@ class EmployersTable
             'province' => $employer->province,
             'postal_code' => $employer->postal_code,
             'active' => $employer->active,
+            'date_created' => $employer->date_created,
             'id_user' => $employer->id_user,
             'uuid' => $employer->uuid,
         ];

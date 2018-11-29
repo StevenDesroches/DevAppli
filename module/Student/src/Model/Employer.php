@@ -11,6 +11,7 @@ class Employer
     public $province;
     public $postal_code;
     public $active;
+    public $date_created;
     public $id_user;
 
     public function exchangeArray(array $data)
@@ -23,6 +24,7 @@ class Employer
         $this->province = !empty($data['province']) ? $data['province'] : null;
         $this->postal_code = !empty($data['postal_code']) ? $data['postal_code'] : null;
         $this->active = !empty($data['active']) ? $data['active'] : null;
+        $this->date_created = !empty($data['date_created']) ? $data['date_created'] : null;
         $this->id_user = !empty($data['id_user']) ? $data['id_user'] : null;
     }
 }

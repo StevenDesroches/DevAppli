@@ -86,6 +86,7 @@ class UsersController extends BaseController
         $id_user = $this->table->saveUser($user);
         $employer->exchangeArray($form->getData());
         $employer->id_user = $id_user;
+        $employer->date_created = date('Y-m-d');
         $this->employerTable->saveEmployer($employer);
         return $this->redirect()->toRoute('employer_home');
     }
