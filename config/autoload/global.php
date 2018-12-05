@@ -18,5 +18,8 @@ return [
         'username' => 'root',
         'password' => 'mysql',
         'hostname' => 'localhost',
+        'options' => array(
+            'buffer_results' => true,
+        ),
     ],
 ];

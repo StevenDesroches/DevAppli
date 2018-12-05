@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mer 05 Décembre 2018 à 21:21
+-- Généré le :  Mer 05 Décembre 2018 à 21:47
 -- Version du serveur :  5.6.37
 -- Version de PHP :  7.1.8
 
@@ -111,6 +111,17 @@ INSERT INTO `students` (`admission_number`, `name`, `active`, `user_id`, `email`
 (1463693, 'Nathan Test 123', 1, 3, ''),
 (69696969, 'Tekashi 69', 1, 4, ''),
 (201463693, 'Nathan Cyr', 0, 1, '');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `students_internships`
+--
+
+CREATE TABLE IF NOT EXISTS `students_internships` (
+  `student_id` int(8) NOT NULL,
+  `internship_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
