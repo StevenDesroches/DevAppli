@@ -28,6 +28,13 @@ class StudentForm extends Form
             ]
         ]);
         $this->add([
+            'name' => 'email',
+            'type' => 'email',
+            'options' => [
+                'title' => 'courriel',
+            ]
+        ]);
+        $this->add([
             'name' => 'password',
             'type' => 'password',
             'options' => [

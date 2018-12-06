@@ -66,6 +66,16 @@ class Module implements ConfigProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Employer());
                     return new TableGateway('employers', $dbAdapter, null, $resultSetPrototype);
                 },
+                Model\Students_InternshipsTable::class => function($container) {
+                    $tableGateway = $container->get(Model\Students_InternshipsTableGateway::class);
+                    return new Model\Students_InternshipsTable($tableGateway);
+                },
+                Model\Students_InternshipsTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Students_Internships());
+                    return new TableGateway('students_internships', $dbAdapter, null, $resultSetPrototype);
+                },
             ],
         ];
     }
@@ -84,10 +94,10 @@ class Module implements ConfigProviderInterface
                         $container->get(Model\StudentsTable::class)
                     );
                 },
-                Controller\InternshipsController::class => function($container) {
-                    return new Controller\InternshipsController(
-                        $container->get(Model\InternshipsTable::class),
-                        $container->get(Model\EmployerTable::class)
+                Controller\Students_InternshipsController::class => function($container) {
+                    return new Controller\Students_InternshipsController(
+                        $container->get(Model\Students_InternshipsTable::class),
+                        $container->get(Model\InternshipsTable::class)
                     );
                 },
                 Controller\StudentsController::class => function($container) {
@@ -95,6 +105,7 @@ class Module implements ConfigProviderInterface
                         $container->get(Model\StudentsTable::class)
                     );
                 },
+                
             ],
         ];
     }

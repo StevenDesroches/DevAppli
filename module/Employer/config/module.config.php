@@ -33,6 +33,16 @@ return [
                     ],
                 ],
             ],
+            'employer_employers' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/employer/employers[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\EmployersController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'employer_internships' => [
                 'type'    => Segment::class,
                 'options' => [

@@ -53,6 +53,16 @@ return [
                     ],
                 ],
             ],
+            'student_StudentsInternships' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/student/students_internships[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\Students_InternshipsController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'view_manager' => [

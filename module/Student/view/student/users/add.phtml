@@ -14,6 +14,10 @@ $name = $form->get('name');
 $name->setAttribute('class', 'form-control');
 $name->setAttribute('placeholder', 'Nom');
 
+$email = $form->get('email');
+$email->setAttribute('class', 'form-control');
+$email->setAttribute('placeholder', 'Courriel');
+
 $active = $form->get('active');
 $active->setAttribute('class', 'form-check-input');
 
@@ -42,6 +46,12 @@ echo $this->form()->openTag($form);
     <?= $this->formLabel($name, "Nom") ?>
     <?= $this->formElement($name) ?>
     <?= $this->formElementErrors()->render($name, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($email, "Courriel") ?>
+    <?= $this->formElement($email) ?>
+    <?= $this->formElementErrors()->render($email, ['class' => 'help-block']) ?>
 </div>
 
 <div class="form-group">
