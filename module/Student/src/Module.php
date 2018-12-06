@@ -90,6 +90,11 @@ class Module implements ConfigProviderInterface
                         $container->get(Model\EmployerTable::class)
                     );
                 },
+                Controller\StudentsController::class => function($container) {
+                    return new Controller\StudentsController(
+                        $container->get(Model\StudentsTable::class)
+                    );
+                },
             ],
         ];
     }

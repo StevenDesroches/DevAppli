@@ -16,7 +16,7 @@ class BaseController extends AbstractController
 
     public function __construct()
     {
-        $this->allowedActions = ['login'];
+        $this->allowedActions = ['login', 'edit'];
     }
 
     public function notFoundAction()

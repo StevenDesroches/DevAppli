@@ -4,26 +4,26 @@ namespace Student\Controller;
 
 use Zend\View\Model\ViewModel;
 use Zend\Db\Adapter\Adapter;
-use Application\Model\Student;
-use Application\Model\StudentsTable;
-use Application\Form\StudentForm;
+use Student\Model\Student;
+use Student\Model\StudentsTable;
+use Student\Form\StudentForm;
 
 
 class StudentsController extends BaseController
 {
-
     private $table;
+      
 
-    public function __construct(StudentsTable $table)
+    public function __construct(StudentsTable $table )
     {
         parent::__construct();
         $this->table = $table;
+       
     }
 
     public function indexAction()
     {
-        return new ViewModel(['students' => $this->table->fetchAll()]);
-
+        return new ViewModel(['currentUser' => $this->currentUser]);
     }
 
     public function editAction()
@@ -57,13 +57,14 @@ class StudentsController extends BaseController
         $form->setData($request->getPost());
 
         if (! $form->isValid()) {
+
             return $viewData;
         }
 
         $this->table->editStudent($student);
 
        
-        return $this->redirect()->toRoute('student_home', ['action' => 'index']);
+        return $this->redirect()->toRoute("student_home", ['action' => 'index']);
     }
 
 

@@ -24,7 +24,7 @@ $this->headTitle($title);
                 <p>Modifier mon profil étudiant</p>
             </div>
             <div class="panel-footer">
-                <a class="btn btn-primary" href="<?= $this->url('student_students')?>">Modifier</a>
+                <a class="btn btn-primary" href="<?= $this->url('student_students', array('action'=>'edit', 'id' => $currentUser));?>">Modifier</a>
             </div>
         </div>
         

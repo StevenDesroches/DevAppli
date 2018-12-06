@@ -14,14 +14,14 @@ $name = $form->get('name');
 $name->setAttribute('class', 'form-control');
 $name->setAttribute('placeholder', 'Nom');
 
-$active = $form->get('active');
-$active->setAttribute('class', 'form-control');
-
+$file = $form->get('file');
+$file->setAttribute('class', 'form-control');
+$file->setAttribute('placeholder', 'CV');
 
 $submit = $form->get('submit');
 $submit->setAttribute('class', 'btn btn-primary');
 
-$form->setAttribute('action', $this->url('students', [
+$form->setAttribute('action', $this->url('student_students', [
     'action' => 'edit',
     'id'     => $admission_number,
 ]));
@@ -41,13 +41,15 @@ echo $this->form()->openTag($form);
     <?= $this->formElement($name) ?>
     <?= $this->formElementErrors()->render($name, ['class' => 'help-block']) ?>
 </div>
+
 <div class="form-group">
-    <?= $this->formLabel($active, 'actif') ?>
-    <?= $this->formElement($active) ?>
-    <?= $this->formElementErrors()->render($active, ['class' => 'help-block']) ?>
+    <?= $this->formLabel($file, 'file') ?>
+    <?= $this->formElement($file) ?>
+    <?= $this->formElementErrors()->render($name, ['class' => 'help-block']) ?>
 </div>
+
 
 <?php
 echo $this->formSubmit($submit);
-echo $this->formHidden($form->get('user_id'));
+//echo $this->formHidden($form->get('user_id'));
 echo $this->form()->closeTag();

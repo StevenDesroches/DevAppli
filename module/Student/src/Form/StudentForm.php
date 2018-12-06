@@ -10,6 +10,8 @@ class StudentForm extends Form
     public function __construct($name = null)
     {
         parent::__construct('student');
+        $this->setAttribute('method', 'post');
+        $this->setAttribute('enctype','multipart/form-data');
 
         $this->add([
             'name' => 'admission_number',
@@ -33,11 +35,11 @@ class StudentForm extends Form
             ]
         ]);
         $this->add([
-            'name' => 'active',
-            'type' => 'checkbox',
+            'name' => 'file',
+            'type' => 'file',
             'options' => [
-                'title' => 'actif',
-            ]
+                'title' => 'CV',
+            ],
         ]);
         $this->add([
             'name' => 'submit',

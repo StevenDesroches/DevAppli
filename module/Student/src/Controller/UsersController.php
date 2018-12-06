@@ -21,15 +21,14 @@ use \Zend\Db\Adapter\Adapter as Database;
 class UsersController extends BaseController
 {
     private $db;
-    private $table;
+    private $studentTable;
     private $students;
     
-    public function __construct(Database $db, UsersTable $table, StudentsTable $students)
+    public function __construct(Database $db, UsersTable $table, StudentsTable $studentTable)
     {
         parent::__construct();
         $this->db = $db;
-        $this->table = $table;
-        $this->students = $students;
+        $this->studentTable = $studentTable;
         array_push($this->allowedActions, 'add');
     }
 
@@ -68,28 +67,28 @@ class UsersController extends BaseController
         $request = $this->getRequest();
         if(! $request->isPost())
         {
-            //$form = new EmployerForm();
-            //$form->get('submit')->setAttribute('value', 'Add');
             $viewData = ['form' => $form];
             return $viewData;
         }
 
         $student = new Student();
         $user = new User();
-        //$form->setInputFilter($employer->getInputFilter());
         $form->setData($request->getPost());
 
         if (! $form->isValid()) {
             return ['form' => $form];
         }
 
-        $user->exchangeArray([ 'email' => $form->getData()['admission_number'], 'password' => $form->getData()['password']]);
+        $user->exchangeArray($form->getData());
         $user->type = 1;
+        $student->exchangeArray($form->getData());
+        $user->email = $student->admission_number;
         $user_id = $this->table->saveUser($user);
         $student->exchangeArray($form->getData());
         $student->user_id = $user_id;
-        $this->table->saveStudent($student);
-        return $this->redirect()->toRoute('student_users', ['action' => 'login']);
+        $student->date_created = date('Y-m-d');
+        $this->StudentTable->saveStudent($student);
+        return $this->redirect()->toRoute('student_home');
     }
 
     public function logoutAction()

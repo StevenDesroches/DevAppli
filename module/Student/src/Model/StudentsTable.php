@@ -19,6 +19,13 @@ class StudentsTable
         return $this->tableGateway->select();
     }
 
+    public function getCurrentStudent(){
+        $auth = new AuthenticationService();
+        $auth->setStorage(new Session('Student'));
+
+        return $auth->getIdentity()->getId();
+    }
+
     public function getStudent($id)
     {
         $id = (int) $id;
@@ -34,6 +41,7 @@ class StudentsTable
             'name' => $student->name,
             'active' => $student->active,
             'user_id' => $student->user_id,
+            'file' => $student->file,
         ];
 
         $id = (int) $student->admission_number;
