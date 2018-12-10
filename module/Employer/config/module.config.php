@@ -36,7 +36,7 @@ return [
             'employer_employers' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/employer/employers[/:action[/:id]]',
+                    'route'    => '/employer/employers[/:action[/:id[/:uuid]]]',
                     'defaults' => [
                         'controller' => Controller\EmployersController::class,
                         'action'     => 'index',

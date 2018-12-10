@@ -53,6 +53,12 @@ class BaseController extends AbstractController
         if(!in_array($action, $this->allowedActions)) {
             $auth = new AuthenticationService();
             $auth->setStorage(new Session('Employer'));
+
+            $uuid = $routeMatch->getParam('uuid', 'none');
+            if($action == 'edit' && $uuid == 'none'){
+                $this->redirect()->toRoute("employer_users", ['action' => 'login']);
+            }
+
             if(!$auth->hasIdentity())
             {
                 $this->redirect()->toRoute("employer_users", ['action' => 'login']);
@@ -62,7 +68,6 @@ class BaseController extends AbstractController
                 $this->currentUser = $auth->getIdentity();
             }
         }  
-        //$uid = $routeMatch->getParam('uid', 'none');
 
         $actionResponse = $this->$method();
 

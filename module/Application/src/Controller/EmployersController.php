@@ -8,10 +8,8 @@ use Application\Model\User;
 use Application\Model\UsersTable;
 use Application\Form\EmployerForm;
 use Zend\View\Model\ViewModel;
-use Zend\Mail;
-use Zend\Mail\Transport\Smtp as SmtpTransport;
-use Zend\Mail\Transport\SmtpOptions;
-
+use Application\Adapter\EmailAdapter;
+use Zend\Mail\Message;
 
 
 class EmployersController extends BaseController
@@ -138,7 +136,7 @@ class EmployersController extends BaseController
 
             if(!empty($employer->uuid)){
 
-                $mail = new Mail\Message();
+                $mail = new Message();
                 $mail->setBody('Bonjour,<br/> Vous avez dépassé le délai de 15 jours'
                  . ' pour mettre à jour vos informations de contact veillez appuyer '
                  . '<a href="' . $this->url()->fromRoute('employer_employers', ['action' => 'edit', 'id' => $employer->id, 'uuid' => $employer->uuid ], 
@@ -149,21 +147,7 @@ class EmployersController extends BaseController
                 $mail->addTo('luc.fauvel@hotmail.com', 'Luc Fauvel');
                 $mail->setSubject('Mise à jour - Milieu de stage');
 
-                $mail->getHeaders()->addHeaderLine('Content-Type', 'text/html; charset=UTF-8');
-
-
-                $options = new SmtpOptions([
-                    'host' => 'mail.gestionstage.com',
-                    'port' => 465,
-                    'connection_class'  => 'login',
-                    'connection_config' => [
-                        'username' => 'noreply@gestionstage.com',
-                        'password' => '(yQRGkAA-2v.',
-                        'ssl' => 'ssl'
-                    ]
-                ]);
-                $transport = new SmtpTransport($options);
-                $transport->send($mail);
+                EmailAdapter::getInstance()->sendMail($mail);
             }
         }
     }

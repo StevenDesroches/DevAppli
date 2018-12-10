@@ -80,6 +80,12 @@ class Module implements ConfigProviderInterface
                         $container->get(Model\EmployersTable::class)
                     );
                 },
+                Controller\EmployersController::class => function($container) {
+                    return new Controller\EmployersController(
+                        $container->get(Model\EmployersTable::class),
+                        $container->get(Model\UsersTable::class)
+                    );
+                },
             ],
         ];
     }
