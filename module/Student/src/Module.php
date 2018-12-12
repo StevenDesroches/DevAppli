@@ -70,11 +70,22 @@ class Module implements ConfigProviderInterface
                     $tableGateway = $container->get(Model\Students_InternshipsTableGateway::class);
                     return new Model\Students_InternshipsTable($tableGateway);
                 },
+                
                 Model\Students_InternshipsTableGateway::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Students_Internships());
                     return new TableGateway('students_internships', $dbAdapter, null, $resultSetPrototype);
+                },
+                Model\FileTable::class => function($container) {
+                    $tableGateway = $container->get(Model\FileTableGateway::class);
+                    return new Model\FileTable($tableGateway);
+                },
+                Model\FileTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\File());
+                    return new TableGateway('files', $dbAdapter, null, $resultSetPrototype);
                 },
             ],
         ];
@@ -109,6 +120,12 @@ class Module implements ConfigProviderInterface
                 },
                 Controller\StudentsController::class => function($container) {
                     return new Controller\StudentsController(
+                        $container->get(Model\StudentsTable::class)
+                    );
+                },
+                Controller\FilesController::class => function($container) {
+                    return new Controller\FilesController(
+                        $container->get(Model\FileTable::class),
                         $container->get(Model\StudentsTable::class)
                     );
                 },

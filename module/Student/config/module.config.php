@@ -63,6 +63,16 @@ return [
                     ],
                 ],
             ],
+            'student_file' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/student/files[/:action[/:id]]',
+                    'defaults' => [
+                        'controller' => Controller\FilesController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'view_manager' => [

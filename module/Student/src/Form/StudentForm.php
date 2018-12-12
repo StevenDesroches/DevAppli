@@ -15,7 +15,6 @@ class StudentForm extends Form
         parent::__construct('student');
 
         $this->setAttribute('method', 'post');
-        $this->setAttribute('enctype','multipart/form-data');
 
         $this->add([
             'name' => 'admission_number',
@@ -59,16 +58,7 @@ class StudentForm extends Form
                 'title' => 'actif',
             ]
         ]);
-        $this->add([
-            'name' => 'file',
-            'type' => 'file',
-            'attributes' => [                
-                'id' => 'file'
-            ],
-            'options' => [
-                'Label' => 'Upload file',
-            ],
-        ]);
+    
         $this->add([
             'name' => 'submit',
             'type' => 'submit',

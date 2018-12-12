@@ -14,10 +14,6 @@ $name = $form->get('name');
 $name->setAttribute('class', 'form-control');
 $name->setAttribute('placeholder', 'Nom');
 
-$file = $form->get('file');
-$file->setAttribute('class', 'form-control');
-$file->setAttribute('placeholder', 'CV');
-
 $submit = $form->get('submit');
 $submit->setAttribute('class', 'btn btn-primary');
 
@@ -42,12 +38,8 @@ echo $this->form()->openTag($form);
     <?= $this->formElementErrors()->render($name, ['class' => 'help-block']) ?>
 </div>
 
-<div class="form-group">
-    <?= $this->formLabel($file, 'File') ?>
-    <?= $this->formElement($file) ?>
-    <?= $this->formElementErrors()->render($name, ['class' => 'help-block']) ?>
-</div>
 
+<a class="btn btn-primary" href="<?= $this->url('student_file')?>">Ajouter un CV à votre profil</a>
 
 <?php
 echo $this->formSubmit($submit);
