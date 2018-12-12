@@ -32,6 +32,7 @@ class Student implements InputFilterAwareInterface
         $this->name = isset($data['name']) ? $data['name'] : null;
         $this->active = isset($data['active']) ? $data['active'] : null;
         $this->user_id = isset($data['user_id']) ? $data['user_id'] : null;
+        $this->email = isset($data['email']) ?  $data['email'] : null;
 
         if(!empty($data['file'])) { 
             if(is_array($data['file'])) { 
