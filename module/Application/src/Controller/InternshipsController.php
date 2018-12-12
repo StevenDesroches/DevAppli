@@ -76,7 +76,6 @@ class InternshipsController extends BaseController
                 );
                 $mail->setFrom('noreply@gestionstage.com', 'GestionStage');
                 $mail->addTo($student->email, $student->name); 
-                $mail->addTo('nathan.cyr@gmail.com', 'Nathan Cyr');
                 $mail->setSubject('Mise à jour - Nouveau Stage');
 
                 EmailAdapter::getInstance()->sendMail($mail);
