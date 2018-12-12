@@ -28,6 +28,13 @@ class InternshipsTable
         return $results;
     }
 
+    public function getInternshipWhereEmployer($id)
+    {
+        $employer_id = (int) $id;
+        $rowset = $this->tableGateway->select(['id_employer' => $employer_id]);
+        return $rowset;
+    }
+
     public function getInternship($id)
     {
         $id = (int) $id;

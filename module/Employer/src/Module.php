@@ -56,6 +56,26 @@ class Module implements ConfigProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Employer());
                     return new TableGateway('employers', $dbAdapter, null, $resultSetPrototype);
                 },
+                Model\Students_InternshipsTable::class => function($container) {
+                    $tableGateway = $container->get(Model\Students_InternshipsTableGateway::class);
+                    return new Model\Students_InternshipsTable($tableGateway);
+                },
+                Model\Students_InternshipsTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Students_Internships());
+                    return new TableGateway('students_internships', $dbAdapter, null, $resultSetPrototype);
+                },
+                Model\StudentsTable::class => function($container) {
+                    $tableGateway = $container->get(Model\StudentsTableGateway::class);
+                    return new Model\StudentsTable($tableGateway);
+                },
+                Model\StudentsTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Student());
+                    return new TableGateway('students', $dbAdapter, null, $resultSetPrototype);
+                },
             ],
         ];
     }
@@ -84,6 +104,15 @@ class Module implements ConfigProviderInterface
                     return new Controller\EmployersController(
                         $container->get(Model\EmployersTable::class),
                         $container->get(Model\UsersTable::class)
+                    );
+                },
+                Controller\Students_InternshipsController::class => function($container) {
+                    return new Controller\Students_InternshipsController(
+                        $container->get(Model\Students_InternshipsTable::class),
+                        $container->get(Model\InternshipsTable::class),
+                        $container->get(Model\StudentsTable::class),
+                        $container->get(Model\UsersTable::class),
+                        $container->get(Model\EmployersTable::class)
                     );
                 },
             ],

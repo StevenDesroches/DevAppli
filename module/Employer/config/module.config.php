@@ -43,6 +43,16 @@ return [
                     ],
                 ],
             ],
+            'employer_StudentsInternships' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/employer/students_internships[/:action[/:id[/:uuid]]]',
+                    'defaults' => [
+                        'controller' => Controller\Students_InternshipsController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'employer_internships' => [
                 'type'    => Segment::class,
                 'options' => [

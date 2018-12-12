@@ -1,0 +1,22 @@
+<?php
+
+$title = 'Les étudiants qui ont postulés à vos stages';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<table class="table">
+    <tr>
+        <th>Nom</th>
+        <th>Action</th>
+    </tr>
+    <?php foreach ($rowsetStudents as $internship) : ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($internship->name);?></td>
+            <td>
+                <a href="<?php echo $this->url('employer_StudentsInternships',
+                    array('action'=>'notifier', 'id' => $internship->user_id));?>">Notifier</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
