@@ -34,6 +34,14 @@ class StudentsTable
         return $row;
     }
 
+    public function getStudentFromUser($id)
+    {
+        $id = (int) $id;
+        $rowset= $this->tableGateway->select(['user_id' => $id]);
+        $row = $rowset->current();
+        return $row;
+    }
+
     public function saveStudent(Student $student)
     {
         $data = [
