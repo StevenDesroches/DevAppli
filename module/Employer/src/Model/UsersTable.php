@@ -64,4 +64,19 @@ class UsersTable
     {
         $this->tableGateway->delete(['id' => (int) $id]);
     }
+
+    public function getEmployerFromUser($email)
+    {
+        $email = (string) $email;
+        $rowset = $this->tableGateway->select(['email' => $email]);
+        $row = $rowset->current();
+        if (! $row) {
+            throw new RuntimeException(sprintf(
+                'Could not find row with email %d',
+                $email
+            ));
+        }
+
+        return $row;
+    }
 }
