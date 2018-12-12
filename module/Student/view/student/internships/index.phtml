@@ -18,6 +18,9 @@ $this->headTitle($title);
             <td>
                 <a href="<?php echo $this->url('student_internships',
                     array('action'=>'details', 'id' => $internship['id']));?>">Détails</a>
+                <a href="<?php echo $this->url('student_internships',
+                    array('action'=>'Postuler', 'id' => $internship['id']));?>">Postuler</a>
+
             </td>
         </tr>
     <?php endforeach; ?>

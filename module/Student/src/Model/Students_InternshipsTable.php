@@ -35,19 +35,20 @@ class Students_InternshipsTable
         return $rowset;
     }
 
-    public function saveInternship(Students_Internships $students_internships)
+    public function deleteInternship($id)
     {
+        $this->tableGateway->delete(['internship_id' => (int) $id]);
+    }
+
+    public function saveRelationInternship($id, $id2)
+    {
+        $this->tableGateway->delete(['internship_id' => (int) $id]);
         $data = [
-            'student_id' => $students_internships->student_id,
-            'internship_id' => $students_internships->internship_id,
+            'student_id' => (int) $id,
+            'internship_id' => (int) $id2,
         ];
 
         $this->tableGateway->insert($data);
         return;
-    }
-
-    public function deleteInternship($id)
-    {
-        $this->tableGateway->delete(['internship_id' => (int) $id]);
     }
 }

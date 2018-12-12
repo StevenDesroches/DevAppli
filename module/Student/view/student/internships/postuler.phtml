@@ -1,0 +1,36 @@
+<?php
+
+
+$title = 'Postuler pour une demande de stage';
+$url   = $this->url('student_internships', ['action' => 'postuler', 'id' => $id]);
+
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<br>
+<h1><?php echo $this->escapeHtml($internship->name);?></h1>
+
+<p>Date postée : <?php echo $this->escapeHtml($internship->date_posted);?></p>
+<p>Active : <?php echo $this->escapeHtml($internship->active);?></p>
+<p>Description : </p>
+<p><?php echo $this->escapeHtml($internship->description);?></p>
+<br><br>
+<p>Employeur name : <?php echo $this->escapeHtml($employer->name);?></p>
+<p>Employeur email : <?php echo $this->escapeHtml($employer->contact_email);?></p>
+<p>Employeur adress : <?php echo $this->escapeHtml($employer->adress);?></p>
+<p>Employeur city : <?php echo $this->escapeHtml($employer->city);?></p>
+<p>Employeur province : <?php echo $this->escapeHtml($employer->province);?></p>
+<p>Employeur code postal : <?php echo $this->escapeHtml($employer->postal_code);?></p>
+
+<br><hr>
+<p>
+Voulez-vous vraiment postuler sur cette offre?
+</p>
+
+<form action="<?= $url ?>" method="post">
+<div class="form-group">
+    <input type="hidden" name="id" value="<?= (int) $id ?>" />
+    <input type="submit" class="btn btn-success" name="del" value="Yes" />
+    <input type="submit" class="btn btn-danger" name="del" value="No" />
+</div>
+</form>
