@@ -43,4 +43,28 @@ class Students_InternshipsController extends BaseController
 
         return new ViewModel(['rowset2' => $rowset2]);
     }
+
+    public function deleteAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (!$id) {
+            return $this->redirect()->toRoute('student_StudentsInternships');
+        }
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $del = $request->getPost('del', 'No');
+
+            if ($del == 'Yes') {
+                $id = (int) $request->getPost('id');
+                $this->table->deleteInternship($id);
+            }
+
+            return $this->redirect()->toRoute('student_StudentsInternships');
+        }
+
+        return [
+            'id'    => $id,
+        ];
+    }
 }

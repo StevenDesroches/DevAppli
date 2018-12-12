@@ -18,6 +18,8 @@ $this->headTitle($title);
             <td>
                 <a href="<?php echo $this->url('student_internships',
                     array('action'=>'details', 'id' => $internship->id));?>">Détails</a>
+                <a href="<?= $this->url('student_StudentsInternships',
+                    array('action'=>'delete', 'id' => $internship->id)); ?>">Supprimer</a>
             </td>
         </tr>
     <?php endforeach; ?>

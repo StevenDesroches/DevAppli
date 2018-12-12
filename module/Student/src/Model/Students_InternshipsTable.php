@@ -48,6 +48,6 @@ class Students_InternshipsTable
 
     public function deleteInternship($id)
     {
-        $this->tableGateway->delete(['id' => (int) $id]);
+        $this->tableGateway->delete(['internship_id' => (int) $id]);
     }
 }
