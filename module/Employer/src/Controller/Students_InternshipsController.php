@@ -42,7 +42,8 @@ class Students_InternshipsController extends BaseController
     public function indexAction()
     {
         $userEmail = $this->currentUser;
-        $employerCourant = $this->tableEmployers->getEmployerFromUser($userEmail);
+        $userCourant = $this->tableUsers->getEmployerFromUser($userEmail);
+        $employerCourant = $this->tableEmployers->getEmployerFromIdUser($userCourant->id);
         $rowsetInternships = $this->tableInternships->getInternshipWhereEmployer($employerCourant->id);
         $rowsetStudents = array();
 

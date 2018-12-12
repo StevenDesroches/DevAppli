@@ -34,6 +34,21 @@ class EmployersTable
         return $row;
     }
 
+    public function getEmployerFromIdUser($id)
+    {
+        $id = (int) $id;
+        $rowset = $this->tableGateway->select(['id_user' => $id]);
+        $row = $rowset->current();
+        if (! $row) {
+            throw new RuntimeException(sprintf(
+                'Could not find row with identifier %d',
+                $id
+            ));
+        }
+
+        return $row;
+    }
+
     public function getEmployerByUuid($uuid)
     {
         $id = (int) $uuid;
