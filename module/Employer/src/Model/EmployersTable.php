@@ -34,19 +34,19 @@ class EmployersTable
         return $row;
     }
 
-    public function getEmployerFromUser($user){
-        $select = $this->tableGateway->getSql()->select();
-        $select->join('users', 'users.id = employers.id_user', [], 'left');
-        $select->where(['users.email' => $user]);
-        $row = $this->tableGateway->selectWith($select);
+    public function getEmployerByUuid($uuid)
+    {
+        $id = (int) $uuid;
+        $rowset = $this->tableGateway->select(['uuid' => $uuid]);
+        $row = $rowset->current();
         if (! $row) {
             throw new RuntimeException(sprintf(
-                'Could not find row with identifier %s',
-                $user
+                'Could not find row with identifier %d',
+                $id
             ));
         }
 
-        return $row->current();
+        return $row;
     }
 
     public function saveEmployer(Employer $employer)
@@ -59,6 +59,7 @@ class EmployersTable
             'province' => $employer->province,
             'postal_code' => $employer->postal_code,
             'active' => $employer->active,
+            'date_created' => $employer->date_created,
             'id_user' => $employer->id_user,
             'uuid' => $employer->uuid,
         ];

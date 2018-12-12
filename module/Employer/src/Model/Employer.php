@@ -11,6 +11,7 @@ class Employer
     public $province;
     public $postal_code;
     public $active;
+    public $date_created;
     public $id_user;
     public $uuid;
 
@@ -24,6 +25,7 @@ class Employer
         $this->province = !empty($data['province']) ? $data['province'] : null;
         $this->postal_code = !empty($data['postal_code']) ? $data['postal_code'] : null;
         $this->active = !empty($data['active']) ? $data['active'] : null;
+        $this->date_created = !empty($data['date_created']) ? $data['date_created'] : null;
         $this->id_user = !empty($data['id_user']) ? $data['id_user'] : null;
         $this->uuid = !empty($data['uuid']) ? $data['uuid'] : null;
     }
@@ -32,11 +34,13 @@ class Employer
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'contact_email' => $this->contact_email,
             'adress' => $this->adress,
             'city' => $this->city,
             'province' => $this->province,
             'postal_code' => $this->postal_code,
             'active' => $this->active,
+            'date_created' => $this->date_created,
             'id_user' => $this->id_user,
             'uuid' => $this->uuid,
         ];

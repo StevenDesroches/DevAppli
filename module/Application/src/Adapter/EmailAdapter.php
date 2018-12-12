@@ -24,7 +24,7 @@ class EmailAdapter
     {
         if ( is_null( self::$instance ) )
         {
-        self::$instance = new self();
+            self::$instance = new self();
         }
         return self::$instance;
     }

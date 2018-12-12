@@ -85,7 +85,7 @@ class EmployerForm extends Form
                 'title' => 'courriel de contact',
             ]
         ]);
-        $this->add([
+        /* $this->add([
             'name' => 'email',
             'type' => 'text',
             'options' => [
@@ -98,22 +98,7 @@ class EmployerForm extends Form
             'options' => [
                 'title' => 'mot de passe',
             ]
-        ]);
-        $this->add([
-            'name' => 'active',
-            'type' => 'checkbox',
-            'options' => [
-                'title' => 'actif',
-            ]
-
-        ]);
-        $this->add([
-            'name' => 'uuid',
-            'type' => 'hidden',
-            'attributes' => [
-                'value' => self::uuid(),
-            ],
-        ]);
+        ]); */
         $this->add([
             'name' => 'submit',
             'type' => 'submit',
