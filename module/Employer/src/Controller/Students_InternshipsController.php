@@ -42,7 +42,8 @@ class Students_InternshipsController extends BaseController
     public function indexAction()
     {
         $userEmail = $this->currentUser;
-        $employerCourant = $this->tableEmployers->getEmployerFromUser($userEmail);
+        $userCourant = $this->tableUsers->getEmployerFromUser($userEmail);
+        $employerCourant = $this->tableEmployers->getEmployerFromIdUser($userCourant->id);
         $rowsetInternships = $this->tableInternships->getInternshipWhereEmployer($employerCourant->id);
         $rowsetStudents = array();
 
@@ -80,17 +81,18 @@ class Students_InternshipsController extends BaseController
             if ($del == 'Yes') {
                 $id = (int) $request->getPost('id');
 
-                $user = $this->tableUsers->getUser($id);
+                $student = $this->tableStudent->getStudentFromUser($id);
+                //$user = $this->tableUsers->getUser($id);
 
-                $has_A = strpos($user->email, '@') !== false;
-                $has_Dot = strpos($user->email, '.') !== false;
+                $has_A = strpos($student->email, '@') !== false;
+                $has_Dot = strpos($student->email, '.') !== false;
 
                 $mail = new Message();
                 $mail->setBody('Bonjour,<br/> Je voudrais planifier une rencontre pour le stage.');
                 $mail->setFrom('noreply@gestionstage.com', 'GestionStage');
 
                 if($has_A && $has_Dot){
-                    $mail->addTo($user->email);
+                    $mail->addTo($student->email);
                 }
 
                 $mail->addTo('stevendesroches@hotmail.com', 'Steven Desroches');

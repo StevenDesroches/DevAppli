@@ -86,7 +86,6 @@ class UsersController extends BaseController
         $user_id = $this->table->saveUser($user);
         $student->exchangeArray($form->getData());
         $student->user_id = $user_id;
-        $student->date_created = date('Y-m-d');
         $this->StudentTable->saveStudent($student);
         return $this->redirect()->toRoute('student_home');
     }

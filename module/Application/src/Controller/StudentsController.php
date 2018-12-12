@@ -37,15 +37,13 @@ class StudentsController extends BaseController
         $request = $this->getRequest();
         if(! $request->isPost())
         {
-            //$form = new EmployerForm();
-            //$form->get('submit')->setAttribute('value', 'Add');
+
             $viewData = ['form' => $form];
             return $viewData;
         }
 
         $student = new Student();
         $user = new User();
-        //$form->setInputFilter($employer->getInputFilter());
         $form->setData($request->getPost());
 
         if (! $form->isValid()) {
