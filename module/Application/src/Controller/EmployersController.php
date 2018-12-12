@@ -10,6 +10,7 @@ use Application\Form\EmployerForm;
 use Zend\View\Model\ViewModel;
 use Application\Adapter\EmailAdapter;
 use Zend\Mail\Message;
+use \Datetime;
 
 
 class EmployersController extends BaseController
@@ -88,8 +89,6 @@ class EmployersController extends BaseController
         if (! $request->isPost()) {
             return $viewData;
         }
-
-        $form->setInputFilter($employer->getInputFilter());
         $form->setData($request->getPost());
 
         if (! $form->isValid()) {
@@ -130,24 +129,34 @@ class EmployersController extends BaseController
 
     public function sendMailUpdateAction(){
         
+        require constant('ROOT') . '/fuck_whodong.php';
+        
         $employers = $this->table->fetchAll();
+        try{
+            $tokenRec = $_GET['token'];
+        } catch(Exception $e){
+            $tokenRec = null;
+        } 
 
-        foreach($employers as $employer){
+        if($token == $tokenRec && $tokenRec != null){
+            foreach($employers as $employer){
 
-            if(!empty($employer->uuid)){
+                $date_now = new DateTime();
+                $date_created = new DateTime($employer->date_created);
+                if(!empty($employer->uuid) && $date_now->diff($date_created)->format("%a") == '15'){
 
-                $mail = new Message();
-                $mail->setBody('Bonjour,<br/> Vous avez dépassé le délai de 15 jours'
-                 . ' pour mettre à jour vos informations de contact veillez appuyer '
-                 . '<a href="' . $this->url()->fromRoute('employer_employers', ['action' => 'edit', 'id' => $employer->id, 'uuid' => $employer->uuid ], 
-                 ['force_canonical' => true]) . '">ici</a>'
-                );
-                $mail->setFrom('noreply@gestionstage.com', 'GestionStage');
-                $mail->addTo($employer->contact_email, $employer->name);
-                $mail->addTo('luc.fauvel@hotmail.com', 'Luc Fauvel');
-                $mail->setSubject('Mise à jour - Milieu de stage');
+                    $mail = new Message();
+                    $mail->setBody('Bonjour,<br/> Vous avez dépassé le délai de 15 jours'
+                    . ' pour mettre à jour vos informations de contact veillez appuyer '
+                    . '<a href="' . $this->url()->fromRoute('employer_employers', ['action' => 'edit', 'id' => $employer->id, 'uuid' => $employer->uuid ], 
+                    ['force_canonical' => true]) . '">ici</a>'
+                    );
+                    $mail->setFrom('noreply@gestionstage.com', 'GestionStage');
+                    $mail->addTo($employer->contact_email, $employer->name);
+                    $mail->setSubject('Mise à jour - Milieu de stage');
 
-                EmailAdapter::getInstance()->sendMail($mail);
+                    EmailAdapter::getInstance()->sendMail($mail);
+                }
             }
         }
     }

@@ -33,18 +33,14 @@ $postal = $form->get('postal_code');
 $postal->setAttribute('class', 'form-control');
 $postal->setAttribute('placeholder', 'code postal');
 
-$active = $form->get('active');
-$active->setAttribute('class', 'form-check-input');
-
-$uuid = $form->get('uuid');
-$uuid->setAttribute('class', 'form-check-input');
 
 $submit = $form->get('submit');
 $submit->setAttribute('class', 'btn btn-primary');
 
-$form->setAttribute('action', $this->url('employers', [
+$form->setAttribute('action', $this->url('employer_employers', [
     'action' => 'edit',
-    'id' => $id
+    'id' => $id,
+    'uuid' => $uuid
 ]));
 
 $form->prepare();
@@ -90,17 +86,6 @@ echo $this->form()->openTag($form);
         <?= $this->formLabel($postal, "Code postal") ?>
         <?= $this->formElement($postal) ?>
         <?= $this->formElementErrors()->render($postal, ['class' => 'help-block']) ?>
-    </div>
-
-    <div class="form-group">
-        <?= $this->formLabel($active, "Actif") ?>
-        <?= $this->formElement($active) ?>
-        <?= $this->formElementErrors()->render($active, ['class' => 'help-block']) ?>
-    </div>
-
-    <div class="form-group">
-        <?= $this->formElement($uuid) ?>
-        <?= $this->formElementErrors()->render($uuid, ['class' => 'help-block']) ?>
     </div>
 
 <?php
