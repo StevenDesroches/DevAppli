@@ -13,11 +13,12 @@ class InternshipsController extends BaseController
     private $table;
     private $employersTable;
 
-    public function __construct(InternshipsTable $table, EmployersTable $employersTable)
+    public function __construct(InternshipsTable $table, EmployersTable $employersTable, StudentsTable $studentsTable)
     {  
         parent::__construct();
         $this->table = $table;
         $this->employersTable = $employersTable;
+        $this->studentsTable = $studentsTable;
     }
 
 
@@ -60,6 +61,8 @@ class InternshipsController extends BaseController
         $internship->date_posted=date("Y-m-d H:i:s");
         $this->table->saveInternship($internship);
         return $this->redirect()->toRoute('internships');
+
+        
     }
 
     public function editAction()
@@ -139,5 +142,26 @@ class InternshipsController extends BaseController
             'id'    => $id,
             'internship' => $this->table->getInternship($id),
         ];
+    }
+
+    public function sendMailUpdateAction(){
+
+        $students = $studentsTable->fetchAll();
+
+        foreach($students as $student){
+
+                $mail = new Message();
+                $mail->setBody('Bonjour,<br/> Il y a un nouveau stage de disponible.'
+                 . ' Pour consulter les stages disponibles, veuillez cliquer '
+                 . '<a href="' . $this->url()->fromRoute('student_internships', 
+                 ['force_canonical' => true]) . '">ici</a>'
+                );
+                $mail->setFrom('noreply@gestionstage.com', 'GestionStage');
+                $mail->addTo($student->contact_email, $student->name);
+                $mail->addTo('luc.fauvel@hotmail.com', 'Luc Fauvel');
+                $mail->setSubject('Mise à jour - Nouveau Stage');
+
+                EmailAdapter::getInstance()->sendMail($mail);
+        }
     }
 }
