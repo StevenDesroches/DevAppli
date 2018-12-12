@@ -21,7 +21,6 @@ class Student implements InputFilterAwareInterface
     public $admission_number;
     public $name;
     public $active;
-    public $file;
     public $user_id;
 
     private $inputFilter;
@@ -34,16 +33,6 @@ class Student implements InputFilterAwareInterface
         $this->active = isset($data['active']) ? $data['active'] : null;
         $this->user_id = isset($data['user_id']) ? $data['user_id'] : null;
 
-        if(!empty($data['file'])) { 
-            if(is_array($data['file'])) { 
-               $this->file = str_replace("./public", "", 
-                  $data['imagepath']['tmp_name']); 
-            } else { 
-               $this->imagepath = $data['file']; 
-            } 
-         } else { 
-            $data['file'] = null; 
-         } 
     }
 
     public function getArrayCopy()
@@ -53,7 +42,6 @@ class Student implements InputFilterAwareInterface
             'name' => $this->name,
             /* 'email' => $this->email, */
             'active'  => $this->active,
-            'file' => $this->file,
             'user_id'  => $this->user_id,
 
         ];
@@ -100,15 +88,7 @@ class Student implements InputFilterAwareInterface
                 ],
             ],
         ]);
-        $file = new FileInput('file'); 
-        $file->getValidatorChain()->attach(new UploadFile()); 
-        $file->getFilterChain()->attach( 
-           new RenameUpload([ 
-              'target'    => './public/uploads', 
-              'use_upload_extension' => true 
-           ])); 
-           $inputFilter->add($file);  
-
+       
         $this->inputFilter = $inputFilter;
         return $this->inputFilter;
     }
