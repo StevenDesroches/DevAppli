@@ -48,7 +48,18 @@ class Students_InternshipsTable
             'internship_id' => (int) $id2,
         ];
 
-        $this->tableGateway->insert($data);
-        return;
+        if (! $this->ifExist($id, $id2)) {
+            $this->tableGateway->insert($data);
+            return;
+        }
+    }
+
+    public function ifExist($student_id, $internship_id)
+    {
+        $student_id = (int) $student_id;
+        $internship_id = (int) $internship_id;
+        $rowset = $this->tableGateway->select(['student_id' => $student_id, 'internship_id' => $internship_id]);
+        $row = $rowset->current();
+        return $row;
     }
 }
