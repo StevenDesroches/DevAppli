@@ -31,19 +31,19 @@ $form->prepare();
 echo $this->form()->openTag($form);
 ?>
 <div class="form-group">
-    <?= $this->formLabel($numAdmission, 'numero d admission') ?>
+    <?= $this->formLabel($numAdmission, "Numéro d'admission") ?>
     <?= $this->formElement($numAdmission) ?>
     <?= $this->formElementErrors()->render($numAdmission, ['class' => 'help-block']) ?>
 </div>
 
 <div class="form-group">
-    <?= $this->formLabel($name, 'nom') ?>
+    <?= $this->formLabel($name, 'Nom') ?>
     <?= $this->formElement($name) ?>
     <?= $this->formElementErrors()->render($name, ['class' => 'help-block']) ?>
 </div>
 
 <div class="form-group">
-    <?= $this->formLabel($file, 'file') ?>
+    <?= $this->formLabel($file, 'File') ?>
     <?= $this->formElement($file) ?>
     <?= $this->formElementErrors()->render($name, ['class' => 'help-block']) ?>
 </div>

@@ -41,7 +41,7 @@ class StudentsTable
             'name' => $student->name,
             'active' => $student->active,
             'user_id' => $student->user_id,
-            'file' => $student->file,
+            
         ];
 
         $id = (int) $student->admission_number;
@@ -58,6 +58,7 @@ class StudentsTable
                 'name'  => $student->name,
             'active'  => $student->active,
             'user_id'  => $student->user_id,
+
             ];
 
             $id = (int) $student->admission_number;

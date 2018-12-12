@@ -3,6 +3,9 @@
 namespace Student\Form;
 
 use Zend\Form\Form;
+use Zend\Form\Element;
+use Zend\InputFilter;
+use Zend\InputFilter\InputFilterInterface;
 
 class StudentForm extends Form
 {
@@ -10,6 +13,8 @@ class StudentForm extends Form
     public function __construct($name = null)
     {
         parent::__construct('student');
+
+        $this->addElements();
         $this->setAttribute('method', 'post');
         $this->setAttribute('enctype','multipart/form-data');
 
@@ -28,8 +33,15 @@ class StudentForm extends Form
             ]
         ]);
         $this->add([
+            'name' => 'active',
+            'type' => 'checkbox',
+            'options' => [
+                'title' => 'actif',
+            ]
+        ]);
+        $this->add([
             'name' => 'email',
-            'type' => 'email',
+            'type' => 'text',
             'options' => [
                 'title' => 'courriel',
             ]
@@ -42,10 +54,20 @@ class StudentForm extends Form
             ]
         ]);
         $this->add([
+            'name' => 'active',
+            'type' => 'checkbox',
+            'options' => [
+                'title' => 'actif',
+            ]
+        ]);
+        $this->add([
             'name' => 'file',
             'type' => 'file',
+            'attributes' => [                
+                'id' => 'file'
+            ],
             'options' => [
-                'title' => 'CV',
+                'Label' => 'CV',
             ],
         ]);
         $this->add([
@@ -58,4 +80,9 @@ class StudentForm extends Form
         ]);
 
     }
-}
+
+  
+   
+    }
+
+
