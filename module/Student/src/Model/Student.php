@@ -30,6 +30,7 @@ class Student implements InputFilterAwareInterface
     {
         $this->admission_number = isset($data['admission_number']) ? $data['admission_number'] : null;
         $this->name = isset($data['name']) ? $data['name'] : null;
+/*         $this->name = isset($data['email']) ? $data['email'] : null; */
         $this->active = isset($data['active']) ? $data['active'] : null;
         $this->user_id = isset($data['user_id']) ? $data['user_id'] : null;
 
@@ -50,6 +51,7 @@ class Student implements InputFilterAwareInterface
         return [
             'admission_number' => $this->admission_number,
             'name' => $this->name,
+            /* 'email' => $this->email, */
             'active'  => $this->active,
             'file' => $this->file,
             'user_id'  => $this->user_id,

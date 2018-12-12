@@ -41,7 +41,7 @@ class StudentForm extends Form
         ]);
         $this->add([
             'name' => 'email',
-            'type' => 'email',
+            'type' => 'text',
             'options' => [
                 'title' => 'courriel',
             ]
@@ -51,6 +51,13 @@ class StudentForm extends Form
             'type' => 'password',
             'options' => [
                 'title' => 'mot de passe',
+            ]
+        ]);
+        $this->add([
+            'name' => 'active',
+            'type' => 'checkbox',
+            'options' => [
+                'title' => 'actif',
             ]
         ]);
         $this->add([
