@@ -62,7 +62,7 @@ class InternshipsController extends BaseController
 
         $internship->exchangeArray($form->getData());
         $internship->date_posted=date("Y-m-d H:i:s");
-        $this->table->saveInternship($internship);
+        $id = $this->table->saveInternship($internship);
         
         $students = $this->studentsTable->fetchAll();
         foreach($students as $student){
@@ -70,7 +70,9 @@ class InternshipsController extends BaseController
                 $mail->setBody('Bonjour,<br/> Il y a un nouveau stage de disponible.'
                  . ' Pour consulter les stages disponibles, veuillez cliquer '
                  . '<a href="' . $this->url()->fromRoute('student_internships', 
-                 ['force_canonical' => true]) . '">ici</a>'
+                 ['force_canonical' => true]) . '">ici</a><br/><a href="' 
+                 . $this->url()->fromRoute('student_internships', ['action' => 'Postuler', 'id' => $id],
+                 ['force_canonical' => true]) . '">Postuler pour ce stage ici</a>'
                 );
                 $mail->setFrom('noreply@gestionstage.com', 'GestionStage');
                 $mail->addTo($student->email, $student->name); 

@@ -58,7 +58,8 @@ class InternshipsTable
 
         if ($id === 0) {
             $this->tableGateway->insert($data);
-            return;
+            $rowset = $this->tableGateway->select(['name' => $internship->name, 'description' => $internship->description, 'id_employer' => $internship->id_employer ]);
+            return $rowset->current()->id;
         }
 
         if (! $this->getInternship($id)) {
