@@ -39,6 +39,7 @@ class StudentsTable
         $data = [
             'admission_number' => $student->admission_number,
             'name' => $student->name,
+            'email' => $student->email,
             'active' => $student->active,
             'user_id' => $student->user_id,
             
@@ -56,9 +57,9 @@ class StudentsTable
     {
             $data = [
                 'name'  => $student->name,
-            'active'  => $student->active,
-            'user_id'  => $student->user_id,
-
+                'email' => $student->email,
+                'active'  => $student->active,
+                'user_id'  => $student->user_id,
             ];
 
             $id = (int) $student->admission_number;
