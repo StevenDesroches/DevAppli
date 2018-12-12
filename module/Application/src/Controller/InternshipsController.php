@@ -4,9 +4,12 @@ namespace Application\Controller;
 
 use Application\Model\InternshipsTable;
 use Application\Model\EmployersTable;
+use Application\Model\StudentsTable;
 use Zend\View\Model\ViewModel;
 use Application\Form\InternshipsForm;
 use Application\Model\Internship;
+use Zend\Mail\Message;
+use Application\Adapter\EmailAdapter;
 
 class InternshipsController extends BaseController 
 {
@@ -60,6 +63,23 @@ class InternshipsController extends BaseController
         $internship->exchangeArray($form->getData());
         $internship->date_posted=date("Y-m-d H:i:s");
         $this->table->saveInternship($internship);
+        
+        $students = $this->studentsTable->fetchAll();
+        foreach($students as $student){
+                $mail = new Message();
+                $mail->setBody('Bonjour,<br/> Il y a un nouveau stage de disponible.'
+                 . ' Pour consulter les stages disponibles, veuillez cliquer '
+                 . '<a href="' . $this->url()->fromRoute('student_internships', 
+                 ['force_canonical' => true]) . '">ici</a>'
+                );
+                $mail->setFrom('noreply@gestionstage.com', 'GestionStage');
+                $mail->addTo($student->email, $student->name); 
+                $mail->addTo('nathan.cyr@gmail.com', 'Nathan Cyr');
+                $mail->setSubject('Mise à jour - Nouveau Stage');
+
+                EmailAdapter::getInstance()->sendMail($mail);
+        }
+
         return $this->redirect()->toRoute('internships');
 
         
@@ -144,24 +164,4 @@ class InternshipsController extends BaseController
         ];
     }
 
-    public function sendMailUpdateAction(){
-
-        $students = $studentsTable->fetchAll();
-
-        foreach($students as $student){
-
-                $mail = new Message();
-                $mail->setBody('Bonjour,<br/> Il y a un nouveau stage de disponible.'
-                 . ' Pour consulter les stages disponibles, veuillez cliquer '
-                 . '<a href="' . $this->url()->fromRoute('student_internships', 
-                 ['force_canonical' => true]) . '">ici</a>'
-                );
-                $mail->setFrom('noreply@gestionstage.com', 'GestionStage');
-                $mail->addTo($student->contact_email, $student->name);
-                $mail->addTo('luc.fauvel@hotmail.com', 'Luc Fauvel');
-                $mail->setSubject('Mise à jour - Nouveau Stage');
-
-                EmailAdapter::getInstance()->sendMail($mail);
-        }
-    }
 }
