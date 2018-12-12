@@ -10,12 +10,26 @@ $this->headTitle($title);
         <th>Nom</th>
         <th>Action</th>
     </tr>
-    <?php foreach ($rowsetStudents as $internship) : ?>
+    <?php foreach ($rowsetStudents as $internship) :?>
         <tr>
+            <?php
+                if($rowsetFiles != null){
+
+                    $fichier = null;
+                    foreach($rowsetFiles as $file){
+                        if($file->student_id == $internship->admission_number){
+                            $fichier = $file;
+                        }
+                    }
+                }
+            ?>
             <td><?php echo $this->escapeHtml($internship->name);?></td>
             <td>
                 <a href="<?php echo $this->url('employer_StudentsInternships',
                     array('action'=>'notifier', 'id' => $internship->user_id));?>">Notifier</a>
+                <?php if($fichier != null):?>
+                    <a href="<?= $this->serverUrl() . '/' . $fichier->file?>">CV</a>
+                <?php endif;?>
             </td>
         </tr>
     <?php endforeach; ?>

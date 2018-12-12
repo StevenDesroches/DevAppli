@@ -76,6 +76,16 @@ class Module implements ConfigProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Student());
                     return new TableGateway('students', $dbAdapter, null, $resultSetPrototype);
                 },
+                Model\FileTable::class => function($container) {
+                    $tableGateway = $container->get(Model\FileTableGateway::class);
+                    return new Model\FileTable($tableGateway);
+                },
+                Model\FileTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\File());
+                    return new TableGateway('files', $dbAdapter, null, $resultSetPrototype);
+                },
             ],
         ];
     }
@@ -112,7 +122,8 @@ class Module implements ConfigProviderInterface
                         $container->get(Model\InternshipsTable::class),
                         $container->get(Model\StudentsTable::class),
                         $container->get(Model\UsersTable::class),
-                        $container->get(Model\EmployersTable::class)
+                        $container->get(Model\EmployersTable::class),
+                        $container->get(Model\FileTable::class)
                     );
                 },
             ],

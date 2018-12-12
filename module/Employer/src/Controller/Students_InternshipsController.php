@@ -2,6 +2,7 @@
 
 namespace Employer\Controller;
 
+use Employer\Model\FileTable;
 use Employer\Model\UsersTable;
 use phpDocumentor\Reflection\Types\Array_;
 use Employer\Model\InternshipsTable;
@@ -26,8 +27,10 @@ class Students_InternshipsController extends BaseController
 
     private $tableEmployers;
 
+    private $tableFiles;
+
     public function __construct(Students_InternshipsTable $table, InternshipsTable $tableInternships,
-                                StudentsTable $tableStudent, UsersTable $tableUsers, EmployersTable $tableEmployers)
+                                StudentsTable $tableStudent, UsersTable $tableUsers, EmployersTable $tableEmployers, FileTable $tableFiles)
     {
         parent::__construct();
 
@@ -36,6 +39,7 @@ class Students_InternshipsController extends BaseController
         $this->tableStudent = $tableStudent;
         $this->tableUsers = $tableUsers;
         $this->tableEmployers = $tableEmployers;
+        $this->tableFiles = $tableFiles;
     }
 
 
@@ -46,6 +50,7 @@ class Students_InternshipsController extends BaseController
         $employerCourant = $this->tableEmployers->getEmployerFromIdUser($userCourant->id);
         $rowsetInternships = $this->tableInternships->getInternshipWhereEmployer($employerCourant->id);
         $rowsetStudents = array();
+        $rowsetFichier = array();
 
         $rowNumb = $rowsetInternships->count();
         for ($i = 0; $i < $rowNumb; $i++ ){
@@ -64,7 +69,7 @@ class Students_InternshipsController extends BaseController
                 array_push($rowsetStudents, $this->tableStudent->getStudent($id));
             }
         }
-        return new ViewModel(['rowsetStudents' => $rowsetStudents]);
+        return new ViewModel(['rowsetStudents' => $rowsetStudents, 'rowsetFiles' => $this->tableFiles->fetchAll()]);
     }
 
     public function notifierAction()
