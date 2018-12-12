@@ -58,7 +58,7 @@ class StudentsTable
                 'name'  => $student->name,
             'active'  => $student->active,
             'user_id'  => $student->user_id,
-            'file' => $student->file,
+
             ];
 
             $id = (int) $student->admission_number;
@@ -70,7 +70,7 @@ class StudentsTable
                 ));
             }
 
-        $this->tableGateway->update($data, ['admission_number' => $id, 'file' => $file]);
+        $this->tableGateway->update($data, ['admission_number' => $id]);
     }
 
     public function deleteStudent($id)
