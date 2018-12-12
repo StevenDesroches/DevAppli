@@ -14,7 +14,6 @@ class StudentForm extends Form
     {
         parent::__construct('student');
 
-        $this->addElements();
         $this->setAttribute('method', 'post');
         $this->setAttribute('enctype','multipart/form-data');
 
@@ -67,7 +66,7 @@ class StudentForm extends Form
                 'id' => 'file'
             ],
             'options' => [
-                'Label' => 'CV',
+                'Label' => 'Upload file',
             ],
         ]);
         $this->add([
